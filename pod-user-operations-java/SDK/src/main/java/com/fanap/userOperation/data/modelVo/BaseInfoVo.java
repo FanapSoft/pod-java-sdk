@@ -1,16 +1,26 @@
 package com.fanap.userOperation.data.modelVo;
 
-import com.fanap.userOperation.exception.UserOperationException;
+import com.fanap.userOperation.enums.Enum_Server_type;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
  */
 public class BaseInfoVo {
 
+    private Enum_Server_type serverType = Enum_Server_type.SANDBOX;
     private String token;
     private String token_issuer;
     private String client_id;
     private String client_secret;
+
+    public Enum_Server_type getServerType() {
+        return serverType;
+    }
+
+    public BaseInfoVo setServerType(Enum_Server_type serverType) {
+        this.serverType = serverType;
+        return this;
+    }
 
     public String getToken() {
         return token;

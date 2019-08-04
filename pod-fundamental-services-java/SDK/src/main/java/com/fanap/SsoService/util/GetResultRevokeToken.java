@@ -3,7 +3,7 @@ package com.fanap.SsoService.util;
 
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
 import com.fanap.SsoService.data.modelSrv.RevokeTokenSrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerRevokeToken;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -45,7 +45,7 @@ public class GetResultRevokeToken {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerRevokeToken.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -53,7 +53,7 @@ public class GetResultRevokeToken {
                 @Override
                 public void onFailure(Call<Void> call, Throwable throwable) {
                     if (onGetResponseListenerRevokeToken != null)
-                        onGetResponseListenerRevokeToken.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerRevokeToken.onFailed(PodException.unexpectedException());
                 }
             });
         }

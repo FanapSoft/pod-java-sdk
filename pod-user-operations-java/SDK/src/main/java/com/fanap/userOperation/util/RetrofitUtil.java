@@ -1,6 +1,6 @@
 package com.fanap.userOperation.util;
 
-import com.fanap.userOperation.config.BaseURL;
+import com.fanap.userOperation.enums.BaseURL;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
@@ -13,18 +13,16 @@ import java.util.Date;
  */
 public class RetrofitUtil {
 
-
-    private static final String BASE_URL = BaseURL.PRODUCTION.getValue();
     private static Retrofit retrofit = null;
 
-    public static synchronized Retrofit getInstance() {
+    public static synchronized Retrofit getInstance(String baseURL) {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Date.class, new MyDateTypeAdapter())
                     .create();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseURL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }

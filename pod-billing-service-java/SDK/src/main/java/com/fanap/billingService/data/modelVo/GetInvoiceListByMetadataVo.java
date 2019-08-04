@@ -1,12 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.TypeConversionUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.lang.reflect.Type;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -106,11 +101,11 @@ public class GetInvoiceListByMetadataVo {
             return this;
         }
 
-        public GetInvoiceListByMetadataVo build() throws BillingException {
+        public GetInvoiceListByMetadataVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
                 return new GetInvoiceListByMetadataVo(this);
-            else throw BillingException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

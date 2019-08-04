@@ -3,7 +3,7 @@ package com.fanap.SsoService.util;
 
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
 import com.fanap.SsoService.data.modelSrv.GetAccessTokenSrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerGetAccessToken;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,7 +43,7 @@ public class GetResultGetAccessToken {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerGetAccessToken.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -51,7 +51,7 @@ public class GetResultGetAccessToken {
                 @Override
                 public void onFailure(Call<GetAccessTokenSrv> call, Throwable throwable) {
                     if (onGetResponseListenerGetAccessToken != null)
-                        onGetResponseListenerGetAccessToken.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerGetAccessToken.onFailed(PodException.unexpectedException());
                 }
             });
         }

@@ -1,6 +1,6 @@
 package com.fanap.billingService.data.modelVo;
 
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 /**
@@ -53,11 +53,11 @@ public class CancelInvoiceVo {
             return this;
         }
 
-        public CancelInvoiceVo build() throws BillingException {
+        public CancelInvoiceVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null && this.id != null)
                 return new CancelInvoiceVo(this);
-            else throw BillingException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

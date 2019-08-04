@@ -6,21 +6,25 @@ import com.fanap.userOperation.data.modelVo.BaseInfoVo;
 import com.fanap.userOperation.data.modelVo.EditProfileWithConfirmationVo;
 import com.fanap.userOperation.data.modelVo.GetUserProfileVo;
 import com.fanap.userOperation.data.modelVo.ResultVo;
-import com.fanap.userOperation.exception.UserOperationException;
+import com.fanap.userOperation.enums.Enum_Server_type;
+import com.fanap.userOperation.exception.PodException;
 import com.fanap.userOperation.util.OnGetResponseListener;
 
 public class App {
 
+    private static String TOKEN = "7683576dfd08480e9ca270f49a479ff7";
+
     public static void main(String[] args) {
-        getUserProfile();
-        editProfileWithConfirmation();
+//        getUserProfile();
+//        editProfileWithConfirmation();
     }
 
     private static void getUserProfile() {
         BaseInfoVo baseInfoVo = new BaseInfoVo();
         baseInfoVo
-                .setToken("e8e0610cbfc446a5a7aa7c2e40599490")
+                .setToken(TOKEN)
                 .setToken_issuer("1")
+                .setServerType(Enum_Server_type.PRODUCTION)
 //                .setClient_id("")
 //                .setClient_secret("")
         ;
@@ -37,11 +41,11 @@ public class App {
                 }
 
                 @Override
-                public void onFailed(UserOperationException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (UserOperationException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -50,8 +54,9 @@ public class App {
     private static void editProfileWithConfirmation() {
         BaseInfoVo baseInfoVo = new BaseInfoVo();
         baseInfoVo
-                .setToken("7683576dfd08480e9ca270f49a479ff7")
+                .setToken(TOKEN)
                 .setToken_issuer("1")
+                .setServerType(Enum_Server_type.PRODUCTION)
 //                .setClient_id("")
 //                .setClient_secret("")
         ;
@@ -70,11 +75,11 @@ public class App {
                 }
 
                 @Override
-                public void onFailed(UserOperationException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (UserOperationException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 

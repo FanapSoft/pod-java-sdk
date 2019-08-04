@@ -1,9 +1,8 @@
 package com.fanap.billingService.util;
 
-import com.fanap.billingService.data.modelSrv.ResultSrv;
 import com.fanap.billingService.data.modelSrv.ResultSrvCreatePreInvoice;
 import com.fanap.billingService.data.modelVo.ResultVo;
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +41,7 @@ public class GetResultCreatePreInvoice<T> {
 
                     } else {
                         onGetResponseListener.onFailed(
-                                BillingException.developerException(resultSrvCreatePreInvoice.getErrorCode(),
+                                PodException.developerException(resultSrvCreatePreInvoice.getErrorCode(),
                                         resultSrvCreatePreInvoice.getErrorMessage()));
                     }
 
@@ -51,7 +50,7 @@ public class GetResultCreatePreInvoice<T> {
                 @Override
                 public void onFailure(Call<ResultSrvCreatePreInvoice<T>> call, Throwable throwable) {
                     if (onGetResponseListener != null)
-                        onGetResponseListener.onFailed(BillingException.unexpectedException());
+                        onGetResponseListener.onFailed(PodException.unexpectedException());
                 }
             });
         }

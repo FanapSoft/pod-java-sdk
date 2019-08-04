@@ -3,10 +3,8 @@ package com.fanap.SsoService.util;
 
 import com.fanap.SsoService.data.modelSrv.AuthorizeSrv;
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
-import com.fanap.SsoService.data.modelSrv.GetAccessTokenSrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerAuthorize;
-import com.fanap.SsoService.util.interfaces.OnGetResponseListenerGetAccessToken;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +43,7 @@ public class GetResultAuthorize {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerAuthorize.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -53,7 +51,7 @@ public class GetResultAuthorize {
                 @Override
                 public void onFailure(Call<AuthorizeSrv> call, Throwable throwable) {
                     if (onGetResponseListenerAuthorize != null)
-                        onGetResponseListenerAuthorize.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerAuthorize.onFailed(PodException.unexpectedException());
                 }
             });
         }

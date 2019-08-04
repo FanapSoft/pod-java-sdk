@@ -1,6 +1,6 @@
 package com.fanap.SsoService.data.modelVo;
 
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 
 /**
  * Created by Shahab Askarian on 6/19/2019.
@@ -69,12 +69,12 @@ public class GetAccessTokenByOtpVo {
             return this;
         }
 
-        public GetAccessTokenByOtpVo build() throws SsoServiceException {
+        public GetAccessTokenByOtpVo build() throws PodException {
             if (this.getGrant_type() != null && this.getCode() != null &&
                     this.getClientInfoVo() != null &&
                     this.getClientInfoVo().getClient_id() != null && this.getClientInfoVo().getClient_secret() != null)
                 return new GetAccessTokenByOtpVo(this);
-            else throw SsoServiceException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

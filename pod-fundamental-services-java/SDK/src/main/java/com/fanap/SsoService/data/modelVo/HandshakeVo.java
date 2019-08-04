@@ -1,6 +1,6 @@
 package com.fanap.SsoService.data.modelVo;
 
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 
 /**
  * Created by Shahab Askarian on 6/19/2019.
@@ -175,11 +175,11 @@ public class HandshakeVo {
             return this;
         }
 
-        public HandshakeVo build() throws SsoServiceException {
+        public HandshakeVo build() throws PodException {
             if (this.getDevice_uid() != null && this.getAuthorization() != null &&
                     this.getClient_id() != null)
                 return new HandshakeVo(this);
-            else throw SsoServiceException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

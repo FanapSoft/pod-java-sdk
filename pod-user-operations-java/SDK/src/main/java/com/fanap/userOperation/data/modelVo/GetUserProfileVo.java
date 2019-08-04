@@ -1,6 +1,6 @@
 package com.fanap.userOperation.data.modelVo;
 
-import com.fanap.userOperation.exception.UserOperationException;
+import com.fanap.userOperation.exception.PodException;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -36,11 +36,11 @@ public class GetUserProfileVo {
             return this;
         }
 
-        public GetUserProfileVo build() throws UserOperationException {
+        public GetUserProfileVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
                 return new GetUserProfileVo(this);
-            else throw UserOperationException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.fanap.billingService.data.modelVo;
 
+import com.fanap.billingService.enums.Enum_Server_type;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 /**
@@ -7,14 +8,20 @@ import com.fanap.billingService.util.TypeConversionUtil;
  */
 public class BaseInfoVo {
 
+    private Enum_Server_type serverType;
     private String token;
     private String token_issuer;
     private String ott;
 
     public BaseInfoVo(Builder builder) {
+        this.serverType = builder.getServerType();
         this.token = builder.getToken();
         this.token_issuer = TypeConversionUtil.intToString(builder.getToken_issuer());
         this.ott = builder.getOtt();
+    }
+
+    public Enum_Server_type getServerType() {
+        return serverType;
     }
 
     public String getOtt() {
@@ -30,9 +37,24 @@ public class BaseInfoVo {
     }
 
     public static class Builder {
+        private Enum_Server_type serverType = Enum_Server_type.SANDBOX;
         private String token;
         private Integer token_issuer;
         private String ott;
+
+        public Builder setServerType(Enum_Server_type serverType) {
+            this.serverType = serverType;
+            return this;
+        }
+
+        public Builder setToken_issuer(Integer token_issuer) {
+            this.token_issuer = token_issuer;
+            return this;
+        }
+
+        public Enum_Server_type getServerType() {
+            return serverType;
+        }
 
         public String getToken() {
             return token;
@@ -64,7 +86,6 @@ public class BaseInfoVo {
         public BaseInfoVo build() {
             return new BaseInfoVo(this);
         }
-
     }
 
 }

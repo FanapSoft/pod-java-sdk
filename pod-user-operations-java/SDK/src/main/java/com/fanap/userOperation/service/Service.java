@@ -12,7 +12,9 @@ public class Service {
     public void getUserProfile(GetUserProfileVo getUserProfileVo,
                                OnGetResponseListener onGetResponseListener) {
 
-        UserOperationService service = RetrofitUtil.getInstance().create(UserOperationService.class);
+        UserOperationService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(getUserProfileVo.getBaseInfoVo().getServerType()))
+                .create(UserOperationService.class);
 
         new GetResult<CustomerProfileSrv>(service.getUserProfile(
                 getUserProfileVo.getBaseInfoVo().getToken(),
@@ -23,9 +25,11 @@ public class Service {
     }
 
     public void editProfileWithConfirmation(EditProfileWithConfirmationVo editProfileWithConfirmationVo,
-                               OnGetResponseListener onGetResponseListener) {
+                                            OnGetResponseListener onGetResponseListener) {
 
-        UserOperationService service = RetrofitUtil.getInstance().create(UserOperationService.class);
+        UserOperationService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(editProfileWithConfirmationVo.getBaseInfoVo().getServerType()))
+                .create(UserOperationService.class);
 
         new GetResult<CustomerProfileSrv>(service.editProfileWithConfirmation(
                 editProfileWithConfirmationVo.getFirstName(),

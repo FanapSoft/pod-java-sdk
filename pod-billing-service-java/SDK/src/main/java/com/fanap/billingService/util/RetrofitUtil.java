@@ -1,6 +1,5 @@
 package com.fanap.billingService.util;
 
-import com.fanap.billingService.config.BaseURLPlatform;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;

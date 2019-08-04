@@ -1,11 +1,8 @@
 package com.fanap.billingService.data.modelVo;
 
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.TypeConversionUtil;
 
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -452,14 +449,14 @@ public class IssueInvoiceVo {
             return this;
         }
 
-        public IssueInvoiceVo build() throws BillingException {
+        public IssueInvoiceVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getOtt() != null &&
                     this.productInfos != null &&
                     this.productInfos.size() != 0 &&
                     this.guildCode != null)
                 return new IssueInvoiceVo(this);
-            else throw BillingException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

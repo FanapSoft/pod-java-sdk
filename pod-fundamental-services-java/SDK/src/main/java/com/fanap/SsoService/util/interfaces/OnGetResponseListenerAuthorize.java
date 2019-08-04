@@ -1,8 +1,7 @@
 package com.fanap.SsoService.util.interfaces;
 
 import com.fanap.SsoService.data.modelSrv.AuthorizeSrv;
-import com.fanap.SsoService.data.modelSrv.VerifySrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 
 /**
  * Created By Khojasteh on 2/26/2019
@@ -10,6 +9,6 @@ import com.fanap.SsoService.exception.SsoServiceException;
 public interface OnGetResponseListenerAuthorize {
     void onResponse(AuthorizeSrv result);
 
-    void onFailed(SsoServiceException e);
+    void onFailed(PodException e);
 
 }

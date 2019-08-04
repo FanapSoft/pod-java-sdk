@@ -2,7 +2,7 @@ package com.fanap.billingService.util;
 
 import com.fanap.billingService.data.modelSrv.ResultSrv;
 import com.fanap.billingService.data.modelVo.ResultVo;
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +41,7 @@ public class GetResult<T> {
 
                     } else {
                         onGetResponseListener.onFailed(
-                                BillingException.developerException(resultSrv.getErrorCode(),
+                                PodException.developerException(resultSrv.getErrorCode(),
                                         resultSrv.getMessage()));
                     }
 
@@ -50,7 +50,7 @@ public class GetResult<T> {
                 @Override
                 public void onFailure(Call<ResultSrv<T>> call, Throwable throwable) {
                     if (onGetResponseListener != null)
-                        onGetResponseListener.onFailed(BillingException.unexpectedException());
+                        onGetResponseListener.onFailed(PodException.unexpectedException());
                 }
             });
         }

@@ -1,6 +1,6 @@
 package com.fanap.SsoService.data.modelVo;
 
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 
 /**
  * Created by Shahab Askarian on 6/19/2019.
@@ -133,12 +133,12 @@ public class AuthorizeVo {
             return this;
         }
 
-        public AuthorizeVo build() throws SsoServiceException {
+        public AuthorizeVo build() throws PodException {
             if (this.getIdentity() != null && this.getSignature() != null &&
                     this.getKeyId() != null && this.getHeaders() != null &&
                     this.getResponse_type() != null)
                 return new AuthorizeVo(this);
-            else throw SsoServiceException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

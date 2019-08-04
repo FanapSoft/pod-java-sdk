@@ -3,7 +3,7 @@ package com.fanap.SsoService.util;
 
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
 import com.fanap.SsoService.data.modelSrv.VerifySrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerVerify;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,7 +34,7 @@ public class GetResultVerify {
                         VerifySrv verifySrv = response.body();
                         try {
                             onGetResponseListenerVerify.onResponse(verifySrv);
-                        } catch (SsoServiceException e) {
+                        } catch (PodException e) {
                             e.printStackTrace();
                         }
                     } else {
@@ -47,7 +47,7 @@ public class GetResultVerify {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerVerify.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -55,7 +55,7 @@ public class GetResultVerify {
                 @Override
                 public void onFailure(Call<VerifySrv> call, Throwable throwable) {
                     if (onGetResponseListenerVerify != null)
-                        onGetResponseListenerVerify.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerVerify.onFailed(PodException.unexpectedException());
                 }
             });
         }

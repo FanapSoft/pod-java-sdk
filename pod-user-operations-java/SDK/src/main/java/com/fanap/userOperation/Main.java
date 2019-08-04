@@ -3,7 +3,8 @@ package com.fanap.userOperation;
 import com.fanap.userOperation.controller.UserOperationMethodInvoke;
 import com.fanap.userOperation.data.modelSrv.*;
 import com.fanap.userOperation.data.modelVo.*;
-import com.fanap.userOperation.exception.UserOperationException;
+import com.fanap.userOperation.enums.Enum_Server_type;
+import com.fanap.userOperation.exception.PodException;
 import com.fanap.userOperation.util.OnGetResponseListener;
 
 /**
@@ -11,16 +12,19 @@ import com.fanap.userOperation.util.OnGetResponseListener;
  */
 public class Main {
 
+    private static String TOKEN = "7683576dfd08480e9ca270f49a479ff7";
+    private static String TOKEN_ISSUER = "1";
     public static void main(String[] args) {
-        getUserProfile();
-        editProfileWithConfirmation();
+//        getUserProfile();
+//        editProfileWithConfirmation();
     }
 
     private static void getUserProfile() {
         BaseInfoVo baseInfoVo = new BaseInfoVo();
         baseInfoVo
-                .setToken("7683576dfd08480e9ca270f49a479ff7")
+                .setToken(TOKEN)
                 .setToken_issuer("1")
+                .setServerType(Enum_Server_type.PRODUCTION)
 //                .setClient_id("")
 //                .setClient_secret("")
         ;
@@ -37,11 +41,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(UserOperationException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (UserOperationException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -50,8 +54,9 @@ public class Main {
     private static void editProfileWithConfirmation() {
         BaseInfoVo baseInfoVo = new BaseInfoVo();
         baseInfoVo
-                .setToken("7683576dfd08480e9ca270f49a479ff7")
+                .setToken(TOKEN)
                 .setToken_issuer("1")
+                .setServerType(Enum_Server_type.PRODUCTION)
 //                .setClient_id("")
 //                .setClient_secret("")
         ;
@@ -61,8 +66,8 @@ public class Main {
         try {
             EditProfileWithConfirmationVo editProfileWithConfirmationVo =
                     new EditProfileWithConfirmationVo.Builder(baseInfoVo)
-                    .setNickName("testces100")
-                    .build();
+                            .setNickName("testces100")
+                            .build();
             userOperationMethodInvoke.editProfileWithConfirmation(editProfileWithConfirmationVo, new OnGetResponseListener<CustomerProfileSrv>() {
                 @Override
                 public void onResponse(ResultVo<CustomerProfileSrv> result) {
@@ -70,11 +75,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(UserOperationException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (UserOperationException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 

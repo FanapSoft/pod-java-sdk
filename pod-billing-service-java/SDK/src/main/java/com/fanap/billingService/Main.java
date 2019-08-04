@@ -4,7 +4,8 @@ import com.fanap.billingService.controller.BillingService;
 import com.fanap.billingService.data.modelSrv.ExportServiceSrv;
 import com.fanap.billingService.data.modelSrv.InvoiceSrv;
 import com.fanap.billingService.data.modelVo.*;
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.enums.Enum_Server_type;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.OnGetResponseListener;
 
 import java.math.BigDecimal;
@@ -16,6 +17,11 @@ import java.util.List;
  */
 
 public class Main {
+
+    private static String TOKEN = "c43049a626e5462ab85c0a8e4028e9fe";
+    private static String OTT = "";
+    private static String RIDERECT_URI = "https://www.google.com/";
+    private static String SAMPLE_GUILD_CODE = "INFORMATION_TECHNOLOGY_GUILD";
 
     public static void main(String[] args) {
 //        ott();
@@ -32,8 +38,9 @@ public class Main {
 
     private static void getInvoicePaymentLink() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -42,26 +49,27 @@ public class Main {
             GetInvoicePaymentLinkVo getInvoicePaymentLinkVo = new GetInvoicePaymentLinkVo.Builder(baseInfoVo)
                     .setInvoiceId(3581653L)
                     .build();
-            billingService.getInvoicePaymentLinkVo(getInvoicePaymentLinkVo, new OnGetResponseListener<String>() {
+            billingService.getInvoicePaymentLink(getInvoicePaymentLinkVo, new OnGetResponseListener<String>() {
                 @Override
                 public void onResponse(ResultVo<String> result) {
                     System.out.println(result.getResult());
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
 
     private static void closeInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -77,19 +85,20 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
 
     private static void cancelInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -105,11 +114,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -117,8 +126,9 @@ public class Main {
 
     private static void verifyAndCloseInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -134,11 +144,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -146,8 +156,9 @@ public class Main {
 
     private static void getInvoiceListAsFile() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -163,11 +174,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -175,8 +186,9 @@ public class Main {
 
     private static void getInvoiceListByMetadata() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -192,11 +204,11 @@ public class Main {
                         }
 
                         @Override
-                        public void onFailed(BillingException e) {
+                        public void onFailed(PodException e) {
                             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                         }
                     });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -205,8 +217,9 @@ public class Main {
 
     private static void getInvoiceList() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -223,11 +236,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -235,9 +248,10 @@ public class Main {
 
     private static void createPreInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setOtt("84d5b96f8218c6bd")
+                .setOtt(OTT)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -253,10 +267,10 @@ public class Main {
 
         try {
             CreatePreInvoiceVo createPreInvoiceVo = new CreatePreInvoiceVo.Builder(baseInfoVo)
-                    .setRedirectURL("https://www.google.com/")
+                    .setRedirectURL(RIDERECT_URI)
                     .setUserId(513304L)
                     .setProductInfos(productInfos)
-                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+                    .setGuildCode(SAMPLE_GUILD_CODE)
                     .build();
 
             billingService.createPreInvoice(createPreInvoiceVo, new OnGetResponseListener<String>() {
@@ -266,11 +280,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -278,8 +292,9 @@ public class Main {
 
     private static void ott() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -294,11 +309,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -306,9 +321,10 @@ public class Main {
 
     private static void issueInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c43049a626e5462ab85c0a8e4028e9fe")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setOtt("79a4dae2b9f5b9d0")
+                .setOtt(OTT)
+                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -326,7 +342,7 @@ public class Main {
             IssueInvoiceVo issueInvoiceVo = new IssueInvoiceVo.Builder(baseInfoVo)
                     .setProductInfos(productInfos)
 //                    .setUserId(123L)
-                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+                    .setGuildCode(SAMPLE_GUILD_CODE)
                     .build();
             billingService.issueInvoice(issueInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -335,11 +351,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(BillingException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (BillingException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 

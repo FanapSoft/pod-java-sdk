@@ -2,10 +2,8 @@ package com.fanap.SsoService.util;
 
 
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
-import com.fanap.SsoService.data.modelSrv.GetAccessTokenSrv;
 import com.fanap.SsoService.data.modelSrv.HandshakeSrv;
-import com.fanap.SsoService.exception.SsoServiceException;
-import com.fanap.SsoService.util.interfaces.OnGetResponseListenerGetAccessToken;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerHandshake;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,7 +34,7 @@ public class GetResultHandshake {
                         HandshakeSrv handshakeSrv = response.body();
                         try {
                             onGetResponseListenerHandshake.onResponse(handshakeSrv);
-                        } catch (SsoServiceException e) {
+                        } catch (PodException e) {
                             e.printStackTrace();
                         }
                     } else {
@@ -49,7 +47,7 @@ public class GetResultHandshake {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerHandshake.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -57,7 +55,7 @@ public class GetResultHandshake {
                 @Override
                 public void onFailure(Call<HandshakeSrv> call, Throwable throwable) {
                     if (onGetResponseListenerHandshake != null)
-                        onGetResponseListenerHandshake.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerHandshake.onFailed(PodException.unexpectedException());
                 }
             });
         }

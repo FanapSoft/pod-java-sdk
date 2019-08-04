@@ -1,10 +1,9 @@
 package com.fanap.billingService.service;
 
-import com.fanap.billingService.config.BaseURLPlatform;
-import com.fanap.billingService.config.BaseURLPrivate;
 import com.fanap.billingService.data.modelSrv.ExportServiceSrv;
 import com.fanap.billingService.data.modelSrv.InvoiceSrv;
 import com.fanap.billingService.data.modelVo.*;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.*;
 
 import java.util.List;
@@ -15,8 +14,10 @@ import java.util.List;
 public class Service {
 
     public void ott(OttVo ottVo, OnGetResponseListener onGetResponseListener) {
-
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        ottVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<String>(service.ott(
                 ottVo.getBaseInfoVo().getToken(),
@@ -26,7 +27,10 @@ public class Service {
 
     public void issueInvoice(IssueInvoiceVo issueInvoiceVo, OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        issueInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<InvoiceSrv>(service.issueInvoice(
                 issueInvoiceVo.getBaseInfoVo().getToken(),
@@ -62,9 +66,12 @@ public class Service {
         ), onGetResponseListener).get();
     }
 
-    public void createPreInvoice(CreatePreInvoiceVo createPreInvoiceVo, OnGetResponseListener onGetResponseListener) {
+    public void createPreInvoice(CreatePreInvoiceVo createPreInvoiceVo, OnGetResponseListener onGetResponseListener) throws PodException {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPrivate.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        createPreInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResultCreatePreInvoice<String>(service.createPreInvoice(
                 createPreInvoiceVo.getBaseInfoVo().getToken(),
@@ -89,7 +96,10 @@ public class Service {
     public void getInvoiceList(GetInvoiceListVo getInvoiceListVo,
                                OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getInvoiceListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<List<InvoiceSrv>>(service.getInvoiceList(
                 getInvoiceListVo.getBaseInfoVo().getToken(),
@@ -121,7 +131,10 @@ public class Service {
     public void getInvoiceListByMetadata(GetInvoiceListByMetadataVo getInvoiceListByMetadataVo,
                                          OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getInvoiceListByMetadataVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<List<InvoiceSrv>>(service.getInvoiceListByMetadata(
                 getInvoiceListByMetadataVo.getBaseInfoVo().getToken(),
@@ -137,7 +150,10 @@ public class Service {
     public void getInvoiceListAsFile(GetInvoiceListAsFileVo getInvoiceListAsFileVo,
                                      OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getInvoiceListAsFileVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<ExportServiceSrv>(service.getInvoiceListAsFile(
                 getInvoiceListAsFileVo.getBaseInfoVo().getToken(),
@@ -166,7 +182,10 @@ public class Service {
     public void cancelInvoice(CancelInvoiceVo cancelInvoiceVo,
                               OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        cancelInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<Boolean>(service.cancelInvoice(
                 cancelInvoiceVo.getBaseInfoVo().getToken(),
@@ -177,9 +196,12 @@ public class Service {
     }
 
     public void verifyAndCloseInvoice(VerifyAndCloseInvoiceVo verifyAndCloseInvoiceVo,
-                              OnGetResponseListener onGetResponseListener) {
+                                      OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        verifyAndCloseInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<InvoiceSrv>(service.verifyAndCloseInvoice(
                 verifyAndCloseInvoiceVo.getBaseInfoVo().getToken(),
@@ -190,9 +212,12 @@ public class Service {
     }
 
     public void closeInvoice(CloseInvoiceVo closeInvoiceVo,
-                              OnGetResponseListener onGetResponseListener) {
+                             OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        closeInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<Boolean>(service.closeInvoice(
                 closeInvoiceVo.getBaseInfoVo().getToken(),
@@ -202,10 +227,13 @@ public class Service {
                 onGetResponseListener).get();
     }
 
-    public void getInvoicePaymentLinkVo(GetInvoicePaymentLinkVo getInvoicePaymentLinkVo,
-                             OnGetResponseListener onGetResponseListener) {
+    public void getInvoicePaymentLink(GetInvoicePaymentLinkVo getInvoicePaymentLinkVo,
+                                      OnGetResponseListener onGetResponseListener) {
 
-        BillingService service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(BillingService.class);
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getInvoicePaymentLinkVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
 
         new GetResult<String>(service.getInvoicePaymentLink(
                 getInvoicePaymentLinkVo.getBaseInfoVo().getToken(),
@@ -214,50 +242,4 @@ public class Service {
         ),
                 onGetResponseListener).get();
     }
-
-//    public void getUserProfile(GetUserProfileVo getUserProfileVo,
-//                               OnGetResponseListener onGetResponseListener) {
-//
-//        BillingService service = RetrofitUtil.getInstance().create(BillingService.class);
-//
-//        new GetResult<CustomerProfileSrv>(service.getUserProfile(
-//                getUserProfileVo.getBaseInfoVo().getToken(),
-//                getUserProfileVo.getBaseInfoVo().getToken_issuer(),
-//                getUserProfileVo.getBaseInfoVo().getClient_id(),
-//                getUserProfileVo.getBaseInfoVo().getClient_secret()
-//        ), onGetResponseListener).get();
-//    }
-
-//    public void editProfileWithConfirmation(EditProfileWithConfirmationVo editProfileWithConfirmationVo,
-//                                            OnGetResponseListener onGetResponseListener) {
-//
-//        BillingService service = RetrofitUtil.getInstance().create(BillingService.class);
-//
-//        new GetResult<CustomerProfileSrv>(service.editProfileWithConfirmation(
-//                editProfileWithConfirmationVo.getFirstName(),
-//                editProfileWithConfirmationVo.getLastName(),
-//                editProfileWithConfirmationVo.getNickName(),
-//                editProfileWithConfirmationVo.getEmail(),
-//                editProfileWithConfirmationVo.getPhoneNumber(),
-//                editProfileWithConfirmationVo.getCellphoneNumber(),
-//                editProfileWithConfirmationVo.getNationalCode(),
-//                editProfileWithConfirmationVo.getGender(),
-//                editProfileWithConfirmationVo.getAddress(),
-//                editProfileWithConfirmationVo.getBirthDate(),
-//                editProfileWithConfirmationVo.getCountry(),
-//                editProfileWithConfirmationVo.getState(),
-//                editProfileWithConfirmationVo.getCity(),
-//                editProfileWithConfirmationVo.getPostalcode(),
-//                editProfileWithConfirmationVo.getSheba(),
-//                editProfileWithConfirmationVo.getProfileImage(),
-//                editProfileWithConfirmationVo.getClient_metadata(),
-//                editProfileWithConfirmationVo.getBirthState(),
-//                editProfileWithConfirmationVo.getIdentificationNumber(),
-//                editProfileWithConfirmationVo.getFatherName(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getToken(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getToken_issuer(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getClient_id(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getClient_secret()
-//        ), onGetResponseListener).get();
-//    }
 }

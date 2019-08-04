@@ -2,7 +2,7 @@ package com.fanap.userOperation.util;
 
 import com.fanap.userOperation.data.modelSrv.ResultSrv;
 import com.fanap.userOperation.data.modelVo.ResultVo;
-import com.fanap.userOperation.exception.UserOperationException;
+import com.fanap.userOperation.exception.PodException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +41,7 @@ public class GetResult<T> {
 
                     } else {
                         onGetResponseListener.onFailed(
-                                UserOperationException.developerException(resultSrv.getErrorCode(),
+                                PodException.developerException(resultSrv.getErrorCode(),
                                         resultSrv.getMessage()));
                     }
 
@@ -50,7 +50,7 @@ public class GetResult<T> {
                 @Override
                 public void onFailure(Call<ResultSrv<T>> call, Throwable throwable) {
                     if (onGetResponseListener != null)
-                        onGetResponseListener.onFailed(UserOperationException.unexpectedException());
+                        onGetResponseListener.onFailed(PodException.unexpectedException());
                 }
             });
         }

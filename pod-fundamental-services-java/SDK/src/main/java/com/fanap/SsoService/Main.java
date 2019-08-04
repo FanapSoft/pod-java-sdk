@@ -3,7 +3,7 @@ package com.fanap.SsoService;
 import com.fanap.SsoService.controller.SsoService;
 import com.fanap.SsoService.data.modelSrv.*;
 import com.fanap.SsoService.data.modelVo.*;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.*;
 
 /**
@@ -52,7 +52,7 @@ public class Main {
 
             ssoService.verify(verifyVo, new OnGetResponseListenerVerify() {
                 @Override
-                public void onResponse(VerifySrv verifySrv) throws SsoServiceException {
+                public void onResponse(VerifySrv verifySrv) throws PodException {
                     SsoService ssoService = new SsoService();
 
                     ClientInfoVo clientInfoVo = new ClientInfoVo();
@@ -74,18 +74,18 @@ public class Main {
                         }
 
                         @Override
-                        public void onFailed(SsoServiceException e) {
+                        public void onFailed(PodException e) {
                             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                         }
                     });
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -103,7 +103,7 @@ public class Main {
 
             ssoService.handshake(handshakeVo, new OnGetResponseListenerHandshake() {
                 @Override
-                public void onResponse(HandshakeSrv handshakeSrv) throws SsoServiceException {
+                public void onResponse(HandshakeSrv handshakeSrv) throws PodException {
                     SsoService ssoService = new SsoService();
                     AuthorizeVo authorizeVo = new AuthorizeVo
                             .Builder()
@@ -125,18 +125,18 @@ public class Main {
                         }
 
                         @Override
-                        public void onFailed(SsoServiceException e) {
+                        public void onFailed(PodException e) {
                             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                         }
                     });
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -164,11 +164,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
@@ -193,11 +193,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -225,11 +225,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -251,11 +251,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -284,11 +284,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -316,11 +316,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -347,11 +347,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
@@ -379,11 +379,11 @@ public class Main {
                 }
 
                 @Override
-                public void onFailed(SsoServiceException e) {
+                public void onFailed(PodException e) {
                     System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                 }
             });
-        } catch (SsoServiceException e) {
+        } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }

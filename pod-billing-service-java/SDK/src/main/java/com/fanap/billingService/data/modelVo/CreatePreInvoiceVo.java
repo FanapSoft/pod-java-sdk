@@ -1,6 +1,6 @@
 package com.fanap.billingService.data.modelVo;
 
-import com.fanap.billingService.exception.BillingException;
+import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.math.BigDecimal;
@@ -237,14 +237,14 @@ public class CreatePreInvoiceVo {
             return this;
         }
 
-        public CreatePreInvoiceVo build() throws BillingException {
+        public CreatePreInvoiceVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getOtt() != null && this.redirectURL != null &&
                     this.userId != null &&
                     this.productInfos != null &&
                     this.productInfos.size() != 0 && this.guildCode != null)
                 return new CreatePreInvoiceVo(this);
-            else throw BillingException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 }

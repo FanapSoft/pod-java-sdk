@@ -3,7 +3,7 @@ package com.fanap.SsoService.util;
 
 import com.fanap.SsoService.data.modelSrv.ErrorSrv;
 import com.fanap.SsoService.data.modelSrv.TokenInfoSrv;
-import com.fanap.SsoService.exception.SsoServiceException;
+import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.OnGetResponseListenerGetTokenInfo;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,7 +43,7 @@ public class GetResultTokenInfo {
                         }
                         ErrorSrv errorSrv = JacksonUtil.getObject(s, ErrorSrv.class);
                         onGetResponseListenerGetTokenInfo.onFailed(
-                                SsoServiceException.developerException(response.code(),
+                                PodException.developerException(response.code(),
                                         errorSrv.getError() + ". " + errorSrv.getError_description()));
                     }
                 }
@@ -51,7 +51,7 @@ public class GetResultTokenInfo {
                 @Override
                 public void onFailure(Call<TokenInfoSrv> call, Throwable throwable) {
                     if (onGetResponseListenerGetTokenInfo != null)
-                        onGetResponseListenerGetTokenInfo.onFailed(SsoServiceException.unexpectedException());
+                        onGetResponseListenerGetTokenInfo.onFailed(PodException.unexpectedException());
                 }
             });
         }
