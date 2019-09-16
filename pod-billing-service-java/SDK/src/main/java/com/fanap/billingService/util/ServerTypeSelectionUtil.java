@@ -21,13 +21,33 @@ public class ServerTypeSelectionUtil {
             case "getInvoiceList":
             case "issueInvoice":
             case "cancelInvoice":
-
+            case "payInvoice":
+            case "payInvoiceByCredit":
+            case "sendInvoicePaymentSMS":
+            case "payInvoiceByInvoice":
+            case "payInvoiceInFuture":
+            case "payAnyInvoiceByCredit":
+            case "addDealer":
+            case "dealerList":
+            case "enableDealer":
+            case "disableDealer":
+            case "businessDealingList":
+            case "issueMultiInvoiceVo":
+            case "addDealerProductPermission":
+            case " dealerProductPermissionList":
+            case "dealingProductPermissionList":
+            case "disabeDealerProductPermission":
+            case "enableDealerProductPermission":
+            case "reduceMultiInvoice":
+            case "reduceMultiInvoiceAndCashout":
                 if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
                     return EnumBaseURLPlatform.PRODUCTION.getValue();
                 else
                     return EnumBaseURLPlatform.SANDBOX.getValue();
 
             case "createPreInvoice":
+            case "payInvoiceByUniqueNumber":
+
                 if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
                     return EnumBaseURLPrivate.PRODUCTION.getValue();
                 else

@@ -4,7 +4,6 @@ import com.fanap.billingService.data.modelSrv.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -158,39 +157,209 @@ public interface BillingService {
             @Query("invoiceId") String invoiceId
     );
 
-//    @GET("/srv/core/nzh/getUserProfile")
-//    Call<ResultSrv<CustomerProfileSrv>> getUserProfile(
-//            @Query("_token_") String token,
-//            @Query("_token_issuer_") String token_issuer,
-//            @Query("client_id") String client_id,
-//            @Query("client_secret") String client_secret);
-//
-//    @FormUrlEncoded
-//    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-//    @POST("/srv/core/nzh/editProfileWithConfirmation")
-//    Call<ResultSrv<CustomerProfileSrv>> editProfileWithConfirmation(
-//            @Field("firstName") String firstName,
-//            @Field("lastName") String lastName,
-//            @Field("nickName") String nickName,
-//            @Field("email") String email,
-//            @Field("phoneNumber") String phoneNumber,
-//            @Field("cellphoneNumber") String cellphoneNumber,
-//            @Field("nationalCode") String nationalCode,
-//            @Field("gender") String gender,
-//            @Field("address") String address,
-//            @Field("birthDate") String birthDate,
-//            @Field("country") String country,
-//            @Field("state") String state,
-//            @Field("city") String city,
-//            @Field("postalcode") String postalcode,
-//            @Field("sheba") String sheba,
-//            @Field("profileImage") String profileImage,
-//            @Field("client_metadata") String client_metadata,
-//            @Field("birthState") String birthState,
-//            @Field("identificationNumber") String identificationNumber,
-//            @Field("fatherName") String fatherName,
-//            @Field("_token_") String token,
-//            @Field("_token_issuer_") String token_issuer,
-//            @Field("client_id") String client_id,
-//            @Field("client_secret") String client_secret);
+    @GET("srv/core/nzh/biz/payInvoice")
+    Call<ResultSrv<Boolean>> payInvoice(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("invoiceId") String invoiceId
+    );
+
+    @GET("srv/core/nzh/payInvoiceByCredit")
+    Call<ResultSrv<Boolean>> payInvoiceByCredit(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("_ott_") String ott,
+            @Query("invoiceId") String invoiceId,
+            @Query("delegationHash") String delegationHash,
+            @Query("delegatorId") String delegatorId,
+            @Query("wallet") String wallet,
+            @Query("forceDelegation") String forceDelegation
+    );
+
+    @GET("srv/core/nzh/payAnyInvoiceByCredit")
+    Call<ResultSrv<Boolean>> payAnyInvoiceByCredit(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("_ott_") String ott,
+            @Query("invoiceId") String invoiceId,
+            @Query("delegationHash") String delegationHash,
+            @Query("delegatorId") String delegatorId,
+            @Query("wallet") String wallet,
+            @Query("forceDelegation") String forceDelegation
+    );
+
+
+    @GET("srv/core/nzh/biz/sendInvoicePaymentSMS")
+    Call<ResultSrv<Boolean>> sendInvoicePaymentSMS(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("invoiceId") String invoiceId,
+            @Query("delegationId") String delegationId,
+            @Query("wallet") String wallet,
+            @Query("forceDelegation") String forceDelegation,
+            @Query("callbackUri") String callbackUri,
+            @Query("redirectUri") String redirectUri
+    );
+
+    @GET("srv/core/nzh/biz/payInvoiceInFuture")
+    Call<ResultSrv<Boolean>> payInvoiceInFuture(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("invoiceId") String invoiceId,
+            @Query("date") String date,
+            @Query("wallet") String wallet,
+            @Query("guildCode") String guildCode
+
+    );
+
+    @GET("srv/core/nzh/biz/payInvoiceByInvoice")
+    Call<ResultSrv<Boolean>> payInvoiceByInvoice(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("creditorInvoiceId") String creditorInvoiceId,
+            @Query("debtorInvoiceId") String debtorInvoiceId
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/addDealer")
+    Call<ResultSrv<BusinessDealerSrv>> addDealer(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("allProductAllow") String allProductAllow
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/dealerList")
+    Call<ResultSrv<List<BusinessDealerSrv>>> dealerList(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("enable") String enable,
+            @Field("offset") String offset,
+            @Field("size") String size
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/enableDealer")
+    Call<ResultSrv<BusinessDealerSrv>> enableDealer(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/disableDealer")
+    Call<ResultSrv<BusinessDealerSrv>> disableDealer(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/businessDealingList")
+    Call<ResultSrv<List<BusinessDealerSrv>>> businessDealingList(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("dealingBusinessId") String dealingBusinessId,
+            @Field("enable") String enable,
+            @Field("offset") String offset,
+            @Field("size") String size
+    );
+
+    @GET("srv/core/nzh/biz/issueMultiInvoice")
+    Call<ResultSrv<InvoiceSrv>> issueMultiInvoice(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("data") String data,
+            @Query("delegatorId") List<String> delegatorId,
+            @Query("delegationHash") List<String> delegationHash,
+            @Query("forceDelegation") String forceDelegation
+
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/addDealerProductPermission")
+    Call<ResultSrv<DealerProductPermissionSrv>> addDealerProductPermission(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/dealerProductPermissionList")
+    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealerProductPermissionList(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("offset") String offset,
+            @Field("size") String size,
+            @Field("enable") String enable
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/dealingProductPermissionList")
+    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealingProductPermissionList(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("productId") String productId,
+            @Field("dealingBusinessId") String dealingBusinessId,
+            @Field("offset") String offset,
+            @Field("size") String size,
+            @Field("enable") String enable
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/disableDealerProductPermission")
+    Call<ResultSrv<DealerProductPermissionSrv>> disableDealerProductPermission(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("srv/core/nzh/biz/enableDealerProductPermission")
+    Call<ResultSrv<DealerProductPermissionSrv>> enableDealerProductPermission(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+
+    @GET("srv/core/nzh/biz/reduceMultiInvoice")
+    Call<ResultSrv<InvoiceSrv>> reduceMultiInvoice(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("data") String data
+
+
+    );
+
+    @GET("srv/core/nzh/biz/reduceMultiInvoiceAndCashout")
+    Call<ResultSrv<InvoiceSrv>> reduceMultiInvoiceAndCashout(
+            @Query("_token_") String token,
+            @Query("_token_issuer_") String tokenIssuer,
+            @Query("data") String data,
+            @Query("toolCode") String toolCode
+
+
+    );
+
 }

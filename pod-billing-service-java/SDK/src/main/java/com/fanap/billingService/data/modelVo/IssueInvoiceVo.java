@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class IssueInvoiceVo {
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ott, productInfos and guildCode are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ott, productInfos, userId and guildCode are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String redirectURL;
@@ -454,7 +454,7 @@ public class IssueInvoiceVo {
                     this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getOtt() != null &&
                     this.productInfos != null &&
                     this.productInfos.size() != 0 &&
-                    this.guildCode != null)
+                    this.guildCode != null && this.userId!=null)
                 return new IssueInvoiceVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }

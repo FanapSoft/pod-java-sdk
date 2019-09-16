@@ -1,5 +1,7 @@
 package com.fanap.billingService.service;
 
+import com.fanap.billingService.data.modelSrv.BusinessDealerSrv;
+import com.fanap.billingService.data.modelSrv.DealerProductPermissionSrv;
 import com.fanap.billingService.data.modelSrv.ExportServiceSrv;
 import com.fanap.billingService.data.modelSrv.InvoiceSrv;
 import com.fanap.billingService.data.modelVo.*;
@@ -9,7 +11,7 @@ import com.fanap.billingService.util.*;
 import java.util.List;
 
 /**
- * Created By Askarian on 5/28/2019
+ * Created by  Z.Gholinia on 8/28/2019.
  */
 public class Service {
 
@@ -241,5 +243,302 @@ public class Service {
                 getInvoicePaymentLinkVo.getInvoiceId()
         ),
                 onGetResponseListener).get();
+    }
+
+    public void payInvoice(PayInvoiceVo payInvoiceVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        payInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.payInvoice(
+                payInvoiceVo.getBaseInfoVo().getToken(),
+                payInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceVo.getInvoiceId()
+        ), onGetResponseListener).get();
+    }
+
+    public void payInvoiceByCredit(PayInvoiceByCreditVo payInvoiceByCreditVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        payInvoiceByCreditVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.payInvoiceByCredit(
+                payInvoiceByCreditVo.getBaseInfoVo().getToken(),
+                payInvoiceByCreditVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceByCreditVo.getBaseInfoVo().getOtt(),
+                payInvoiceByCreditVo.getInvoiceId(),
+                payInvoiceByCreditVo.getDelegationHash(),
+                payInvoiceByCreditVo.getDelegatorId(),
+                payInvoiceByCreditVo.getWallet(),
+                payInvoiceByCreditVo.getForceDelegation()
+        ), onGetResponseListener).get();
+    }
+
+    public void payAnyInvoiceByCredit(PayAnyInvoiceByCreditVo payAnyInvoiceByCreditVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        payAnyInvoiceByCreditVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.payAnyInvoiceByCredit(
+                payAnyInvoiceByCreditVo.getBaseInfoVo().getToken(),
+                payAnyInvoiceByCreditVo.getBaseInfoVo().getToken_issuer(),
+                payAnyInvoiceByCreditVo.getBaseInfoVo().getOtt(),
+                payAnyInvoiceByCreditVo.getInvoiceId(),
+                payAnyInvoiceByCreditVo.getDelegationHash(),
+                payAnyInvoiceByCreditVo.getDelegatorId(),
+                payAnyInvoiceByCreditVo.getWallet(),
+                payAnyInvoiceByCreditVo.getForceDelegation()
+        ), onGetResponseListener).get();
+    }
+
+    public void sendInvoicePaymentSMS(SendInvoicePaymentSmsVo sendInvoicePaymentSMSVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        sendInvoicePaymentSMSVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.sendInvoicePaymentSMS(
+                sendInvoicePaymentSMSVo.getBaseInfoVo().getToken(),
+                sendInvoicePaymentSMSVo.getBaseInfoVo().getToken_issuer(),
+                sendInvoicePaymentSMSVo.getInvoiceId(),
+                sendInvoicePaymentSMSVo.getDelegationId(),
+                sendInvoicePaymentSMSVo.getWallet(),
+                sendInvoicePaymentSMSVo.getForceDelegation(),
+                sendInvoicePaymentSMSVo.getCallbackUri(),
+                sendInvoicePaymentSMSVo.getRedirectUri()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void payInvoiceInFuture(PayInvoiceInFutureVo payInvoiceInFutureVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        payInvoiceInFutureVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.payInvoiceInFuture(
+                payInvoiceInFutureVo.getBaseInfoVo().getToken(),
+                payInvoiceInFutureVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceInFutureVo.getInvoiceId(),
+                payInvoiceInFutureVo.getDate(),
+                payInvoiceInFutureVo.getWallet(),
+                payInvoiceInFutureVo.getGuildCode()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void payInvoiceByInvoice(PayInvoiceByInvoiceVo payInvoiceByInvoiceVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        payInvoiceByInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.payInvoiceByInvoice(
+                payInvoiceByInvoiceVo.getBaseInfoVo().getToken(),
+                payInvoiceByInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceByInvoiceVo.getCreditorInvoiceId(),
+                payInvoiceByInvoiceVo.getDebtorInvoiceId()
+        ), onGetResponseListener).get();
+    }
+
+    public void addDealer(AddDealerVo addDealerVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        addDealerVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<BusinessDealerSrv>(service.addDealer(
+                addDealerVo.getBaseInfoVo().getToken(),
+                addDealerVo.getBaseInfoVo().getToken_issuer(),
+                addDealerVo.getDealerBizId(),
+                addDealerVo.getAllProductAllow()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealerList(DealerListVo dealerListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        dealerListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<BusinessDealerSrv>>(service.dealerList(
+                dealerListVo.getBaseInfoVo().getToken(),
+                dealerListVo.getBaseInfoVo().getToken_issuer(),
+                dealerListVo.getDealerBizId(),
+                dealerListVo.getEnable(),
+                dealerListVo.getOffset(),
+                dealerListVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+    public void enableDealer(EnableDealerVo enableDealerVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        enableDealerVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<BusinessDealerSrv>(service.enableDealer(
+                enableDealerVo.getBaseInfoVo().getToken(),
+                enableDealerVo.getBaseInfoVo().getToken_issuer(),
+                enableDealerVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+    public void disableDealer(DisableDealerVo disableDealerVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        disableDealerVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<BusinessDealerSrv>(service.disableDealer(
+                disableDealerVo.getBaseInfoVo().getToken(),
+                disableDealerVo.getBaseInfoVo().getToken_issuer(),
+                disableDealerVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void businessDealingList(BusinessDealingListVo businessDealingListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        businessDealingListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<BusinessDealerSrv>>(service.businessDealingList(
+                businessDealingListVo.getBaseInfoVo().getToken(),
+                businessDealingListVo.getBaseInfoVo().getToken_issuer(),
+                businessDealingListVo.getDealingBusinessId(),
+                businessDealingListVo.getEnable(),
+                businessDealingListVo.getOffset(),
+                businessDealingListVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+    public void issueMultiInvoice(IssueMultiInvoiceVo issueMultiInvoiceVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        issueMultiInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<InvoiceSrv>(service.issueMultiInvoice(
+                issueMultiInvoiceVo.getBaseInfoVo().getToken(),
+                issueMultiInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                issueMultiInvoiceVo.getData(),
+                issueMultiInvoiceVo.getDelegationHash(),
+                issueMultiInvoiceVo.getDelegatorId(),
+                issueMultiInvoiceVo.getForceDelegation()
+        ), onGetResponseListener).get();
+    }
+
+    public void addDealerProductPermission(AddDealerProductPermissionVo addDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        addDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.addDealerProductPermission(
+                addDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                addDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                addDealerProductPermissionVo.getProductId(),
+                addDealerProductPermissionVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealerProductPermissionList(DealerProductPermissionListVo dealerProductPermissionListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        dealerProductPermissionListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<DealerProductPermissionSrv>>(service.dealerProductPermissionList(
+                dealerProductPermissionListVo.getBaseInfoVo().getToken(),
+                dealerProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
+                dealerProductPermissionListVo.getProductId(),
+                dealerProductPermissionListVo.getDealerBizId(),
+                dealerProductPermissionListVo.getEnable(),
+                dealerProductPermissionListVo.getOffset(),
+                dealerProductPermissionListVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealingProductPermissionList(DealingProductPermissionListVo dealingProductPermissionListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        dealingProductPermissionListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<DealerProductPermissionSrv>>(service.dealingProductPermissionList(
+                dealingProductPermissionListVo.getBaseInfoVo().getToken(),
+                dealingProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
+                dealingProductPermissionListVo.getProductId(),
+                dealingProductPermissionListVo.getDealingBusinessId(),
+                dealingProductPermissionListVo.getOffset(),
+                dealingProductPermissionListVo.getSize(),
+                dealingProductPermissionListVo.getEnable()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void disableDealerProductPermission(DisableDealerProductPermissionVo disableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        disableDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.disableDealerProductPermission(
+                disableDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                disableDealerProductPermissionVo.getProductId(),
+                disableDealerProductPermissionVo.getDealerBizId()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void enableDealerProductPermission(EnableDealerProductPermissionVo enableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        enableDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.enableDealerProductPermission(
+                enableDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                enableDealerProductPermissionVo.getProductId(),
+                enableDealerProductPermissionVo.getDealerBizId()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void reduceMultiInvoice(ReduceMultiInvoiceVo reduceMultiInvoiceVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        reduceMultiInvoiceVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<InvoiceSrv>(service.reduceMultiInvoice(
+                reduceMultiInvoiceVo.getBaseInfoVo().getToken(),
+                reduceMultiInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                reduceMultiInvoiceVo.getData()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void reduceMultiInvoiceAndCashout(ReduceMultiInvoiceAndCashoutVo reduceMultiInvoiceAndCashoutVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<InvoiceSrv>(service.reduceMultiInvoiceAndCashout(
+                reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getToken(),
+                reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getToken_issuer(),
+                reduceMultiInvoiceAndCashoutVo.getData(),
+                reduceMultiInvoiceAndCashoutVo.getToolCode()
+
+        ), onGetResponseListener).get();
     }
 }
