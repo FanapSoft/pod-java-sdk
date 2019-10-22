@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class BusinessFavoriteVo {
@@ -11,11 +12,12 @@ public class BusinessFavoriteVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType , businessId  and disfavorite  are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer , businessId  and disfavorite  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
     private String disfavorite;
+    private static String scProductId;
 
     public String getDisfavorite() {
         return disfavorite;
@@ -25,10 +27,15 @@ public class BusinessFavoriteVo {
         return businessId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public BusinessFavoriteVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
         this.disfavorite = TypeConversionUtil.booleanToString(builder.getDisfavorite());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BUSINESS_FAVORITE);
 
 
     }
@@ -41,6 +48,7 @@ public class BusinessFavoriteVo {
         private BaseInfoVo baseInfoVo;
         private Long businessId;
         private Boolean disfavorite;
+
 
         public Boolean getDisfavorite() {
             return disfavorite;
@@ -76,7 +84,6 @@ public class BusinessFavoriteVo {
 
         public BusinessFavoriteVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null && this.disfavorite != null)
                 return new BusinessFavoriteVo(this);

@@ -1,79 +1,102 @@
 package com.fanap.billingService;
 
 import com.fanap.billingService.controller.BillingService;
-import com.fanap.billingService.data.modelSrv.BusinessDealerSrv;
-import com.fanap.billingService.data.modelSrv.DealerProductPermissionSrv;
-import com.fanap.billingService.data.modelSrv.ExportServiceSrv;
-import com.fanap.billingService.data.modelSrv.InvoiceSrv;
+import com.fanap.billingService.data.modelSrv.*;
 import com.fanap.billingService.data.modelVo.*;
-import com.fanap.billingService.enums.Enum_Server_type;
+import com.fanap.billingService.enums.EnumFileStatusCode;
+import com.fanap.billingService.enums.EnumToolCode;
+import com.fanap.billingService.enums.Enum_Server_type_Percent;
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.DelegationInfo;
 import com.fanap.billingService.util.OnGetResponseListener;
+import com.fanap.billingService.util.Voucher;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Shahab Askarian on 5/28/2019.
+ * Created by Zahra Gholinia on 10/9/2019.
  */
 
 public class
 Main {
 
-    private static String TOKEN = "c43049a626e5462ab85c0a8e4028e9fe";
-    private static String OTT = "";
+    private static final String TOKEN = "7ffa31bb599b40418938e56da7a815b6";
+    private static String OTT = "a0e025eebe2e658c";
     private static String RIDERECT_URI = "https://www.google.com/";
     private static String SAMPLE_GUILD_CODE = "INFORMATION_TECHNOLOGY_GUILD";
 
-    public static void main(String[] args) throws PodException {
-        ott();
-        issueInvoice();
-        createPreInvoice();
-        getInvoiceList();
-        getInvoiceListByMetadata();
-        getInvoiceListAsFile();
-        cancelInvoice();
-        verifyAndCloseInvoice();
-        closeInvoice();
-        getInvoicePaymentLink();
-        payInvoice();
-        payInvoiceByCredit();
-        sendInvoicePaymentSMS();
-        payInvoiceInFuture();
-        payInvoiceByInvoice();
-        payAnyInvoiceByCredit();
-        payInvoiceByUniqueNumber();
-        addDealer();
-        dealerList();
-        enableDealer();
-        disableDealer();
-        addDealerProductPermission();
-        businessDealingList();
-        addDealerProductPermission();
-        dealerProductPermissionList();
-        dealingProductPermissionList();
-        disableDealerProductPermission();
-        enableDealerProductPermission();
-        issueMultiInvoice();
-        reduceMultiInvoice();
-        reduceMultiInvoiceAndCashout();
+    public static void main(String[] args) throws PodException, IOException {
+//        ott();
+//        issueInvoice();
+//        createPreInvoice();
+//        getInvoiceList();
+//        getInvoiceListByMetadata();
+//        getInvoiceListAsFile();
+//        cancelInvoice();
+//        verifyAndCloseInvoice();
+//        closeInvoice();
+//        getInvoicePaymentLink();
+//        payInvoice();
+//        payInvoiceByCredit();
+//        sendInvoicePaymentSMS();
+//        payInvoiceInFuture();
+//        payInvoiceByInvoice();
+//        payAnyInvoiceByCredit();
+//        payInvoiceByUniqueNumber();
+//        addDealer();
+//        dealerList();
+//        enableDealer();
+//        disableDealer();
+//        addDealerProductPermission();
+//        businessDealingList();
+//        addDealerProductPermission();
+//        dealerProductPermissionList();
+//        dealingProductPermissionList();
+//        disableDealerProductPermission();
+//        enableDealerProductPermission();
+//        issueMultiInvoice();
+//        reduceMultiInvoice();
+//        reduceMultiInvoiceAndCashout();
+//        defineCreditVoucher();
+//        defineDiscountAmountVoucher();
+//        defineDiscountPercentageVoucher();
+//        deactivateVoucher();
+//        activateVoucher();
+//        getVoucherList();
+//        defineDirectWithdraw();
+//        updateDirectWithdraw();
+//        directWithdrawList();
+//        revokeDirectWithdraw();
+        getExportList();
+//        requestGuildSettlement();
+//        requestWalletSettlement();
+//        requestSettlementByTool();
+//        listSettlements();
+//        addAutoSettlement();
+//        removeAutoSettlement();
+
     }
 
 
     private static void sendInvoicePaymentSMS() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             SendInvoicePaymentSmsVo sendInvoicePaymentSMSVo = new SendInvoicePaymentSmsVo.Builder(baseInfoVo)
                     .setInvoiceId(31596L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.sendInvoicePaymentSMS(sendInvoicePaymentSMSVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -93,17 +116,21 @@ Main {
 
     private static void payInvoiceByCredit() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("9a36df05377e45fb943d22543996498c")
+                .setToken("7ffa31bb599b40418938e56da7a815b6")
                 .setToken_issuer(1)
-                .setOtt("c021f185e038c772")
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setOtt("93bd0bf8e31144cb")
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
+//        DelegationInfo[] delegationInfo ={new DelegationInfo(1234L,"bb")};
 
         try {
             PayInvoiceByCreditVo payInvoiceByCreditVo = new PayInvoiceByCreditVo.Builder(baseInfoVo)
-                    .setInvoiceId(31576L)
+                    .setInvoiceId(6901422L)
+//                    .setDelegationInfos(delegationInfo)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.payInvoiceByCredit(payInvoiceByCreditVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -123,18 +150,22 @@ Main {
 
     private static void payAnyInvoiceByCredit() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("9a36df05377e45fb943d22543996498c")
+                .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setOtt("b290720b4497e5f7")
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setOtt("b7ada5e256d1b9d7")
                 .build();
 
         BillingService billingService = new BillingService();
+//        DelegationInfo[] delegationInfo ={new DelegationInfo(1234L,"bb")};
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             PayAnyInvoiceByCreditVo payAnyInvoiceByCreditVo = new PayAnyInvoiceByCreditVo.Builder(baseInfoVo)
                     .setInvoiceId(31580L)
                     .setWallet("PODLAND_WALLET")
+//                    .setDelegationInfos(delegationInfo)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.payAnyInvoiceByCredit(payAnyInvoiceByCreditVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -156,14 +187,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             PayInvoiceVo payInvoiceVo = new PayInvoiceVo.Builder(baseInfoVo)
                     .setInvoiceId(5007913L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.payInvoice(payInvoiceVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -185,14 +218,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             GetInvoicePaymentLinkVo getInvoicePaymentLinkVo = new GetInvoicePaymentLinkVo.Builder(baseInfoVo)
                     .setInvoiceId(3581653L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.getInvoicePaymentLink(getInvoicePaymentLinkVo, new OnGetResponseListener<String>() {
                 @Override
@@ -214,14 +249,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             CloseInvoiceVo closeInvoiceVo = new CloseInvoiceVo.Builder(baseInfoVo)
-                    .setId(3360466L)
+                    .setId(38255L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.closeInvoice(closeInvoiceVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -243,14 +280,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             CancelInvoiceVo cancelInvoiceVo = new CancelInvoiceVo.Builder(baseInfoVo)
                     .setId(3581653L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.cancelInvoice(cancelInvoiceVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -273,14 +312,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             VerifyAndCloseInvoiceVo verifyAndCloseInvoiceVo = new VerifyAndCloseInvoiceVo.Builder(baseInfoVo)
-                    .setId(3581653L)
+                    .setId(38255L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.verifyAndCloseInvoice(verifyAndCloseInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -303,14 +344,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             GetInvoiceListAsFileVo getInvoiceListAsFileVo = new GetInvoiceListAsFileVo.Builder(baseInfoVo)
                     .setLastNRows(10L)
+//                    .setScVoucherHash(scVoucherHashs)
                     .build();
             billingService.getInvoiceListAsFile(getInvoiceListAsFileVo, new OnGetResponseListener<ExportServiceSrv>() {
                 @Override
@@ -333,13 +376,18 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
         try {
             GetInvoiceListByMetadataVo getInvoiceListByMetadataVo = new GetInvoiceListByMetadataVo.Builder(baseInfoVo)
+//                   .setScVoucherHash(scVoucherHashs)
+                    .setMetaQuery("{\n" +
+                            "  \"field\":\"name\",\n" +
+                            "  \"is\":\"ali\"}")
                     .build();
             billingService.getInvoiceListByMetadata(getInvoiceListByMetadataVo,
                     new OnGetResponseListener<List<InvoiceSrv>>() {
@@ -364,15 +412,17 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
         try {
             GetInvoiceListVo getInvoiceListVo = new GetInvoiceListVo.Builder(baseInfoVo)
                     .setOffset(0L)
                     .setSize(10L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.getInvoiceList(getInvoiceListVo, new OnGetResponseListener<List<InvoiceSrv>>() {
                 @Override
@@ -393,35 +443,41 @@ Main {
 
     private static void createPreInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken(TOKEN)
+                .setToken("e801898dced840248b0325facb863d8b")
                 .setToken_issuer(1)
-                .setOtt(OTT)
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setOtt("df4e8ee063c209cc")
                 .build();
 
         BillingService billingService = new BillingService();
-
         List<ProductInfo> productInfos = new ArrayList<>();
         ProductInfo productInfo = new ProductInfo();
         productInfo
                 .setProductId(0L)
-                .setPrice(new BigDecimal(1))
-                .setQuantity(new BigDecimal(1))
+                .setPrice(new BigDecimal(1200))
+                .setQuantity(new BigDecimal(3))
                 .setProductDescription("test");
         productInfos.add(productInfo);
 
         try {
             CreatePreInvoiceVo createPreInvoiceVo = new CreatePreInvoiceVo.Builder(baseInfoVo)
                     .setRedirectURL(RIDERECT_URI)
-                    .setUserId(513304L)
+                    .setUserId(1468849L)
                     .setProductInfos(productInfos)
-                    .setGuildCode(SAMPLE_GUILD_CODE)
+                    .setGuildCode("TOILETRIES_GUILD")
+                    .setToken("e801898dced840248b0325facb863d8b")
                     .build();
 
             billingService.createPreInvoice(createPreInvoiceVo, new OnGetResponseListener<String>() {
                 @Override
                 public void onResponse(ResultVo<String> result) {
-                    System.out.println(result.getResult());
+                    LinkSrv linkSrv=new LinkSrv();
+                    try {
+                        linkSrv=createPreInvoiceVo.getLink(result.getResult());
+                    } catch (PodException e) {
+                        System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                    }
+                    System.out.println(linkSrv.getRedirectUrl());
+
                 }
 
                 @Override
@@ -439,13 +495,15 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
         try {
             OttVo ottVo = new OttVo.Builder(baseInfoVo)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.ott(ottVo, new OnGetResponseListener<String>() {
                 @Override
@@ -468,11 +526,12 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setOtt(OTT)
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setOtt("117e5b967a4dc8ac")
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
         List<ProductInfo> productInfos = new ArrayList<>();
         ProductInfo productInfo = new ProductInfo();
@@ -486,8 +545,9 @@ Main {
         try {
             IssueInvoiceVo issueInvoiceVo = new IssueInvoiceVo.Builder(baseInfoVo)
                     .setProductInfos(productInfos)
-                    .setUserId(123L)
-                    .setGuildCode(SAMPLE_GUILD_CODE)
+                    .setUserId(1795L)
+                    .setGuildCode("ENGINEERING_GUILD")
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.issueInvoice(issueInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -512,10 +572,11 @@ Main {
                 .setToken("9a36df05377e45fb943d22543996498c")
                 .setToken_issuer(1)
                 .setOtt(OTT)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
@@ -523,6 +584,7 @@ Main {
                     .setDate("1398/07/05")
                     .setInvoiceId(31607L)
                     .setGuildCode("ENGINEERING_GUILD")
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.payInvoiceInFuture(payInvoiceInFutureVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -543,18 +605,19 @@ Main {
 
     private static void payInvoiceByInvoice() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
-
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
         try {
             PayInvoiceByInvoiceVo payInvoiceByInvoiceVo = new PayInvoiceByInvoiceVo.Builder(baseInfoVo)
-                    .setCreditorInvoiceId(31605L)
-                    .setDebtorInvoiceId(31606L)
+                    .setCreditorInvoiceId(32476L)
+                    .setDebtorInvoiceId(32479L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.payInvoiceByInvoice(payInvoiceByInvoiceVo, new OnGetResponseListener<Boolean>() {
                 @Override
@@ -578,7 +641,6 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("c43049a626e5462ab85c0a8e4028e9fe")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
                 .build();
 
         try {
@@ -599,17 +661,19 @@ Main {
 
     private static void addDealer() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("9a36df05377e45fb943d22543996498c")
+                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             AddDealerVo addDealerVo = new AddDealerVo.Builder(baseInfoVo)
-                    .setDealerBizId(9371L)
+                    .setDealerBizId(9364L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.addDealer(addDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
                 @Override
@@ -630,17 +694,19 @@ Main {
 
     private static void dealerList() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             DealerListVo dealerListVo = new DealerListVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.dealerList(dealerListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
                 @Override
@@ -664,15 +730,17 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             EnableDealerVo enableDealerVo = new EnableDealerVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.enableDealer(enableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
                 @Override
@@ -695,15 +763,17 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             DisableDealerVo disableDealerVo = new DisableDealerVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.disableDealer(disableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
                 @Override
@@ -727,14 +797,16 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("9a36df05377e45fb943d22543996498c")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             BusinessDealingListVo businessDealingListVo = new BusinessDealingListVo.Builder(baseInfoVo)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.businessDealingList(businessDealingListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
                 @Override
@@ -756,24 +828,28 @@ Main {
 
     private static void issueMultiInvoice() throws PodException {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("2b02de2188a149bfa74b7760d4a64c85")
+                .setToken("e801898dced840248b0325facb863d8b")
                 .setToken_issuer(1)
-                .setOtt(OTT)
-                .setServerType(Enum_Server_type.SANDBOX)
+                .setOtt("6eb0b95e072e81e5")
                 .build();
 
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
+        DelegationInfo[] delegationInfo ={new DelegationInfo(1234L,"bb")};
+        List<String> voucherHash = new ArrayList<>();
+        voucherHash.add("sgdhjddu");
         InvoiceItemVO mainInvoiceItemVo = new InvoiceItemVO.Builder(baseInfoVo)
                 .setProductId(0L)
                 .setDescription("p1")
-                .setQuantity(new BigDecimal(1))
+                .setQuantity(new BigDecimal(2))
                 .setPrice(100L)
                 .build();
         List<InvoiceItemVO> mainInvoiceItemVOList = new ArrayList<>();
         mainInvoiceItemVOList.add(mainInvoiceItemVo);
         MainInvoiceVo mainInvoiceVo = new MainInvoiceVo()
-                .setGuildCode("ENGINEERING_GUILD")
+                .setGuildCode("TOILETRIES_GUILD")
                 .setDescription("hi")
                 .setInvoiceItemVOs(mainInvoiceItemVOList);
 
@@ -781,15 +857,15 @@ Main {
         InvoiceItemVO subInvoiceItemVo = new InvoiceItemVO.Builder(baseInfoVo)
                 .setProductId(0L)
                 .setDescription("TEST")
-                .setQuantity(new BigDecimal(1))
+                .setQuantity(new BigDecimal(2))
                 .setPrice(100L)
                 .build();
         List<InvoiceItemVO> SUBInvoiceItemVoList = new ArrayList<>();
         SUBInvoiceItemVoList.add(subInvoiceItemVo);
 
         SubInvoiceVO subInvoiceVO = new SubInvoiceVO.Builder(baseInfoVo)
-                .setBusinessId(9371L)
-                .setGuildCode("ENGINEERING_GUILD")
+                .setBusinessId(3612L)
+                .setGuildCode("TOILETRIES_GUILD")
                 .setInvoiceItemVOs(SUBInvoiceItemVoList)
                 .setDescription("ZIR")
                 .build();
@@ -800,20 +876,29 @@ Main {
         InvoiceItemVO customerInvoiceItemVo = new InvoiceItemVO.Builder(baseInfoVo)
                 .setProductId(0L)
                 .setDescription("CO")
-                .setQuantity(new BigDecimal(1))
+                .setQuantity(new BigDecimal(2))
                 .setPrice(200L)
                 .build();
         List<InvoiceItemVO> customerInvoiceItems = new ArrayList<>();
         customerInvoiceItems.add(customerInvoiceItemVo);
+        List<String> hash = new ArrayList<>();
+        hash.add("bb");
+        List<Long> a = new ArrayList<>();
+        a.add(1234L);
 
         MultiInvoiceDataVo multiInvoiceDataVo = new MultiInvoiceDataVo()
                 .setMainInvoice(mainInvoiceVo)
                 .setSubInvoices(subInvoiceVOS)
                 .setCustomerInvoiceItemVOs(customerInvoiceItems)
-                .setUserId(16849L);
+//                .setVoucherHashs(voucherHash)
+                .setUserId(1468849L);
         try {
             IssueMultiInvoiceVo issueMultiInvoiceVo = new IssueMultiInvoiceVo.Builder(baseInfoVo)
                     .setData(multiInvoiceDataVo)
+                    .setDelegationInfos(delegationInfo)
+//                    .setDelegationHash(hash)
+//                    .setDelegatorId(a)
+//                    .setScVoucherHash(voucherHash)
                     .build();
             billingService.issueMultiInvoice(issueMultiInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -837,16 +922,18 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             AddDealerProductPermissionVo addDealerProductPermissionVo = new AddDealerProductPermissionVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
-                    .setProductId(30343L)
+                    .setEntityId(30343L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.addDealerProductPermission(addDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
                 @Override
@@ -867,22 +954,23 @@ Main {
 
     private static void dealerProductPermissionList() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken("99cb42376f6d4ec8ba6bbab265c79ff1")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs = new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             DealerProductPermissionListVo dealerProductPermissionListVo = new DealerProductPermissionListVo.Builder(baseInfoVo)
-
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.dealerProductPermissionList(dealerProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
                 @Override
                 public void onResponse(ResultVo<List<DealerProductPermissionSrv>> result) {
-                    System.out.println(result.getResult().get(0).getProduct().getEntityId());
+                    System.out.println(result.getResult());
                 }
 
                 @Override
@@ -901,15 +989,17 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("9a36df05377e45fb943d22543996498c")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             DealingProductPermissionListVo dealingProductPermissionListVo = new DealingProductPermissionListVo.Builder(baseInfoVo)
                     .setSize(5)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.dealingProductPermissionList(dealingProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
                 @Override
@@ -932,16 +1022,18 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             DisableDealerProductPermissionVo disableDealerProductPermissionVo = new DisableDealerProductPermissionVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
-                    .setProductId(30343L)
+                    .setEntityId(30343L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.disableDealerProductPermission(disableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
                 @Override
@@ -962,18 +1054,20 @@ Main {
 
     private static void enableDealerProductPermission() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
 
 
         try {
             EnableDealerProductPermissionVo enableDealerProductPermissionVo = new EnableDealerProductPermissionVo.Builder(baseInfoVo)
                     .setDealerBizId(9373L)
-                    .setProductId(30343L)
+                    .setEntityId(30343L)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.enableDealerProductPermission(enableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
                 @Override
@@ -997,10 +1091,12 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
+
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
         ReduceInvoiceSubItemVo mainReduceInvoiceSubItemVo = new ReduceInvoiceSubItemVo()
                 .setId(34881L)
                 .setDescription("JJ")
@@ -1047,6 +1143,7 @@ Main {
         try {
             ReduceMultiInvoiceVo reduceMultiInvoiceVo = new ReduceMultiInvoiceVo.Builder(baseInfoVo)
                     .setData(reduceMultiInvoiceDataVo)
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.reduceMultiInvoice(reduceMultiInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -1072,10 +1169,11 @@ Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
         ReduceInvoiceSubItemVo mainReduceInvoiceSubItemVo = new ReduceInvoiceSubItemVo()
                 .setId(35105L)
                 .setDescription("MJH")
@@ -1123,6 +1221,7 @@ Main {
             ReduceMultiInvoiceAndCashoutVo reduceMultiInvoiceAndCashoutVo = new ReduceMultiInvoiceAndCashoutVo.Builder(baseInfoVo)
                     .setData(reduceMultiInvoiceDataVo)
                     .setToolCode("SETTLEMENT_TOOL_CARD")
+//                    .setScVoucherHash(voucherHashs)
                     .build();
             billingService.reduceMultiInvoiceAndCashout(reduceMultiInvoiceAndCashoutVo, new OnGetResponseListener<InvoiceSrv>() {
                 @Override
@@ -1140,6 +1239,671 @@ Main {
         }
 
     }
+
+    private static void defineCreditVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("8576577201c441bab5320803e5acadae")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
+        Voucher[] vouchers = {new Voucher(2, 100L, "بن شارژ اعتبار - لیست محصولات", "توضیحات")};
+        List<String> hashs = new ArrayList<>();
+        hashs.add("pod_land");
+
+
+        try {
+            DefineCreditVoucherVo defineCreditVoucherVo = new DefineCreditVoucherVo.Builder(baseInfoVo)
+                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+                    .setExpireDate("1400/12/01")
+                    .setVouchers(vouchers)
+//                    .setLimitedConsumerId(16849L)
+//                    .setCurrencyCode("IIR")
+//                    .setHashCode(hashs)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.defineCreditVoucher(defineCreditVoucherVo, new OnGetResponseListener<List<VoucherSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<VoucherSrv>> result) {
+                    System.out.println(result.getResult().get(0));
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void defineDiscountAmountVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken(TOKEN)
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
+        List<Long> entityIds = new ArrayList<>();
+        entityIds.add(29990L);
+        entityIds.add(29989L);
+        Voucher[] vouchers = {new Voucher(2, 100L, "بن شارژ اعتبار - لیست محصولات", "توضیحات")};
+        List<String> hashs = new ArrayList<>();
+        hashs.add("pod_land");
+
+
+        try {
+            DefineDiscountAmountVoucherVo defineDiscountAmountVoucherVo = new DefineDiscountAmountVoucherVo.Builder(baseInfoVo)
+                    .setGuildCode("GAME_OWNER_GUILD")
+                    .setExpireDate("1400/12/01")
+                    .setVouchers(vouchers)
+//                    .setEntityId(entityIds)
+//                    .setLimitedConsumerId(16849L)
+//                    .setCurrencyCode("IIR")
+//                    .setHashCode(hashs)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.defineDiscountAmountVoucher(defineDiscountAmountVoucherVo, new OnGetResponseListener<List<VoucherSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<VoucherSrv>> result) {
+                    System.out.println(result.getResult().get(0).getName());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void defineDiscountPercentageVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("RFSFGDYEDYGS");
+        List<Long> entityIds = new ArrayList<>();
+        entityIds.add(29990L);
+        entityIds.add(29989L);
+        List<Integer> discountPercentages = new ArrayList<>();
+        discountPercentages.add(35);
+        Voucher[] vouchers = {new Voucher(2, 100L, "بن شارژ اعتبار - لیست محصولات", "توضیحات")};
+        Enum_Server_type_Percent typePercent = Enum_Server_type_Percent.eight;
+        List<String> hashs = new ArrayList<>();
+        hashs.add("pod_land");
+
+
+        try {
+            DefineDiscountPercentageVoucherVo defineDiscountPercentageVoucherVo = new DefineDiscountPercentageVoucherVo.Builder(baseInfoVo)
+                    .setGuildCode("GAME_OWNER_GUILD")
+                    .setExpireDate("1400/12/01")
+                    .setVouchers(vouchers)
+                    .setType(typePercent)
+                    .setDiscountPercentage(discountPercentages)
+//                    .setEntityId(entityIds)
+//                    .setLimitedConsumerId(16849L)
+//                    .setCurrencyCode("IIR")
+//                    .setHashCode(hashs)
+//                   .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.defineDiscountPercentageVoucher(defineDiscountPercentageVoucherVo, new OnGetResponseListener<List<VoucherSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<VoucherSrv>> result) {
+                    System.out.println(result.getResult().get(0).getHash());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void applyVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("f34f62d27f92481595399a42ac81cf74")
+                .setToken_issuer(1)
+                .setOtt("745ca2da8203263b")
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
+
+        List<String> voucherHashs = new ArrayList<>();
+        voucherHashs.add("YELZF7WUHRLD");
+
+
+        try {
+            ApplyVoucherVo applyVoucherVo = new ApplyVoucherVo.Builder(baseInfoVo)
+                    .setInvoiceId(37445L)
+                    .setVoucherHash(voucherHashs)
+//                    .setPreview()
+//                    .setScVoucherHash(scVoucherHashs)
+
+                    .build();
+            billingService.applyVoucher(applyVoucherVo, new OnGetResponseListener<InvoiceSrv>() {
+                @Override
+                public void onResponse(ResultVo<InvoiceSrv> result) {
+                    System.out.println(result.getResult().getDescription());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void deactivateVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("f34f62d27f92481595399a42ac81cf74")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+
+
+        try {
+            DeactivateVoucherVo deactivateVoucherVo = new DeactivateVoucherVo.Builder(baseInfoVo)
+                    .setVoucherId(87606L)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.deactivateVoucher(deactivateVoucherVo, new OnGetResponseListener<VoucherSrv>() {
+                @Override
+                public void onResponse(ResultVo<VoucherSrv> result) {
+                    System.out.println(result.getResult().isActive());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void activateVoucher() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+
+        try {
+            ActivateVoucherVo activateVoucherVo = new ActivateVoucherVo.Builder(baseInfoVo)
+                    .setVoucherId(87606L)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.activateVoucher(activateVoucherVo, new OnGetResponseListener<VoucherSrv>() {
+                @Override
+                public void onResponse(ResultVo<VoucherSrv> result) {
+                    System.out.println(result.getResult().isActive());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+
+    }
+
+    private static void getVoucherList() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("99cb42376f6d4ec8ba6bbab265c79ff1")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+
+
+        try {
+            GetVoucherListVo getVoucherListVo = new GetVoucherListVo.Builder(baseInfoVo)
+                    .setOffset(0)
+                    .setSize(50)
+//                    .setActive(true)
+//                    .setAmountFrom(0L)
+//                    .setType(8)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.getVoucherList(getVoucherListVo, new OnGetResponseListener<List<VoucherSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<VoucherSrv>> result) {
+                    System.out.println(result.getResult().get(0).getName());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void defineDirectWithdraw() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("f34f62d27f92481595399a42ac81cf74")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+
+
+        try {
+            DefineDirectWithdrawVo defineDirectWithdrawVo = new DefineDirectWithdrawVo.Builder(baseInfoVo)
+                    .setUsername("zahra")
+                    .setPrivateKey("<RSAKeyValue><Modulus>p432JnQ+HxV2jzFv+i1bG3mEBoCrca0BcRiPBIjKJ+ay3IVVEx71C9IhTdIm1vnzzxufmpU5HA3IzUuo+YfVjybn6aZp78AjH2BInQyl43NNVGZyLBJ0YXnHKaZuWBlxnW25tzUshlJtphDHuHxaXDkuccKc0ze0BQjQ98/bBL0=</Modulus><Exponent>AQAB</Exponent><P>18o6JZPz6ftCukdjfYUfAlr5kUQuGE6aYVF7md493vbyx30FF5Js/8EstoHVXyI82BLm8UkSG0C8PMPKNIRJzw==</P><Q>xsbF16w14Foff1MXcuVW8jfZKbMKTdDpMEfzK8jQNROND1B3uLfxmFCLI3/SVuRYfPd65psxIxYn3V5Imq1Hsw==</Q><DP>cl0F9hZ0hcQZODpPex2LMqdebuOwfkdiQEN7+y8yoTFFt/4FLdn3lJAfj1Y97B5sGqPh62yrgPANEzM8vhqCNw==</DP><DQ>JzCfZwMr6By8owTF1cBDoSPDrAYBnQ/4Oa2l0tcXva8qG3/Y6tFRT59pn0kfNkR08cZ1M6wbRviiSXHCTMSnIw==</DQ><InverseQ>KXUY0Rtae0YgJ/QdZ6+AkvzuyYDohzRmrzY8AHgDUnNbYN5kzdsEAPC1fhkScPAA7MH420Fl2FH9V4f9I04yFg==</InverseQ><D>H2c4+i4RMow4Q1A1t4Lmr3iP6RQWjeCqA4Nh0qy8jsvrO+91aXcE4GlKuqYnh2Ujb+6ydCuBn6NpvihvDA2MVdF20KZW4PZX0Bq+yj/WV4hH9mOoUKE86rZIU90rHNF0aRRPRAaCaIXCExyK9LvnGcDKjX0liD5pWPHDL8J2/9U=</D></RSAKeyValue>")
+                    .setDepositNumber("13692932")
+                    .setOnDemand(true)
+                    .setMinAmount(10000L)
+                    .setMaxAmount(10000000L)
+                    .setWallet("PODLAND_WALLET")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.defineDirectWithdraw(defineDirectWithdrawVo, new OnGetResponseListener<DirectWithdrawSrv>() {
+                @Override
+                public void onResponse(ResultVo<DirectWithdrawSrv> result) {
+                    System.out.println(result.getResult().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void updateDirectWithdraw() throws IOException {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        File xmlFile = new File("info.xml");
+
+        try {
+            UpdateDirectWithdrawVo updateDirectWithdrawVo = new UpdateDirectWithdrawVo.Builder(baseInfoVo)
+                    .setId(21L)
+                    .setUsername("zahraz")
+                    .setPrivateKey(xmlFile)
+//                    .setPrivateKey("<RSAKeyValue><Modulus>p432JnQ+HxV2jzFv+i1bG3mEBoCrca0BcRiPBIjKJ+ay3IVVEx71C9IhTdIm1vnzzxufmpU5HA3IzUuo+YfVjybn6aZp78AjH2BInQyl43NNVGZyLBJ0YXnHKaZuWBlxnW25tzUshlJtphDHuHxaXDkuccKc0ze0BQjQ98/bBL0=</Modulus><Exponent>AQAB</Exponent><P>18o6JZPz6ftCukdjfYUfAlr5kUQuGE6aYVF7md493vbyx30FF5Js/8EstoHVXyI82BLm8UkSG0C8PMPKNIRJzw==</P><Q>xsbF16w14Foff1MXcuVW8jfZKbMKTdDpMEfzK8jQNROND1B3uLfxmFCLI3/SVuRYfPd65psxIxYn3V5Imq1Hsw==</Q><DP>cl0F9hZ0hcQZODpPex2LMqdebuOwfkdiQEN7+y8yoTFFt/4FLdn3lJAfj1Y97B5sGqPh62yrgPANEzM8vhqCNw==</DP><DQ>JzCfZwMr6By8owTF1cBDoSPDrAYBnQ/4Oa2l0tcXva8qG3/Y6tFRT59pn0kfNkR08cZ1M6wbRviiSXHCTMSnIw==</DQ><InverseQ>KXUY0Rtae0YgJ/QdZ6+AkvzuyYDohzRmrzY8AHgDUnNbYN5kzdsEAPC1fhkScPAA7MH420Fl2FH9V4f9I04yFg==</InverseQ><D>H2c4+i4RMow4Q1A1t4Lmr3iP6RQWjeCqA4Nh0qy8jsvrO+91aXcE4GlKuqYnh2Ujb+6ydCuBn6NpvihvDA2MVdF20KZW4PZX0Bq+yj/WV4hH9mOoUKE86rZIU90rHNF0aRRPRAaCaIXCExyK9LvnGcDKjX0liD5pWPHDL8J2/9U=</D></RSAKeyValue>")
+                    .setDepositNumber("13692932")
+                    .setOnDemand(true)
+                    .setMinAmount(10000L)
+                    .setMaxAmount(10000000L)
+                    .setWallet("PODLAND_WALLET")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.updateDirectWithdraw(updateDirectWithdrawVo, new OnGetResponseListener<DirectWithdrawSrv>() {
+                @Override
+                public void onResponse(ResultVo<DirectWithdrawSrv> result) {
+                    System.out.println(result.getResult().getUsername());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void directWithdrawList() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+
+
+        try {
+            DirectWithdrawListVo directWithdrawListVo = new DirectWithdrawListVo.Builder(baseInfoVo)
+                    .setWallet("PODLAND_WALLET")
+                    .setOffset(0)
+                    .setSize(50)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.directWithdrawList(directWithdrawListVo, new OnGetResponseListener<List<DirectWithdrawSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<DirectWithdrawSrv>> result) {
+                    System.out.println(result.getResult().get(0).getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+//
+
+
+    private static void revokeDirectWithdraw() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("f34f62d27f92481595399a42ac81cf74")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            RevokeDirectWithdrawVo revokeDirectWithdrawVo = new RevokeDirectWithdrawVo.Builder(baseInfoVo)
+                    .setId(21L)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.revokeDirectWithdraw(revokeDirectWithdrawVo, new OnGetResponseListener<Boolean>() {
+                @Override
+                public void onResponse(ResultVo<Boolean> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+    private static void getExportList() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("9dfc30b213f74c82b2e03053c338d58e")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+        EnumFileStatusCode enumFileStatusCode = EnumFileStatusCode.EXPORT_SERVICE_STATUS_SUCCESSFUL;
+
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            GetExportListVo getExportListVo = new GetExportListVo.Builder(baseInfoVo)
+                    .setOffset(0)
+                    .setSize(50)
+                    .setStatusCode(enumFileStatusCode.getValue())
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.getExportList(getExportListVo, new OnGetResponseListener<List<ExportServiceSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<ExportServiceSrv>> result) {
+                    LinkSrv linkSrv=new LinkSrv();
+                    linkSrv=getExportListVo.getLink(result.getResult().get(0).getResultFile().getId(),result.getResult().get(0).getResultFile().getHashCode());
+                    System.out.println(linkSrv.getRedirectUrl());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+    private static void requestGuildSettlement() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .setOtt("87e476936558924d")
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            RequestGuildSettlementVo requestGuildSettlementVo = new RequestGuildSettlementVo.Builder(baseInfoVo)
+                    .setAmount(10L)
+                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.requestGuildSettlement(requestGuildSettlementVo, new OnGetResponseListener<SettlementRequestSrv>() {
+                @Override
+                public void onResponse(ResultVo<SettlementRequestSrv> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+    private static void requestWalletSettlement() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("f34f62d27f92481595399a42ac81cf74")
+                .setToken_issuer(1)
+                .setOtt("fec3970c1eb5a102")
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            RequestWalletSettlementVo requestWalletSettlementVo = new RequestWalletSettlementVo.Builder(baseInfoVo)
+                    .setAmount(10L)
+//                    .setWallet("")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.requestWalletSettlement(requestWalletSettlementVo, new OnGetResponseListener<SettlementRequestSrv>() {
+                @Override
+                public void onResponse(ResultVo<SettlementRequestSrv> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+    private static void requestSettlementByTool() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .setOtt("fec3970c1eb5a102")
+                .build();
+
+        BillingService billingService = new BillingService();
+        EnumToolCode enumToolCode = EnumToolCode.SETTLEMENT_TOOL_CARD;
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            RequestSettlementByToolVo requestSettlementByToolVo = new RequestSettlementByToolVo.Builder(baseInfoVo)
+                    .setAmount(10L)
+                    .setToolCode(enumToolCode.getValue())
+                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+                    .setToolId("5022291073725036")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.requestSettlementByTool(requestSettlementByToolVo, new OnGetResponseListener<SettlementRequestSrv>() {
+                @Override
+                public void onResponse(ResultVo<SettlementRequestSrv> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+    private static void listSettlements() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+        EnumToolCode enumToolCode = EnumToolCode.SETTLEMENT_TOOL_CARD;
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            ListSettlementsVo listSettlementsVo = new ListSettlementsVo.Builder(baseInfoVo)
+                    .setOffset(0)
+                    .setSize(50)
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.listSettlements(listSettlementsVo, new OnGetResponseListener<List<SettlementRequestSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<SettlementRequestSrv>> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+    private static void addAutoSettlement() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            AddAutoSettlementVo addAutoSettlementVo = new AddAutoSettlementVo.Builder(baseInfoVo)
+                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.addAutoSettlement(addAutoSettlementVo, new OnGetResponseListener<Boolean>() {
+                @Override
+                public void onResponse(ResultVo<Boolean> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+    private static void removeAutoSettlement() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .build();
+
+        BillingService billingService = new BillingService();
+//        List<String> voucherHashs =new ArrayList<>();
+//        voucherHashs.add("YELZF7WUHRLD");
+        try {
+            RemoveAutoSettlementVo removeAutoSettlementVo = new RemoveAutoSettlementVo.Builder(baseInfoVo)
+                    .setGuildCode("INFORMATION_TECHNOLOGY_GUILD")
+//                    .setScVoucherHash(voucherHashs)
+                    .build();
+            billingService.removeAutoSettlement(removeAutoSettlementVo, new OnGetResponseListener<Boolean>() {
+                @Override
+                public void onResponse(ResultVo<Boolean> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+
 
 
 }

@@ -1,6 +1,9 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
+import com.fanap.podDealing.util.TypeConversionUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,7 @@ public class AddUserAndBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,serverType, username, businessName, email, " +
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, username, businessName, email, " +
             "guildCode, country, state, city, address, description, agentFirstName, agentLastName and agentCellphoneNumber are required parameters!";
 
     private BaseInfoVo baseInfoVo;
@@ -47,6 +50,8 @@ public class AddUserAndBusinessVo {
     private String agentLastName;
     private String agentCellphoneNumber;
     private String agentNationalCode;
+    private static String scProductId;
+
 
     public static String getRequiredParameterErrorMessage() {
         return REQUIRED_PARAMETER_ERROR_MESSAGE;
@@ -184,6 +189,10 @@ public class AddUserAndBusinessVo {
         return agentNationalCode;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public AddUserAndBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.username = builder.getUsername();
@@ -218,7 +227,7 @@ public class AddUserAndBusinessVo {
         this.agentLastName = builder.getAgentLastName();
         this.agentCellphoneNumber = builder.getAgentCellphoneNumber();
         this.agentNationalCode = builder.getAgentNationalCode();
-
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_USER_AND_BUSINESS);
 
     }
 
@@ -235,7 +244,6 @@ public class AddUserAndBusinessVo {
         private String registrationNumber;
         private String email;
         private List<String> guildCode = new ArrayList<String>();
-        ;
         private String cellphone;
         private String phone;
         private String fax;
@@ -474,8 +482,8 @@ public class AddUserAndBusinessVo {
             return tags;
         }
 
-        public Builder setTags(String tags) {
-            this.tags = tags;
+        public Builder setTags(String[] tags) {
+            this.tags = String.join(",", tags);
             return this;
         }
 
@@ -483,8 +491,8 @@ public class AddUserAndBusinessVo {
             return tagTrees;
         }
 
-        public Builder setTagTrees(String tagTrees) {
-            this.tagTrees = tagTrees;
+        public Builder setTagTrees(String[] tagTrees) {
+            this.tagTrees = String.join(",", tagTrees);
             return this;
         }
 
@@ -561,8 +569,7 @@ public class AddUserAndBusinessVo {
         }
 
         public AddUserAndBusinessVo build() throws PodException {
-            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null && this.baseInfoVo.getToken_issuer() != null &&
+            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null && this.baseInfoVo.getToken_issuer() != null &&
                     this.username != null && this.businessName != null && this.email != null &&
                     this.guildCode != null && this.country != null && this.state != null &&
                     this.city != null && this.address != null && this.description != null &&

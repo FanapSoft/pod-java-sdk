@@ -118,9 +118,12 @@ public class Service {
                 authorizeVo.getResponse_type(),
                 authorizeVo.getState(),
                 authorizeVo.getReferrerType(),
-                authorizeVo.getReferrer()
+                authorizeVo.getReferrer(),
+                authorizeVo.getScope()
         ), onGetResponseListenerAuthorize).get();
     }
+
+
 
 //    public void revokeToken(RevokeTokenVo2 revokeTokenVo2,
 //                            OnGetResponseListenerGetAccessToken onGetResponseListener) {
@@ -130,7 +133,7 @@ public class Service {
 //        new GetResultGetAccessToken<Void>(service.revokeToken(revokeTokenVo2),
 //                onGetResponseListener).get();
 //    }
-
+//
 //    public void revokeToken(RevokeTokenVo revokeTokenVo,
 //                            OnGetResponseListenerGetAccessToken onGetResponseListenerGetAccessToken) {
 //

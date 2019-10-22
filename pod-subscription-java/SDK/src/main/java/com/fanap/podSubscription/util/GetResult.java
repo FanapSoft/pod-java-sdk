@@ -2,7 +2,7 @@ package com.fanap.podSubscription.util;
 
 import com.fanap.podSubscription.data.modelSrv.ResultSrv;
 import com.fanap.podSubscription.data.modelVo.ResultVo;
-import com.fanap.podSubscription.exception.PodSubscriptionException;
+import com.fanap.podSubscription.exception.PodException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,9 +41,8 @@ public class GetResult<T> {
 
                     } else {
                         onGetResponseListener.onFailed(
-                                PodSubscriptionException.developerException(resultSrv.getErrorCode(),
+                                PodException.developerException(resultSrv.getErrorCode(),
                                         resultSrv.getMessage()));
-
                     }
 
                 }
@@ -51,8 +50,7 @@ public class GetResult<T> {
                 @Override
                 public void onFailure(Call<ResultSrv<T>> call, Throwable throwable) {
                     if (onGetResponseListener != null)
-                        onGetResponseListener.onFailed(PodSubscriptionException.unexpectedException());
-
+                        onGetResponseListener.onFailed(PodException.unexpectedException());
                 }
             });
         }

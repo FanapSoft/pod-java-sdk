@@ -76,7 +76,8 @@ public interface UserAuthenticationService {
             @Field("response_type") String response_type,
             @Field("state") String state,
             @Field("referrerType") String referrerType,
-            @Field("referrer") String referrer);
+            @Field("referrer") String referrer,
+            @Field("scope") String scope);
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
@@ -94,6 +95,8 @@ public interface UserAuthenticationService {
             @Field("code") String code,
             @Field("client_id") String client_id,
             @Field("client_secret") String client_secret);
+
+
 
 
 //    @Headers({

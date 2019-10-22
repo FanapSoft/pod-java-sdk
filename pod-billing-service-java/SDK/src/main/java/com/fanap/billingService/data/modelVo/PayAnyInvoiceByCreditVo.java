@@ -1,19 +1,26 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.DelegationInfo;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PayAnyInvoiceByCreditVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer ,serverType, wallet and invoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer , wallet and invoiceId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String invoiceId;
-    private String delegatorId;
-    private String delegationHash;
+    private List<String> delegatorId;
+    private List<String> delegationHash;
     private String forceDelegation;
     private String wallet;
+    private DelegationInfo[] delegationInfos;
+    private static String scProductId;
 
     public PayAnyInvoiceByCreditVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -22,6 +29,9 @@ public class PayAnyInvoiceByCreditVo {
         this.delegatorId = TypeConversionUtil.longToString(builder.getDelegatorId());
         this.forceDelegation = builder.getForceDelegation();
         this.wallet = builder.getWallet();
+        this.delegationInfos = builder.getDelegationInfos();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_PAY_ANY_INVOICE_BY_CREDIT);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -36,11 +46,11 @@ public class PayAnyInvoiceByCreditVo {
         return invoiceId;
     }
 
-    public String getDelegatorId() {
+    public List<String> getDelegatorId() {
         return delegatorId;
     }
 
-    public String getDelegationHash() {
+    public List<String> getDelegationHash() {
         return delegationHash;
     }
 
@@ -48,18 +58,28 @@ public class PayAnyInvoiceByCreditVo {
         return forceDelegation;
     }
 
+    public DelegationInfo[] getDelegationInfos() {
+        return delegationInfos;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
         private Long invoiceId;
-        private Long delegatorId;
-        private String delegationHash;
+        private List<Long> delegatorId;
+        private List<String> delegationHash;
         private String forceDelegation;
         private String wallet;
+        private DelegationInfo[] delegationInfos;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public String getWallet() {
             return wallet;
@@ -70,23 +90,35 @@ public class PayAnyInvoiceByCreditVo {
             return this;
         }
 
-        public Long getDelegatorId() {
-            return delegatorId;
+        public DelegationInfo[] getDelegationInfos() {
+            return delegationInfos;
         }
 
-        public Builder setDelegatorId(Long delegatorId) {
+        public Builder setDelegationInfos(DelegationInfo[] delegationInfos) {
+            List<Long> delegatorId = new ArrayList<>();
+            List<String> delegationHash = new ArrayList<>();
+
+
+            for (int i = 0; i < delegationInfos.length; i++) {
+                if (delegationInfos[i] != null) {
+                    delegatorId.add(i, delegationInfos[i].getDelegatorId());
+                    delegationHash.add(i, delegationInfos[i].getDelegationHash());
+                }
+            }
             this.delegatorId = delegatorId;
-            return this;
-        }
-
-        public String getDelegationHash() {
-            return delegationHash;
-        }
-
-        public Builder setDelegationHash(String delegationHash) {
             this.delegationHash = delegationHash;
             return this;
         }
+
+        public List<Long> getDelegatorId() {
+            return delegatorId;
+        }
+
+
+        public List<String> getDelegationHash() {
+            return delegationHash;
+        }
+
 
         public String getForceDelegation() {
             return forceDelegation;

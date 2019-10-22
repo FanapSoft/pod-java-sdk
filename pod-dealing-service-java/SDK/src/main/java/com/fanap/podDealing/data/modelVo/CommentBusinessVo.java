@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class CommentBusinessVo {
@@ -11,11 +12,13 @@ public class CommentBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType , businessId  and   are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer , businessId  and   are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
     private String text;
+    private static String scProductId;
+
 
     public String getText() {
         return text;
@@ -25,10 +28,15 @@ public class CommentBusinessVo {
         return businessId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public CommentBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
         this.text = builder.getText();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_COMMENT_BUSINESS);
 
 
     }
@@ -41,6 +49,7 @@ public class CommentBusinessVo {
         private BaseInfoVo baseInfoVo;
         private Long businessId;
         private String text;
+
 
         public String getText() {
             return text;
@@ -76,7 +85,6 @@ public class CommentBusinessVo {
 
         public CommentBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null && this.text != null)
                 return new CommentBusinessVo(this);

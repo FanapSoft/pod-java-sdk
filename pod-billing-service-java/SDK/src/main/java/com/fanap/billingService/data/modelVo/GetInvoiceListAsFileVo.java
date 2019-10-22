@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.time.LocalDateTime;
@@ -28,9 +29,11 @@ public class GetInvoiceListAsFileVo {
     private String referenceNumber;
     private String userId;
     private String query;
-    private List<String> productIdList;
+    private List<String> entityIdList;
     private String lastNRows;
     private String callbackUrl;
+    private static String scProductId;
+
 
     public GetInvoiceListAsFileVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -48,9 +51,10 @@ public class GetInvoiceListAsFileVo {
         this.referenceNumber = builder.getReferenceNumber();
         this.userId = TypeConversionUtil.longToString(builder.getUserId());
         this.query = builder.getQuery();
-        this.productIdList = TypeConversionUtil.longToString(builder.getProductIdList());
+        this.entityIdList = TypeConversionUtil.longToString(builder.getEntityIdList());
         this.lastNRows = TypeConversionUtil.longToString(builder.getLastNRows());
         this.callbackUrl = builder.getCallbackUrl();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_LIST_AS_FILE);
     }
 
     public String getCallbackUrl() {
@@ -117,12 +121,16 @@ public class GetInvoiceListAsFileVo {
         return query;
     }
 
-    public List<String> getProductIdList() {
-        return productIdList;
+    public List<String> getEntityIdList() {
+        return entityIdList;
     }
 
     public String getLastNRows() {
         return lastNRows;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {
@@ -142,13 +150,14 @@ public class GetInvoiceListAsFileVo {
         private String referenceNumber;
         private Long userId;
         private String query;
-        private List<Long> productIdList;
+        private List<Long> entityIdList;
         private Long lastNRows;
         private String callbackUrl;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;
@@ -294,12 +303,12 @@ public class GetInvoiceListAsFileVo {
             return this;
         }
 
-        public List<Long> getProductIdList() {
-            return productIdList;
+        public List<Long> getEntityIdList() {
+            return entityIdList;
         }
 
-        public Builder setProductIdList(List<Long> productIdList) {
-            this.productIdList = productIdList;
+        public Builder setEntityIdList(List<Long> productIdList) {
+            this.entityIdList = productIdList;
             return this;
         }
 

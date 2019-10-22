@@ -6,6 +6,9 @@ import com.fanap.SsoService.data.modelVo.*;
 import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Shahab Askarian on 5/28/2019.
  */
@@ -29,12 +32,14 @@ public class Main {
 //        revokeToken();
 
 //        handshake();
-//        authorize();
+        authorize();
 //        verify();
 //        getAccessTokenByOtp();
 
 //        getOtpScenario();
 //        GetAccessTokenByOtpScenario("");
+        String s = getLoginUrl();
+        System.out.println(s);
     }
 
     private static void GetAccessTokenByOtpScenario(String otp) {
@@ -147,10 +152,11 @@ public class Main {
             AuthorizeVo authorizeVo = new AuthorizeVo
                     .Builder()
                     .setResponse_type("code")
-                    .setKeyId(sampleKeyID)
-                    .setSignature(sampleSignature)
-                    .setHeaders(sampleHeader)
+//                    .setKeyId(sampleKeyID)
+//                    .setSignature(sampleSignature)
+//                    .setHeaders(sampleHeader)
                     .setIdentity(sampleIdentity)
+                    .setScope("email")
 //                .setReferrer("")
 //                .setReferrerType("")
 //                .setState("")
@@ -273,7 +279,7 @@ public class Main {
                     .setClientInfoVo(clientInfoVo)
                     .setGrant_type(grant_type)
                     .setRedirect_uri(redirect_uri)
-                    .setCode("c5c8c7a4507b48e2b164d311e08494d0")
+                    .setCode("86650b1e4a124f07b6646dfc65c36724")
 //                .setCode_verifier("")
                     .build();
             ssoService.getAccessToken(accessTokenVo, new OnGetResponseListenerGetAccessToken() {
@@ -386,5 +392,31 @@ public class Main {
         } catch (PodException e) {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
+    }
+
+
+    private static String getLoginUrl() {
+        SsoService ssoService = new SsoService();
+        List<String> scops = new ArrayList<>();
+        scops.add("email");
+        String url;
+
+
+        LoginUrlVo loginUrlVo = null;
+        try {
+            loginUrlVo = new LoginUrlVo.Builder()
+
+                    .setClientId(client_id)
+                    .setResponseType("code")
+                    .setRedirectUri(redirect_uri)
+                    .setScope(scops)
+                    .build();
+        } catch (PodException e) {
+            e.printStackTrace();
+        }
+        url = loginUrlVo.getLink();
+        return url;
+
+
     }
 }

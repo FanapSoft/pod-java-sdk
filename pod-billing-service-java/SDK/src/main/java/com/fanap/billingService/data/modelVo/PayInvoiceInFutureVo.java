@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.time.LocalDate;
@@ -8,13 +9,14 @@ import java.time.LocalDate;
 public class PayInvoiceInFutureVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,  serverType, ott, date and invoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ott, date and invoiceId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String invoiceId;
     private String date;
     private String guildCode;
     private String wallet;
+    private static String scProductId;
 
 
     public PayInvoiceInFutureVo(Builder builder) {
@@ -23,6 +25,8 @@ public class PayInvoiceInFutureVo {
         this.date = builder.getDate();
         this.guildCode = builder.getGuildCode();
         this.wallet = builder.getWallet();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_PAY_INVOICE_IN_FUTURE);
+
 
     }
 
@@ -46,6 +50,10 @@ public class PayInvoiceInFutureVo {
         return wallet;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
@@ -54,9 +62,11 @@ public class PayInvoiceInFutureVo {
         private String guildCode;
         private String wallet;
 
+
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;
@@ -91,7 +101,7 @@ public class PayInvoiceInFutureVo {
             int gy = Integer.parseInt(q[0]);
             int gm = Integer.parseInt(q[1]);
             int gd = Integer.parseInt(q[2]);
-            String d = toShamsi(gy, gm, gd);
+            String d = TypeConversionUtil.toShamsi(gy, gm, gd);
             this.date = d;
             return this;
         }
@@ -121,41 +131,8 @@ public class PayInvoiceInFutureVo {
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
 
-        public static String toShamsi(int gy, int gm, int gd) {
-            int[] g_d_m = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-            int jy;
-            if (gy > 1600) {
-                jy = 979;
-                gy -= 1600;
-            } else {
-                jy = 0;
-                gy -= 621;
-            }
-            int gy2 = (gm > 2) ? (gy + 1) : gy;
-            int days = (365 * gy) + ((int) ((gy2 + 3) / 4)) - ((int) ((gy2 + 99) / 100)) + ((int) ((gy2 + 399) / 400)) - 80 + gd + g_d_m[gm - 1];
-            jy += 33 * ((int) (days / 12053));
-            days %= 12053;
-            jy += 4 * ((int) (days / 1461));
-            days %= 1461;
-            if (days > 365) {
-                jy += (int) ((days - 1) / 365);
-                days = (days - 1) % 365;
-            }
-            int jm = (days < 186) ? 1 + (int) (days / 31) : 7 + (int) ((days - 186) / 30);
-            int jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
-            int[] out = {jy, jm, jd};
-            String result = "";
-            for (int i = 0; i < out.length - 1; i++) {
-                result = result + out[i] + "/";
-            }
-            result = result + out[2];
-            return result;
-        }
-
 
     }
-
-
 }
 
 

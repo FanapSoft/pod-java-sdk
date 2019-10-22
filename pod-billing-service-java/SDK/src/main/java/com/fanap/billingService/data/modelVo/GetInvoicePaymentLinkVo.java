@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 /**
@@ -12,11 +13,15 @@ public class GetInvoicePaymentLinkVo {
 
     private BaseInfoVo baseInfoVo;
     private String invoiceId;
+    private static String scProductId;
+
 
     public GetInvoicePaymentLinkVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.invoiceId = TypeConversionUtil.longToString(builder.invoiceId);
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_PAYMENT_LINK);
     }
+
 
     public BaseInfoVo getBaseInfoVo() {
         return baseInfoVo;
@@ -24,6 +29,10 @@ public class GetInvoicePaymentLinkVo {
 
     public String getInvoiceId() {
         return invoiceId;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {
@@ -34,6 +43,7 @@ public class GetInvoicePaymentLinkVo {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;

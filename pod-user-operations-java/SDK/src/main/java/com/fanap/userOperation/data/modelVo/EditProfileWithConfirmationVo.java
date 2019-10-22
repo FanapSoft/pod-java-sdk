@@ -1,9 +1,14 @@
 package com.fanap.userOperation.data.modelVo;
 
 import com.fanap.userOperation.exception.PodException;
+import com.fanap.userOperation.util.PodServicesEnum;
+import com.fanap.userOperation.util.TypeConversionUtil;
+
+import java.util.List;
+
 
 /**
- * Created by Shahab Askarian on 5/28/2019.
+ * Created by Z.Gholinia on 10/12/2019.
  */
 public class EditProfileWithConfirmationVo {
 
@@ -30,8 +35,11 @@ public class EditProfileWithConfirmationVo {
     private String identificationNumber;
     private String fatherName;
     private BaseInfoVo baseInfoVo;
+    private static String scProductId;
+
 
     public EditProfileWithConfirmationVo(Builder builder) {
+        super();
         this.baseInfoVo = builder.getBaseInfoVo();
         this.firstName = builder.getFirstName();
         this.lastName = builder.getLastName();
@@ -53,6 +61,9 @@ public class EditProfileWithConfirmationVo {
         this.birthState = builder.getBirthState();
         this.identificationNumber = builder.getIdentificationNumber();
         this.fatherName = builder.getFatherName();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_EDIT_PROFILE_WITH_CONFIRMATION);
+
+
     }
 
     public String getFirstName() {
@@ -139,6 +150,10 @@ public class EditProfileWithConfirmationVo {
         return baseInfoVo;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private String firstName;
@@ -166,6 +181,7 @@ public class EditProfileWithConfirmationVo {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public String getFirstName() {
             return firstName;

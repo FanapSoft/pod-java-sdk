@@ -1,6 +1,7 @@
 package com.fanap.podSubscription.data.modelVo;
 
-import com.fanap.podSubscription.exception.PodSubscriptionException;
+import com.fanap.podSubscription.exception.PodException;
+import com.fanap.podSubscription.util.PodServicesEnum;
 import com.fanap.podSubscription.util.TypeConversionUtil;
 
 /**
@@ -14,6 +15,8 @@ public class ConsumeSubscriptionVo {
     private BaseInfoVo baseInfoVo;
     private String id;
     private String usedAmount;
+    private static String scProductId;
+
 
     public String getId() {
         return id;
@@ -23,10 +26,16 @@ public class ConsumeSubscriptionVo {
         return usedAmount;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public ConsumeSubscriptionVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.getId());
         this.usedAmount = TypeConversionUtil.longToString(builder.getUsedAmount());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_CONSUME_SUBSCRIPTION);
+
 
     }
 
@@ -38,6 +47,7 @@ public class ConsumeSubscriptionVo {
         private BaseInfoVo baseInfoVo;
         private Long id;
         private Long usedAmount;
+
 
         public Long getId() {
             return id;
@@ -70,12 +80,12 @@ public class ConsumeSubscriptionVo {
             return this;
         }
 
-        public ConsumeSubscriptionVo build() throws PodSubscriptionException {
+        public ConsumeSubscriptionVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
-                    this.id != null && this.usedAmount!=null)
+                    this.id != null)
                 return new ConsumeSubscriptionVo(this);
-            else throw PodSubscriptionException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
 
 

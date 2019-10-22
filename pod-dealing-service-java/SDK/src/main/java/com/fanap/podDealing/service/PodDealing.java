@@ -11,57 +11,63 @@ import java.util.List;
  */
 public interface PodDealing {
 
-
-
-    @GET("/srv/core/nzh/biz/addUserAndBusiness")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessSrv>> addUserAndBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
-            @Query("username") String username,
-            @Query("businessName") String businessName,
-            @Query("firstName") String firstName,
-            @Query("lastName") String lastName,
-            @Query("sheba") String sheba,
-            @Query("nationalCode") String nationalCode,
-            @Query("economicCode") String economicCode,
-            @Query("registrationNumber") String registrationNumber,
-            @Query("email") String email,
-            @Query("guildCode") List<String> guildCode,
-            @Query("cellphone") String cellphone,
-            @Query("phone") String phone,
-            @Query("fax") String fax,
-            @Query("postalCode") String postalCode,
-            @Query("country") String country,
-            @Query("state") String state,
-            @Query("city") String city,
-            @Query("address") String address,
-            @Query("description") String description,
-            @Query("newsReader") String newsReader,
-            @Query("logoImage") String logoImage,
-            @Query("coverImage") String coverImage,
-            @Query("tags") String tags,
-            @Query("tagTrees") String tagTrees,
-            @Query("tagTreeCategoryName") String tagTreeCategoryName,
-            @Query("link") String link,
-            @Query("lat") String lat,
-            @Query("lng") String lng,
-            @Query("agentFirstName") String agentFirstName,
-            @Query("agentLastName") String agentLastName,
-            @Query("agentCellphoneNumber") String agentCellphoneNumber,
-            @Query("agentNationalCode") String agentNationalCode);
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("username") String username,
+            @Field("businessName") String businessName,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("sheba") String sheba,
+            @Field("nationalCode") String nationalCode,
+            @Field("economicCode") String economicCode,
+            @Field("registrationNumber") String registrationNumber,
+            @Field("email") String email,
+            @Field("guildCode") List<String> guildCode,
+            @Field("cellphone") String cellphone,
+            @Field("phone") String phone,
+            @Field("fax") String fax,
+            @Field("postalCode") String postalCode,
+            @Field("country") String country,
+            @Field("state") String state,
+            @Field("city") String city,
+            @Field("address") String address,
+            @Field("description") String description,
+            @Field("newsReader") String newsReader,
+            @Field("logoImage") String logoImage,
+            @Field("coverImage") String coverImage,
+            @Field("tags") String tags,
+            @Field("tagTrees") String tagTrees,
+            @Field("tagTreeCategoryName") String tagTreeCategoryName,
+            @Field("link") String link,
+            @Field("lat") String lat,
+            @Field("lng") String lng,
+            @Field("agentFirstName") String agentFirstName,
+            @Field("agentLastName") String agentLastName,
+            @Field("agentCellphoneNumber") String agentCellphoneNumber,
+            @Field("agentNationalCode") String agentNationalCode);
 
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/listUserCreatedBusiness")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<BusinessSrv>>> listUserCreatedBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("bizId") List<String> bizId,
             @Field("guildCode") List<String> guildCod,
             @Field("offset") String offset,
             @Field("size") String size,
-            @Field("query") String query,
+            @Field("Field") String Field,
             @Field("tags") List<String> tags,
             @Field("tagTrees") List<String> tagTrees,
             @Field("country") String active,
@@ -80,10 +86,13 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/biz/updateBusiness/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessSrv>> updateBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("bizId") String bizId,
             @Field("businessName") String businessName,
             @Field("companyName") String companyName,
@@ -126,56 +135,75 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/biz/getApiTokenForCreatedBusiness/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessApiTokenSrv>> getApiTokenForCreatedBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("businessId") String businessId);
 
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/rateBusiness/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<RateSrv>> rateBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("businessId") String businessId,
             @Field("rate") String rate);
 
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/commentBusiness/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Long>> commentBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("businessId") String businessId,
             @Field("text") String rate);
 
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/businessFavorite/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> businessFavorite(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("businessId") String businessId,
             @Field("disfavorite") String disfavorite);
 
+
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/userBusinessInfos/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<UserBusinessInfoSrv>>> userBusinessInfos(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("id[]") List<String> id);
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/commentBusinessList/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<CommentSrv>>> commentBusinessList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("businessId") String businessId,
             @Field("firstId") String firstId,
             @Field("lastId") String lastId,
@@ -185,19 +213,41 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/biz/confirmComment/")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> confirmComment(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("commentId") String commentId);
 
 
-    @GET("/srv/core/nzh/guildList/")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<GuildSrv>>> guildList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
-            @Query("name") String name,
-            @Query("offset ") String offset,
-            @Query("size ") String size);
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("name") String name,
+            @Field("offset ") String offset,
+            @Field("size ") String size);
+
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<Boolean>> unconfirmComment(
+            @Header("_token_") String token,
+            @Header("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("commentId") String commentId);
+
 
 }

@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class ConfirmCommentVo {
@@ -11,18 +12,26 @@ public class ConfirmCommentVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and commentId  are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, and commentId  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String commentId;
+    private static String scProductId;
+
 
     public String getCommentId() {
         return commentId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public ConfirmCommentVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.commentId = TypeConversionUtil.longToString(builder.getCommentId());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_CONFIRM_COMMENT);
+
 
     }
 
@@ -60,7 +69,6 @@ public class ConfirmCommentVo {
 
         public ConfirmCommentVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.commentId != null)
                 return new ConfirmCommentVo(this);

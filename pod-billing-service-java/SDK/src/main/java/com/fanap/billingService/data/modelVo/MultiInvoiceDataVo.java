@@ -10,9 +10,6 @@ import java.util.List;
 public class MultiInvoiceDataVo implements Serializable {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer ,serverType, wallet and invoiceId are required parameters!";
-
-
     private String redirectURL;
     private Long userId;
     private String currencyCode;
@@ -24,7 +21,7 @@ public class MultiInvoiceDataVo implements Serializable {
     private List<SubInvoiceVO> subInvoices;
     private String customerDescription;
     private String customerMetadata;
-    private List<InvoiceItemVO> customerInvoiceItemVOs;
+    private List<InvoiceItemVO> customerInvoiceItems;
 
 
     public MultiInvoiceDataVo setRedirectURL(String redirectURL) {
@@ -83,7 +80,7 @@ public class MultiInvoiceDataVo implements Serializable {
     }
 
     public MultiInvoiceDataVo setCustomerInvoiceItemVOs(List<InvoiceItemVO> customerInvoiceItemVOs) {
-        this.customerInvoiceItemVOs = customerInvoiceItemVOs;
+        this.customerInvoiceItems = customerInvoiceItemVOs;
         return this;
     }
 
@@ -125,7 +122,7 @@ public class MultiInvoiceDataVo implements Serializable {
     }
 
     public List<InvoiceItemVO> getCustomerInvoiceItemVOs() {
-        return customerInvoiceItemVOs;
+        return customerInvoiceItems;
     }
 
     public String getCustomerDescription() {

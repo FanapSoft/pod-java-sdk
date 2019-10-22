@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 /**
@@ -12,10 +13,14 @@ public class CancelInvoiceVo {
 
     private BaseInfoVo baseInfoVo;
     private String id;
+    private static String scProductId;
+
 
     public CancelInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.id);
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_CANCEL_INVOICE);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -26,6 +31,10 @@ public class CancelInvoiceVo {
         return id;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
@@ -34,6 +43,7 @@ public class CancelInvoiceVo {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;

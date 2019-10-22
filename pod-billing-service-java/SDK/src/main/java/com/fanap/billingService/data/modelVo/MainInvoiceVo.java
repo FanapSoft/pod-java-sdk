@@ -10,13 +10,12 @@ import java.util.List;
 public class MainInvoiceVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer ,serverType, wallet and invoiceId are required parameters!";
-
     private String guildCode;
     private String billNumber;
     private String metadata;
     private List<InvoiceItemVO> invoiceItemVOs;
     private String description;
+    private Integer discountSharePercent;
 
 
     public MainInvoiceVo setGuildCode(String guildCode) {
@@ -65,7 +64,13 @@ public class MainInvoiceVo {
         return description;
     }
 
+    public Integer getDiscountSharePercent() {
+        return discountSharePercent;
+    }
 
+    public void setDiscountSharePercent(Integer discountSharePercent) {
+        this.discountSharePercent = discountSharePercent;
+    }
 }
 
 

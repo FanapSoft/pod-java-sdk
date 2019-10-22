@@ -15,6 +15,7 @@ public class AuthorizeVo {
     private String state;
     private String referrerType;
     private String referrer;
+    private String scope;
 
     public AuthorizeVo(Builder builder) {
         this.identity = builder.getIdentity();
@@ -25,6 +26,7 @@ public class AuthorizeVo {
         this.state = builder.getState();
         this.referrerType = builder.getReferrerType();
         this.referrer = builder.getReferrer();
+        this.scope=builder.getScope();
     }
 
     public String getIdentity() {
@@ -51,6 +53,10 @@ public class AuthorizeVo {
         return referrer;
     }
 
+    public String getScope() {
+        return scope;
+    }
+
     public static class Builder {
         private String identity;
         private String keyId;
@@ -60,6 +66,7 @@ public class AuthorizeVo {
         private String state;
         private String referrerType;
         private String referrer;
+        private String scope;
 
         public String getKeyId() {
             return keyId;
@@ -133,9 +140,17 @@ public class AuthorizeVo {
             return this;
         }
 
+        public String getScope() {
+            return scope;
+        }
+
+        public Builder setScope(String scope) {
+            this.scope = scope;
+            return this;
+        }
+
         public AuthorizeVo build() throws PodException {
-            if (this.getIdentity() != null && this.getSignature() != null &&
-                    this.getKeyId() != null && this.getHeaders() != null &&
+            if (this.getIdentity() != null  &&
                     this.getResponse_type() != null)
                 return new AuthorizeVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

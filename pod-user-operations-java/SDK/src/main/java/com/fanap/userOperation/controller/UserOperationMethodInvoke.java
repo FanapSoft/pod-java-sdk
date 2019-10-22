@@ -55,4 +55,49 @@ public class UserOperationMethodInvoke {
 
         return this;
     }
+
+
+    /**
+     * confirm Edit Profile.
+     *
+     * @param confirmEditProfileVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                                       InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public UserOperationMethodInvoke confirmEditProfile(ConfirmEditProfileVo
+                                                                         confirmEditProfileVo,
+                                                                 OnGetResponseListener onGetResponseListener)
+            throws PodException {
+
+        if (onGetResponseListener != null)
+            service.confirmEditProfile(confirmEditProfileVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
+
+    /**
+     * list Address.
+     *
+     * @param listAddressVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                                       InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public UserOperationMethodInvoke getListAddress(ListAddressVo listAddressVo,
+                                                        OnGetResponseListener onGetResponseListener)
+            throws PodException {
+
+        if (onGetResponseListener != null)
+            service.getListAddress(listAddressVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
+
 }

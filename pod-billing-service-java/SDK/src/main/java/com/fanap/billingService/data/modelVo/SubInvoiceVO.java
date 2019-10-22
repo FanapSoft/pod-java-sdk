@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SubInvoiceVO implements Serializable {
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and invoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
@@ -16,7 +16,9 @@ public class SubInvoiceVO implements Serializable {
     private String billNumber;
     private String description;
     private String metadata;
+    private Integer discountSharePercent;
     private List<InvoiceItemVO> invoiceItemVOs;
+
 
     public SubInvoiceVO(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -25,6 +27,8 @@ public class SubInvoiceVO implements Serializable {
         this.billNumber = builder.getBillNumber();
         this.description = builder.getDescription();
         this.invoiceItemVOs = builder.getInvoiceItemVOs();
+        this.discountSharePercent = builder.getDiscountSharePercent();
+
     }
 
 
@@ -60,6 +64,10 @@ public class SubInvoiceVO implements Serializable {
         return businessId;
     }
 
+    public Integer getDiscountSharePercent() {
+        return discountSharePercent;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
@@ -68,6 +76,7 @@ public class SubInvoiceVO implements Serializable {
         private String billNumber;
         private String description;
         private String metadata;
+        private Integer discountSharePercent;
         private List<InvoiceItemVO> invoiceItemVOs;
 
         public Builder(BaseInfoVo baseInfoVo) {
@@ -134,6 +143,15 @@ public class SubInvoiceVO implements Serializable {
 
         public Builder setBaseInfoVo(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
+            return this;
+        }
+
+        public Integer getDiscountSharePercent() {
+            return discountSharePercent;
+        }
+
+        public Builder setDiscountSharePercent(Integer discountSharePercent) {
+            this.discountSharePercent = discountSharePercent;
             return this;
         }
 

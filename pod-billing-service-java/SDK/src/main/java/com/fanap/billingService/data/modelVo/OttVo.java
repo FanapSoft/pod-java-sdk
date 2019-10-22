@@ -1,6 +1,10 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
+import com.fanap.billingService.util.TypeConversionUtil;
+
+import java.util.List;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -10,13 +14,22 @@ public class OttVo {
     private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token and token_issuer are required parameters!";
 
     private BaseInfoVo baseInfoVo;
+    private static String scProductId;
+
 
     public OttVo(Builder builder) {
+
         this.baseInfoVo = builder.getBaseInfoVo();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_OTT);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
         return baseInfoVo;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {
@@ -25,6 +38,10 @@ public class OttVo {
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
+        }
+
+        public Builder setScVoucherHash(List<String> scVoucherHash) {
+            return this;
         }
 
         public BaseInfoVo getBaseInfoVo() {

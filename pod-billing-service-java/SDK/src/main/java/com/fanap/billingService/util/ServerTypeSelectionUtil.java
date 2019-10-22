@@ -40,20 +40,25 @@ public class ServerTypeSelectionUtil {
             case "enableDealerProductPermission":
             case "reduceMultiInvoice":
             case "reduceMultiInvoiceAndCashout":
-                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
-                    return EnumBaseURLPlatform.PRODUCTION.getValue();
-                else
-                    return EnumBaseURLPlatform.SANDBOX.getValue();
-
             case "createPreInvoice":
-            case "payInvoiceByUniqueNumber":
+//                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
+                return EnumBaseURLPlatform.PRODUCTION.getValue();
+//                else
+//                    return EnumBaseURLPlatform.SANDBOX.getValue();
 
-                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
-                    return EnumBaseURLPrivate.PRODUCTION.getValue();
-                else
-                    return EnumBaseURLPrivate.SANDBOX.getValue();
+
+            case "payInvoiceByUniqueNumber":
+                return EnumBaseURLPrivate.PRODUCTION.getValue();
+
+//                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
+
+//                else
+//                    return EnumBaseURLPrivate.SANDBOX.getValue();
             default:
-                return EnumBaseURLPlatform.SANDBOX.getValue();
+                return EnumBaseURLPlatform.PRODUCTION.getValue();
+//        }
         }
+
     }
 }
+

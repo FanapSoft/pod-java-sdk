@@ -145,5 +145,25 @@ public class PodBaseService {
 
         return this;
     }
+    /**
+     *remove Auto Settlement.
+     *
+     * @param currencyListVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                              InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public PodBaseService getCurrencyList(CurrencyListVo currencyListVo, OnGetResponseListener onGetResponseListener)
+            throws PodException {
+
+        if (onGetResponseListener != null)
+            service.getCurrencyList(currencyListVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
+
 
 }

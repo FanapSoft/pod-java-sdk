@@ -1,8 +1,11 @@
 package com.fanap.userOperation.service;
 
+import com.fanap.userOperation.data.modelSrv.AddressSrv;
 import com.fanap.userOperation.data.modelSrv.CustomerProfileSrv;
 import com.fanap.userOperation.data.modelVo.*;
 import com.fanap.userOperation.util.*;
+
+import java.util.List;
 
 /**
  * Created By Askarian on 5/28/2019
@@ -13,12 +16,15 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         UserOperationService service = RetrofitUtil
-                .getInstance(ServerTypeSelectionUtil.getBaseURL(getUserProfileVo.getBaseInfoVo().getServerType()))
+                .getInstance()
                 .create(UserOperationService.class);
 
         new GetResult<CustomerProfileSrv>(service.getUserProfile(
                 getUserProfileVo.getBaseInfoVo().getToken(),
                 getUserProfileVo.getBaseInfoVo().getToken_issuer(),
+                getUserProfileVo.getScProductId(),
+                getUserProfileVo.getBaseInfoVo().getScVoucherHash(),
+                getUserProfileVo.getBaseInfoVo().getScApiKey(),
                 getUserProfileVo.getBaseInfoVo().getClient_id(),
                 getUserProfileVo.getBaseInfoVo().getClient_secret()
         ), onGetResponseListener).get();
@@ -28,10 +34,13 @@ public class Service {
                                             OnGetResponseListener onGetResponseListener) {
 
         UserOperationService service = RetrofitUtil
-                .getInstance(ServerTypeSelectionUtil.getBaseURL(editProfileWithConfirmationVo.getBaseInfoVo().getServerType()))
+                .getInstance()
                 .create(UserOperationService.class);
 
         new GetResult<CustomerProfileSrv>(service.editProfileWithConfirmation(
+                editProfileWithConfirmationVo.getScProductId(),
+                editProfileWithConfirmationVo.getBaseInfoVo().getScVoucherHash(),
+                editProfileWithConfirmationVo.getBaseInfoVo().getScApiKey(),
                 editProfileWithConfirmationVo.getFirstName(),
                 editProfileWithConfirmationVo.getLastName(),
                 editProfileWithConfirmationVo.getNickName(),
@@ -58,4 +67,48 @@ public class Service {
                 editProfileWithConfirmationVo.getBaseInfoVo().getClient_secret()
         ), onGetResponseListener).get();
     }
+
+
+
+
+
+    public void confirmEditProfile(ConfirmEditProfileVo confirmEditPrvofileVo,
+                                            OnGetResponseListener onGetResponseListener) {
+
+        UserOperationService service = RetrofitUtil
+                .getInstance()
+                .create(UserOperationService.class);
+
+        new GetResult<CustomerProfileSrv>(service.confirmEditProfile(
+                confirmEditPrvofileVo.getBaseInfoVo().getToken(),
+                confirmEditPrvofileVo.getBaseInfoVo().getToken_issuer(),
+                confirmEditPrvofileVo.getScProductId(),
+                confirmEditPrvofileVo.getBaseInfoVo().getScVoucherHash(),
+                confirmEditPrvofileVo.getBaseInfoVo().getScApiKey(),
+                confirmEditPrvofileVo.getCode(),
+                confirmEditPrvofileVo.getCellphoneNumber()
+        ), onGetResponseListener).get();
+    }
+
+
+
+    public void getListAddress(ListAddressVo listAddressVo,
+                                   OnGetResponseListener onGetResponseListener) {
+
+        UserOperationService service = RetrofitUtil
+                .getInstance()
+                .create(UserOperationService.class);
+
+        new GetResult<List<AddressSrv>>(service.getListAddress(
+                listAddressVo.getBaseInfoVo().getToken(),
+                listAddressVo.getBaseInfoVo().getToken_issuer(),
+                listAddressVo.getScProductId(),
+                listAddressVo.getBaseInfoVo().getScVoucherHash(),
+                listAddressVo.getBaseInfoVo().getScApiKey(),
+                listAddressVo.getOffset(),
+                listAddressVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+
 }

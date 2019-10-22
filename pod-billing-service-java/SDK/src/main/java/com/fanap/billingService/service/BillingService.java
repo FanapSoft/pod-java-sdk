@@ -7,53 +7,69 @@ import retrofit2.http.*;
 import java.util.List;
 
 /**
- * Created By Askarian on 5/28/2019
+ * Created by  Z.Gholinia on 9/30/2019.
  */
 public interface BillingService {
 
-    @GET("/srv/core/nzh/ott")
-    Call<ResultSrv<String>> ott(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String token_issuer);
 
-    @GET("/srv/core/nzh/biz/issueInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<String>> ott(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey);
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> issueInvoice(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
             @Header("_ott_") String ott,
-            @Query("redirectURL") String redirectURL,
-            @Query("userId") String userId,
-            @Query("billNumber") String billNumber,
-            @Query("description") String description,
-            @Query("deadline") String deadline,
-            @Query("productId[]") List<String> productId,
-            @Query("price[]") List<String> price,
-            @Query("quantity[]") List<String> quantity,
-            @Query("productDescription[]") List<String> productDescription,
-            @Query("guildCode") String guildCode,
-            @Query("currencyCode") String currencyCode,
-            @Query("addressId") String addressId,
-            @Query("voucherHash[]") List<String> voucherHash,
-            @Query("preferredTaxRate") String preferredTaxRate,
-            @Query("verificationNeeded") String verificationNeeded,
-            @Query("verifyAfterTimeout") String verifyAfterTimeout,
-            @Query("preview") String preview,
-            @Query("metadata") String metadata,
-            @Query("safe") String safe,
-            @Query("postVoucherEnabled") String postVoucherEnabled,
-            @Query("hasEvent") String hasEvent,
-            @Query("eventTitle") String eventTitle,
-            @Query("eventTimeZone") String eventTimeZone,
-            @Query("eventReminders[]") List<String> eventReminders,
-            @Query("eventDescription") String eventDescription,
-            @Query("eventMetadata") String eventMetadata,
-            @Query("cellphoneNumber") String cellphoneNumber
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("redirectURL") String redirectURL,
+            @Field("userId") String userId,
+            @Field("billNumber") String billNumber,
+            @Field("description") String description,
+            @Field("deadline") String deadline,
+            @Field("productId[]") List<String> productId,
+            @Field("price[]") List<String> price,
+            @Field("quantity[]") List<String> quantity,
+            @Field("productDescription[]") List<String> productDescription,
+            @Field("guildCode") String guildCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("addressId") String addressId,
+            @Field("voucherHash[]") List<String> voucherHash,
+            @Field("preferredTaxRate") String preferredTaxRate,
+            @Field("verificationNeeded") String verificationNeeded,
+            @Field("verifyAfterTimeout") String verifyAfterTimeout,
+            @Field("preview") String preview,
+            @Field("metadata") String metadata,
+            @Field("safe") String safe,
+            @Field("postVoucherEnabled") String postVoucherEnabled,
+            @Field("hasEvent") String hasEvent,
+            @Field("eventTitle") String eventTitle,
+            @Field("eventTimeZone") String eventTimeZone,
+            @Field("eventReminders[]") List<String> eventReminders,
+            @Field("eventDescription") String eventDescription,
+            @Field("eventMetadata") String eventMetadata,
+            @Field("cellphoneNumber") String cellphoneNumber
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/service/createPreInvoice")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrvCreatePreInvoice<String>> createPreInvoice(
+            @Header("_token_") String _token_,
+            @Header("_token_issuer_") String tokenIssuer,
+            @Header("scProductId") String scProductId,
+            @Header("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("token") String token,
             @Field("ott") String ott,
             @Field("redirectUri") String redirectUri,
@@ -72,161 +88,231 @@ public interface BillingService {
             @Field("callUrl") String callUrl
     );
 
-    @GET("srv/core/nzh/biz/getInvoiceList")
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<InvoiceSrv>>> getInvoiceList(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("id") String id,
-            @Query("billNumber") String billNumber,
-            @Query("uniqueNumber") String uniqueNumber,
-            @Query("trackerId") String trackerId,
-            @Query("fromDate") String fromDate,
-            @Query("toDate") String toDate,
-            @Query("isCanceled") String isCanceled,
-            @Query("isPayed") String isPayed,
-            @Query("isClosed") String isClosed,
-            @Query("isWaiting") String isWaiting,
-            @Query("guildCode") String guildCode,
-            @Query("referenceNumber") String referenceNumber,
-            @Query("userId") String userId,
-            @Query("issuerId") String issuerId,
-            @Query("query") String query,
-            @Query("firstId") String firstId,
-            @Query("lastId") String lastId,
-            @Query("offset") String offset,
-            @Query("productIdList[]") List<String> productIdList,
-            @Query("size") String size);
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id,
+            @Field("billNumber") String billNumber,
+            @Field("uniqueNumber") String uniqueNumber,
+            @Field("trackerId") String trackerId,
+            @Field("fromDate") String fromDate,
+            @Field("toDate") String toDate,
+            @Field("isCanceled") String isCanceled,
+            @Field("isPayed") String isPayed,
+            @Field("isClosed") String isClosed,
+            @Field("isWaiting") String isWaiting,
+            @Field("guildCode") String guildCode,
+            @Field("referenceNumber") String referenceNumber,
+            @Field("userId") String userId,
+            @Field("issuerId") String issuerId,
+            @Field("Field") String Field,
+            @Field("firstId") String firstId,
+            @Field("lastId") String lastId,
+            @Field("offset") String offset,
+            @Field("productIdList[]") List<String> productIdList,
+            @Field("size") String size);
 
-    @GET("srv/core/nzh/biz/getInvoiceListByMetadata")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<InvoiceSrv>>> getInvoiceListByMetadata(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("isCanceled") String isCanceled,
-            @Query("isPayed") String isPayed,
-            @Query("offset") String offset,
-            @Query("size") String size);
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("metaQuery") String metaQuery,
+            @Field("isCanceled") String isCanceled,
+            @Field("isPayed") String isPayed,
+            @Field("offset") String offset,
+            @Field("size") String size);
 
-    @GET("srv/core/nzh/biz/getInvoiceListAsFile")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<ExportServiceSrv>> getInvoiceListAsFile(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("id") String id,
-            @Query("billNumber") String billNumber,
-            @Query("uniqueNumber") String uniqueNumber,
-            @Query("trackerId") String trackerId,
-            @Query("fromDate") String fromDate,
-            @Query("toDate") String toDate,
-            @Query("isCanceled") String isCanceled,
-            @Query("isPayed") String isPayed,
-            @Query("isClosed") String isClosed,
-            @Query("isWaiting") String isWaiting,
-            @Query("guildCode") String guildCode,
-            @Query("referenceNumber") String referenceNumber,
-            @Query("userId") String userId,
-            @Query("query") String query,
-            @Query("productIdList[]") List<String> productIdList,
-            @Query("lastNRows") String lastNRows,
-            @Query("callbackUrl") String callbackUrl
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id,
+            @Field("billNumber") String billNumber,
+            @Field("uniqueNumber") String uniqueNumber,
+            @Field("trackerId") String trackerId,
+            @Field("fromDate") String fromDate,
+            @Field("toDate") String toDate,
+            @Field("isCanceled") String isCanceled,
+            @Field("isPayed") String isPayed,
+            @Field("isClosed") String isClosed,
+            @Field("isWaiting") String isWaiting,
+            @Field("guildCode") String guildCode,
+            @Field("referenceNumber") String referenceNumber,
+            @Field("userId") String userId,
+            @Field("Field") String Field,
+            @Field("productIdList[]") List<String> productIdList,
+            @Field("lastNRows") String lastNRows,
+            @Field("callbackUrl") String callbackUrl
     );
 
-    @GET("srv/core/nzh/biz/cancelInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> cancelInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("id") String id
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
     );
 
-    @GET("srv/core/nzh/biz/verifyAndCloseInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> verifyAndCloseInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("id") String id
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
     );
 
-    @GET("srv/core/nzh/biz/closeInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> closeInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("id") String id
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
     );
 
-    @GET("srv/core/nzh/biz/getInvoicePaymentLink")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<String>> getInvoicePaymentLink(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("invoiceId") String invoiceId
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("invoiceId") String invoiceId
     );
 
-    @GET("srv/core/nzh/biz/payInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("invoiceId") String invoiceId
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("invoiceId") String invoiceId
     );
 
-    @GET("srv/core/nzh/payInvoiceByCredit")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoiceByCredit(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("_ott_") String ott,
-            @Query("invoiceId") String invoiceId,
-            @Query("delegationHash") String delegationHash,
-            @Query("delegatorId") String delegatorId,
-            @Query("wallet") String wallet,
-            @Query("forceDelegation") String forceDelegation
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("_ott_") String ott,
+            @Field("invoiceId") String invoiceId,
+            @Field("delegationHash") List<String> delegationHash,
+            @Field("delegatorId") List<String> delegatorId,
+            @Field("wallet") String wallet,
+            @Field("forceDelegation") String forceDelegation
     );
 
-    @GET("srv/core/nzh/payAnyInvoiceByCredit")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payAnyInvoiceByCredit(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("_ott_") String ott,
-            @Query("invoiceId") String invoiceId,
-            @Query("delegationHash") String delegationHash,
-            @Query("delegatorId") String delegatorId,
-            @Query("wallet") String wallet,
-            @Query("forceDelegation") String forceDelegation
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("_ott_") String ott,
+            @Field("invoiceId") String invoiceId,
+            @Field("delegationHash") List<String> delegationHash,
+            @Field("delegatorId") List<String> delegatorId,
+            @Field("wallet") String wallet,
+            @Field("forceDelegation") String forceDelegation
     );
 
 
-    @GET("srv/core/nzh/biz/sendInvoicePaymentSMS")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> sendInvoicePaymentSMS(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("invoiceId") String invoiceId,
-            @Query("delegationId") String delegationId,
-            @Query("wallet") String wallet,
-            @Query("forceDelegation") String forceDelegation,
-            @Query("callbackUri") String callbackUri,
-            @Query("redirectUri") String redirectUri
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("invoiceId") String invoiceId,
+            @Field("delegationId") String delegationId,
+            @Field("wallet") String wallet,
+            @Field("forceDelegation") String forceDelegation,
+            @Field("callbackUri") String callbackUri,
+            @Field("redirectUri") String redirectUri
     );
 
-    @GET("srv/core/nzh/biz/payInvoiceInFuture")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoiceInFuture(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("invoiceId") String invoiceId,
-            @Query("date") String date,
-            @Query("wallet") String wallet,
-            @Query("guildCode") String guildCode
-
-    );
-
-    @GET("srv/core/nzh/biz/payInvoiceByInvoice")
-    Call<ResultSrv<Boolean>> payInvoiceByInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("creditorInvoiceId") String creditorInvoiceId,
-            @Query("debtorInvoiceId") String debtorInvoiceId
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("invoiceId") String invoiceId,
+            @Field("date") String date,
+            @Field("wallet") String wallet,
+            @Field("guildCode") String guildCode
 
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/addDealer")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<Boolean>> payInvoiceByInvoice(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("creditorInvoiceId") String creditorInvoiceId,
+            @Field("debtorInvoiceId") String debtorInvoiceId
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessDealerSrv>> addDealer(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("dealerBizId") String dealerBizId,
             @Field("allProductAllow") String allProductAllow
     );
@@ -234,10 +320,13 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/dealerList")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<BusinessDealerSrv>>> dealerList(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("dealerBizId") String dealerBizId,
             @Field("enable") String enable,
             @Field("offset") String offset,
@@ -246,62 +335,82 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/enableDealer")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessDealerSrv>> enableDealer(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("dealerBizId") String dealerBizId
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/disableDealer")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<BusinessDealerSrv>> disableDealer(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("dealerBizId") String dealerBizId
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/businessDealingList")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<BusinessDealerSrv>>> businessDealingList(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("dealingBusinessId") String dealingBusinessId,
             @Field("enable") String enable,
             @Field("offset") String offset,
             @Field("size") String size
     );
 
-    @GET("srv/core/nzh/biz/issueMultiInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> issueMultiInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("data") String data,
-            @Query("delegatorId") List<String> delegatorId,
-            @Query("delegationHash") List<String> delegationHash,
-            @Query("forceDelegation") String forceDelegation
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("data") String data,
+            @Field("delegationHash") List<String> delegationHash,
+            @Field("delegatorId") List<String> delegatorId,
+            @Field("forceDelegation") String forceDelegation
 
 
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/addDealerProductPermission")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<DealerProductPermissionSrv>> addDealerProductPermission(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("productId") String productId,
             @Field("dealerBizId") String dealerBizId
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/dealerProductPermissionList")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<DealerProductPermissionSrv>>> dealerProductPermissionList(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("productId") String productId,
             @Field("dealerBizId") String dealerBizId,
             @Field("offset") String offset,
@@ -311,10 +420,13 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/dealingProductPermissionList")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<List<DealerProductPermissionSrv>>> dealingProductPermissionList(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("productId") String productId,
             @Field("dealingBusinessId") String dealingBusinessId,
             @Field("offset") String offset,
@@ -324,42 +436,406 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/disableDealerProductPermission")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<DealerProductPermissionSrv>> disableDealerProductPermission(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("productId") String productId,
             @Field("dealerBizId") String dealerBizId
     );
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("srv/core/nzh/biz/enableDealerProductPermission")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<DealerProductPermissionSrv>> enableDealerProductPermission(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("productId") String productId,
             @Field("dealerBizId") String dealerBizId
     );
 
 
-    @GET("srv/core/nzh/biz/reduceMultiInvoice")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> reduceMultiInvoice(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("data") String data
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("data") String data
 
 
     );
 
-    @GET("srv/core/nzh/biz/reduceMultiInvoiceAndCashout")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> reduceMultiInvoiceAndCashout(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String tokenIssuer,
-            @Query("data") String data,
-            @Query("toolCode") String toolCode
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("data") String data,
+            @Field("toolCode") String toolCode
 
 
     );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<VoucherSrv>>> defineCreditVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("guildCode") String guildCode,
+            @Field("expireDate") String expireDate,
+            @Field("count[]") List<String> count,
+            @Field("amount[]") List<String> amount,
+            @Field("name[]") List<String> name,
+            @Field("description[]") List<String> description,
+            @Field("limitedConsumerId") String limitedConsumerId,
+            @Field("currencyCode") String currencyCode,
+            @Field("hash[]") List<String> hash
+
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<VoucherSrv>>> defineDiscountAmountVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("guildCode") String guildCode,
+            @Field("expireDate") String expireDate,
+            @Field("count[]") List<String> count,
+            @Field("amount[]") List<String> amount,
+            @Field("productId[]") List<String> productId,
+            @Field("dealerBusinessId[]") List<String> dealerBusinessId,
+            @Field("name[]") List<String> name,
+            @Field("description[]") List<String> description,
+            @Field("limitedConsumerId") String limitedConsumerId,
+            @Field("currencyCode") String currencyCode,
+            @Field("hash[]") List<String> hash
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<VoucherSrv>>> defineDiscountPercentageVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("guildCode") String guildCode,
+            @Field("expireDate") String expireDate,
+            @Field("count[]") List<String> count,
+            @Field("amount[]") List<String> amount,
+            @Field("discountPercentage[]") List<String> discountPercentage,
+            @Field("productId[]") List<String> entityId,
+            @Field("dealerBusinessId[]") List<String> dealerBusinessId,
+            @Field("name[]") List<String> name,
+            @Field("description[]") List<String> description,
+            @Field("limitedConsumerId") String limitedConsumerId,
+            @Field("type") String type,
+            @Field("currencyCode") String currencyCode,
+            @Field("hash[]") List<String> hash
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<InvoiceSrv>> applyVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("ott") String ott,
+            @Field("invoiceId") String invoiceId,
+            @Field("voucherHash") List<String> voucherHash,
+            @Field("preview") String preview
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<VoucherSrv>> deactivateVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<VoucherSrv>> activateVoucher(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<VoucherSrv>>> getVoucherList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("consumerId") String consumerId,
+            @Field("hash") String hash,
+            @Field("name") String name,
+            @Field("type") String type,
+            @Field("guildCode[]") List<String> guildCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("amountFrom") String amountFrom,
+            @Field("amountTo") String amountTo,
+            @Field("discountPercentageFrom") String discountPercentageFrom,
+            @Field("discountPercentageTo") String discountPercentageTo,
+            @Field("expireDateFrom") String expireDateFrom,
+            @Field("expireDateTo") String expireDateTo,
+            @Field("productId[]") List<String> entityId,
+            @Field("consumDateFrom") String consumDateFrom,
+            @Field("consumDateTo") String consumDateTo,
+            @Field("usedAmountFrom") String usedAmountFrom,
+            @Field("usedAmountTo") String usedAmountTo,
+            @Field("active") String active,
+            @Field("used") String used,
+            @Field("offset") String offset,
+            @Field("size") String size
+
+
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<DirectWithdrawSrv>> defineDirectWithdraw(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("username") String username,
+            @Field("privateKey") String privateKey,
+            @Field("depositNumber") String depositNumber,
+            @Field("onDemand") String onDemand,
+            @Field("minAmount") String minAmount,
+            @Field("maxAmount") String maxAmount,
+            @Field("wallet") String wallet
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<DirectWithdrawSrv>>> directWithdrawList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("wallet") String wallet,
+            @Field("offset") String offset,
+            @Field("size") String size
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<DirectWithdrawSrv>> updateDirectWithdraw(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id,
+            @Field("username") String username,
+            @Field("privateKey") String privateKey,
+            @Field("depositNumber ") String depositNumber,
+            @Field("onDemand") String onDemand,
+            @Field("minAmount") String minAmount,
+            @Field("maxAmount") String maxAmount,
+            @Field("wallet") String wallet
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<Boolean>> revokeDirectWithdraw(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<ExportServiceSrv>>> getExportList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("offset") String offset,
+            @Field("size") String size,
+            @Field("id") String id,
+            @Field("statusCode") String statusCode,
+            @Field("serviceUrl") String serviceUrl
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<SettlementRequestSrv>> requestGuildSettlement(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("ott") String ott,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("sheba") String sheba,
+            @Field("amount") String amount,
+            @Field("guildCode") String guildCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("uniqueId") String uniqueId,
+            @Field("description") String description
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<SettlementRequestSrv>> requestWalletSettlement(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("ott") String ott,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("wallet") String wallet,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("sheba") String sheba,
+            @Field("amount") String amount,
+            @Field("currencyCode") String currencyCode,
+            @Field("uniqueId") String uniqueId,
+            @Field("description") String description
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<SettlementRequestSrv>> requestSettlementByTool(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("ott") String ott,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("toolCode") String toolCode,
+            @Field("toolId") String toolId,
+            @Field("amount") String amount,
+            @Field("guildCode") String guildCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("uniqueId") String uniqueId,
+            @Field("description") String description
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<SettlementRequestSrv>>> listSettlements(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("statusCode") String statusCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("fromAmount") String fromAmount,
+            @Field("toAmount") String toAmount,
+            @Field("fromDate") String FromDate,
+            @Field("toDate") String toDate,
+            @Field("offset") String offset,
+            @Field("uniqueId") String uniqueId,
+            @Field("size") String size,
+            @Field("id") String id,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("toolCode") String toolCode,
+            @Field("toolId") String toolId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<Boolean>> addAutoSettlement(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("firstName") String firstName,
+            @Field("lastName") String lastName,
+            @Field("sheba") String sheba,
+            @Field("guildCode") String guildCode,
+            @Field("currencyCode") String currencyCode,
+            @Field("instant") String instant
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<Boolean>> removeAutoSettlement(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("guildCode") String guildCode,
+            @Field("currencyCode") String currencyCode
+    );
+
+
 
 }

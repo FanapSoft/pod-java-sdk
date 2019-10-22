@@ -1,12 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
-import java.util.Map;
-
 /**
  * Created By Khojasteh on 2/27/2019
  */
 public class ResultVoGeneral<T> {
     private T result;
+
     public T getResult() {
         return result;
     }

@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class IssueInvoiceVo {
     private String billNumber;
     private String description;
     private String deadline;
-    private List<String> productId = new ArrayList<>();
+    private List<String> entityId = new ArrayList<>();
     private List<String> price = new ArrayList<>();
     private List<String> quantity = new ArrayList<>();
     private List<String> productDescription = new ArrayList<>();
@@ -41,6 +42,8 @@ public class IssueInvoiceVo {
     private String eventDescription;
     private String eventMetadata;
     private String cellphoneNumber;
+    private static String scProductId;
+
 
     public String getRedirectURL() {
         return redirectURL;
@@ -62,8 +65,8 @@ public class IssueInvoiceVo {
         return deadline;
     }
 
-    public List<String> getProductId() {
-        return productId;
+    public List<String> getEntityId() {
+        return entityId;
     }
 
     public List<String> getPrice() {
@@ -150,6 +153,10 @@ public class IssueInvoiceVo {
         return cellphoneNumber;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public IssueInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.redirectURL = builder.getRedirectURL();
@@ -158,7 +165,7 @@ public class IssueInvoiceVo {
         this.description = builder.getDescription();
         this.deadline = builder.getDeadline();
         for (ProductInfo productInfo : builder.getProductInfos()) {
-            this.productId.add(TypeConversionUtil.longToString(productInfo.getProductId()));
+            this.entityId.add(TypeConversionUtil.longToString(productInfo.getProductId()));
             this.price.add(TypeConversionUtil.decimalToString(productInfo.getPrice()));
             this.quantity.add(TypeConversionUtil.decimalToString(productInfo.getQuantity()));
             this.productDescription.add(productInfo.getProductDescription());
@@ -181,6 +188,8 @@ public class IssueInvoiceVo {
         this.eventDescription = builder.getEventDescription();
         this.eventMetadata = builder.getEventMetadata();
         this.cellphoneNumber = builder.getCellphoneNumber();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ISSUE_INVOICE);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -454,7 +463,7 @@ public class IssueInvoiceVo {
                     this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getOtt() != null &&
                     this.productInfos != null &&
                     this.productInfos.size() != 0 &&
-                    this.guildCode != null && this.userId!=null)
+                    this.guildCode != null && this.userId != null)
                 return new IssueInvoiceVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }

@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class GetApiTokenForCreatedBusinessVo {
@@ -11,18 +12,25 @@ public class GetApiTokenForCreatedBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and businessId  are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, and businessId  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
+    private static String scProductId;
+
 
     public String getBusinessId() {
         return businessId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public GetApiTokenForCreatedBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_API_TOKEN_FOR_CREATED_BUSINESS);
 
 
     }
@@ -34,6 +42,7 @@ public class GetApiTokenForCreatedBusinessVo {
     public static class Builder {
         private BaseInfoVo baseInfoVo;
         private Long businessId;
+
 
         public Long getBusinessId() {
             return businessId;
@@ -60,7 +69,6 @@ public class GetApiTokenForCreatedBusinessVo {
 
         public GetApiTokenForCreatedBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null)
                 return new GetApiTokenForCreatedBusinessVo(this);

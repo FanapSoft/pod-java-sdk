@@ -1,6 +1,8 @@
 package com.fanap.billingService.data.modelVo;
 
+import com.fanap.billingService.data.modelSrv.LinkSrv;
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.math.BigDecimal;
@@ -15,12 +17,13 @@ public class CreatePreInvoiceVo {
     private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, ott, productInfos, guildCode, redirectUri and userId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
+    private String token;
     private String redirectURL;
     private String userId;
     private String billNumber;
     private String description;
     private String deadline;
-    private List<String> productId = new ArrayList<>();
+    private List<String> entityId = new ArrayList<>();
     private List<String> price = new ArrayList<>();
     private List<String> quantity = new ArrayList<>();
     private List<String> productDescription = new ArrayList<>();
@@ -29,6 +32,8 @@ public class CreatePreInvoiceVo {
     private String preferredTaxRate;
     private String verificationNeeded;
     private String callUrl;
+    private static String scProductId;
+
 
     public String getCallUrl() {
         return callUrl;
@@ -54,8 +59,8 @@ public class CreatePreInvoiceVo {
         return deadline;
     }
 
-    public List<String> getProductId() {
-        return productId;
+    public List<String> getEntityId() {
+        return entityId;
     }
 
     public List<String> getPrice() {
@@ -86,6 +91,14 @@ public class CreatePreInvoiceVo {
         return verificationNeeded;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public CreatePreInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.redirectURL = builder.getRedirectURL();
@@ -94,7 +107,7 @@ public class CreatePreInvoiceVo {
         this.description = builder.getDescription();
         this.deadline = builder.getDeadline();
         for (ProductInfo productInfo : builder.getProductInfos()) {
-            this.productId.add(productInfo.getProductId().toString());
+            this.entityId.add(productInfo.getProductId().toString());
             this.price.add(productInfo.getPrice().toString());
             this.quantity.add(productInfo.getQuantity().toString());
             this.productDescription.add(productInfo.getProductDescription());
@@ -104,6 +117,9 @@ public class CreatePreInvoiceVo {
         this.preferredTaxRate = TypeConversionUtil.decimalToString(builder.getPreferredTaxRate());
         this.verificationNeeded = builder.getVerificationNeeded();
         this.callUrl = builder.getCallUrl();
+        this.token = builder.getToken();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.SERVICE_CREAT_PRE_INVOICE);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -113,6 +129,7 @@ public class CreatePreInvoiceVo {
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
+        private String token;
         private String redirectURL;
         private Long userId;
         private String billNumber;
@@ -124,6 +141,15 @@ public class CreatePreInvoiceVo {
         private BigDecimal preferredTaxRate;
         private String verificationNeeded;
         private String callUrl;
+
+        public String getToken() {
+            return token;
+        }
+
+        public Builder setToken(String token) {
+            this.token = token;
+            return this;
+        }
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
@@ -240,11 +266,28 @@ public class CreatePreInvoiceVo {
         public CreatePreInvoiceVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getOtt() != null && this.redirectURL != null &&
-                    this.userId != null &&
+
                     this.productInfos != null &&
                     this.productInfos.size() != 0 && this.guildCode != null)
                 return new CreatePreInvoiceVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
+
+
+    public LinkSrv getLink(String hashCode) throws PodException {
+        if (hashCode == null || hashCode.isEmpty() == true)
+
+            throw PodException.invalidParameter("The field is required.");
+
+        LinkSrv linkSrv = new LinkSrv();
+        linkSrv.setHashCode(hashCode);
+        linkSrv.setRedirectUrl("https://pay.pod.land/v1/pbc/preinvoice/" + hashCode);
+
+        return linkSrv;
+    }
 }
+
+
+
+

@@ -1,7 +1,8 @@
 package com.fanap.podSubscription.service;
 
-import com.fanap.podSubscription.config.BaseURLPlatform;
-import com.fanap.podSubscription.data.modelSrv.*;
+import com.fanap.podSubscription.data.modelSrv.SubscriptionFullSrv;
+import com.fanap.podSubscription.data.modelSrv.SubscriptionPlanSrv;
+import com.fanap.podSubscription.data.modelSrv.SubscriptionSrv;
 import com.fanap.podSubscription.data.modelVo.*;
 import com.fanap.podSubscription.util.GetResult;
 import com.fanap.podSubscription.util.OnGetResponseListener;
@@ -14,14 +15,18 @@ import java.util.List;
  */
 public class Service {
 
-
     public void subscriptionList(SubscriptionListVo subscriptionListVo, OnGetResponseListener onGetResponseListener) {
 
-        PodSubscription service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(PodSubscription.class);
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
 
         new GetResult<List<SubscriptionFullSrv>>(service.subscriptionList(
                 subscriptionListVo.getBaseInfoVo().getToken(),
                 subscriptionListVo.getBaseInfoVo().getToken_issuer(),
+                subscriptionListVo.getScProductId(),
+                subscriptionListVo.getBaseInfoVo().getScVoucherHash(),
+                subscriptionListVo.getBaseInfoVo().getScApiKey(),
                 subscriptionListVo.getSize(),
                 subscriptionListVo.getOffset(),
                 subscriptionListVo.getSubscriptionPlanId()
@@ -30,11 +35,16 @@ public class Service {
 
     public void consumeSubscription(ConsumeSubscriptionVo consumeSubscriptionVo, OnGetResponseListener onGetResponseListener) {
 
-        PodSubscription service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(PodSubscription.class);
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
 
         new GetResult<SubscriptionSrv>(service.consumeSubscription(
                 consumeSubscriptionVo.getBaseInfoVo().getToken(),
                 consumeSubscriptionVo.getBaseInfoVo().getToken_issuer(),
+                consumeSubscriptionVo.getScProductId(),
+                consumeSubscriptionVo.getBaseInfoVo().getScVoucherHash(),
+                consumeSubscriptionVo.getBaseInfoVo().getScApiKey(),
                 consumeSubscriptionVo.getId(),
                 consumeSubscriptionVo.getUsedAmount()
         ), onGetResponseListener).get();
@@ -42,11 +52,16 @@ public class Service {
 
     public void updateSubscriptionPlan(UpdateSubscriptionPlanVo updateSubscriptionPlanVo, OnGetResponseListener onGetResponseListener) {
 
-        PodSubscription service = RetrofitUtil.getInstance(BaseURLPlatform.PRODUCTION.getValue()).create(PodSubscription.class);
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
 
         new GetResult<SubscriptionPlanSrv>(service.updateSubscriptionPlan(
                 updateSubscriptionPlanVo.getBaseInfoVo().getToken(),
                 updateSubscriptionPlanVo.getBaseInfoVo().getToken_issuer(),
+                updateSubscriptionPlanVo.getScProductId(),
+                updateSubscriptionPlanVo.getBaseInfoVo().getScVoucherHash(),
+                updateSubscriptionPlanVo.getBaseInfoVo().getScApiKey(),
                 updateSubscriptionPlanVo.getId(),
                 updateSubscriptionPlanVo.getPeriodTypeCode(),
                 updateSubscriptionPlanVo.getPeriodTypeCount(),
@@ -57,49 +72,101 @@ public class Service {
         ), onGetResponseListener).get();
     }
 
-//    public void getUserProfile(GetUserProfileVo getUserProfileVo,
-//                               OnGetResponseListener onGetResponseListener) {
-//
-//        PodSubscription service = RetrofitUtil.getInstance().create(PodSubscription.class);
-//
-//        new GetResult<CustomerProfileSrv>(service.getUserProfile(
-//                getUserProfileVo.getBaseInfoVo().getToken(),
-//                getUserProfileVo.getBaseInfoVo().getToken_issuer(),
-//                getUserProfileVo.getBaseInfoVo().getClient_id(),
-//                getUserProfileVo.getBaseInfoVo().getClient_secret()
-//        ), onGetResponseListener).get();
-//    }
+    public void subscriptionPlanList(SubscriptionPlanListVo subscriptionPlanListVo,
+                                     OnGetResponseListener onGetResponseListener) {
 
-//    public void editProfileWithConfirmation(EditProfileWithConfirmationVo editProfileWithConfirmationVo,
-//                                            OnGetResponseListener onGetResponseListener) {
-//
-//        PodSubscription service = RetrofitUtil.getInstance().create(PodSubscription.class);
-//
-//        new GetResult<CustomerProfileSrv>(service.editProfileWithConfirmation(
-//                editProfileWithConfirmationVo.getFirstName(),
-//                editProfileWithConfirmationVo.getLastName(),
-//                editProfileWithConfirmationVo.getNickName(),
-//                editProfileWithConfirmationVo.getEmail(),
-//                editProfileWithConfirmationVo.getPhoneNumber(),
-//                editProfileWithConfirmationVo.getCellphoneNumber(),
-//                editProfileWithConfirmationVo.getNationalCode(),
-//                editProfileWithConfirmationVo.getGender(),
-//                editProfileWithConfirmationVo.getAddress(),
-//                editProfileWithConfirmationVo.getBirthDate(),
-//                editProfileWithConfirmationVo.getCountry(),
-//                editProfileWithConfirmationVo.getState(),
-//                editProfileWithConfirmationVo.getCity(),
-//                editProfileWithConfirmationVo.getPostalcode(),
-//                editProfileWithConfirmationVo.getSheba(),
-//                editProfileWithConfirmationVo.getProfileImage(),
-//                editProfileWithConfirmationVo.getClient_metadata(),
-//                editProfileWithConfirmationVo.getBirthState(),
-//                editProfileWithConfirmationVo.getIdentificationNumber(),
-//                editProfileWithConfirmationVo.getFatherName(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getToken(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getToken_issuer(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getClient_id(),
-//                editProfileWithConfirmationVo.getBaseInfoVo().getClient_secret()
-//        ), onGetResponseListener).get();
-//    }
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
+
+        new GetResult<List<SubscriptionPlanSrv>>(service.subscriptionPlanList(
+                subscriptionPlanListVo.getBaseInfoVo().getToken(),
+                subscriptionPlanListVo.getBaseInfoVo().getToken_issuer(),
+                subscriptionPlanListVo.getScProductId(),
+                subscriptionPlanListVo.getBaseInfoVo().getScVoucherHash(),
+                subscriptionPlanListVo.getBaseInfoVo().getScApiKey(),
+                subscriptionPlanListVo.getPeriodTypeCode(),
+                subscriptionPlanListVo.getPeriodTypeCountFrom(),
+                subscriptionPlanListVo.getPeriodTypeCountTo(),
+                subscriptionPlanListVo.getFromPrice(),
+                subscriptionPlanListVo.getToPrice(),
+                subscriptionPlanListVo.getOffset(),
+                subscriptionPlanListVo.getEnable(),
+                subscriptionPlanListVo.getSize(),
+                subscriptionPlanListVo.getPermittedGuildCode(),
+                subscriptionPlanListVo.getPermittedBusinessId(),
+                subscriptionPlanListVo.getPermittedProductId(),
+                subscriptionPlanListVo.getId(),
+                subscriptionPlanListVo.getTypeCode(),
+                subscriptionPlanListVo.getCurrencyCode()
+        ), onGetResponseListener).get();
+    }
+
+    public void addSubscriptionPlanList(AddSubscriptionPlanVo addSubscriptionPlanVo,
+                                        OnGetResponseListener onGetResponseListener) {
+
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
+
+        new GetResult<SubscriptionPlanSrv>(service.addSubscriptionPlan(
+                addSubscriptionPlanVo.getBaseInfoVo().getToken(),
+                addSubscriptionPlanVo.getBaseInfoVo().getToken_issuer(),
+                addSubscriptionPlanVo.getScProductId(),
+                addSubscriptionPlanVo.getBaseInfoVo().getScVoucherHash(),
+                addSubscriptionPlanVo.getBaseInfoVo().getScApiKey(),
+                addSubscriptionPlanVo.getPeriodTypeCount(),
+                addSubscriptionPlanVo.getUsageCountLimit(),
+                addSubscriptionPlanVo.getUsageAmountLimit(),
+                addSubscriptionPlanVo.getPermittedGuildCode(),
+                addSubscriptionPlanVo.getPermittedBusinessId(),
+                addSubscriptionPlanVo.getPermittedProductId(),
+                addSubscriptionPlanVo.getEntityId(),
+                addSubscriptionPlanVo.getName(),
+                addSubscriptionPlanVo.getPrice(),
+                addSubscriptionPlanVo.getPeriodTypeCode(),
+                addSubscriptionPlanVo.getType(),
+                addSubscriptionPlanVo.getGuildCode(),
+                addSubscriptionPlanVo.getCurrencyCode()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void requestSubscription(RequestSubscriptionVo requestSubscriptionVo,
+                                    OnGetResponseListener onGetResponseListener) {
+
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
+
+        new GetResult<SubscriptionSrv>(service.requestSubscription(
+                requestSubscriptionVo.getBaseInfoVo().getToken(),
+                requestSubscriptionVo.getBaseInfoVo().getToken_issuer(),
+                requestSubscriptionVo.getScProductId(),
+                requestSubscriptionVo.getBaseInfoVo().getScVoucherHash(),
+                requestSubscriptionVo.getBaseInfoVo().getScApiKey(),
+                requestSubscriptionVo.getUserId(),
+                requestSubscriptionVo.getSubscriptionPlanId()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void confirmSubscription(ConfirmSubscriptionVo confirmSubscriptionVo,
+                                    OnGetResponseListener onGetResponseListener) {
+
+        PodSubscription service = RetrofitUtil
+                .getInstance()
+                .create(PodSubscription.class);
+
+        new GetResult<SubscriptionSrv>(service.confirmSubscription(
+                confirmSubscriptionVo.getBaseInfoVo().getToken(),
+                confirmSubscriptionVo.getBaseInfoVo().getToken_issuer(),
+                confirmSubscriptionVo.getScProductId(),
+                confirmSubscriptionVo.getBaseInfoVo().getScVoucherHash(),
+                confirmSubscriptionVo.getBaseInfoVo().getScApiKey(),
+                confirmSubscriptionVo.getCode(),
+                confirmSubscriptionVo.getSubscriptionId()
+        ), onGetResponseListener).get();
+    }
+
 }

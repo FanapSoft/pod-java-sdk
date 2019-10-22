@@ -3,12 +3,10 @@ package com.fanap.billingService.data.modelVo;
 import com.fanap.billingService.enums.EnumBaseURLPrivate;
 import com.fanap.billingService.exception.PodException;
 
-import java.net.URL;
-
 public class PayInvoiceByUniqueNumberVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and uniqueNumber are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and uniqueNumber are required parameters!";
 
     public BaseInfoVo baseInfoVo;
     public String uniqueNumber;
@@ -45,6 +43,7 @@ public class PayInvoiceByUniqueNumberVo {
     public String getGateway() {
         return gateway;
     }
+
 
     public static class Builder {
 
@@ -112,12 +111,11 @@ public class PayInvoiceByUniqueNumberVo {
         }
 
 
-
-
     }
+
     public String getLink() {
-        String link=EnumBaseURLPrivate.PRODUCTION.getValue()+"/v1/pbc/payInvoiceByUniqueNumber/?uniqueNumber="+uniqueNumber+"&gateway="+gateway+"&redirectUri="+redirectUri+"&callUri="+callUri;
-        return  link;
+        String link = EnumBaseURLPrivate.PRODUCTION.getValue() + "/v1/pbc/payInvoiceByUniqueNumber/?uniqueNumber=" + uniqueNumber + "&gateway=" + gateway + "&redirectUri=" + redirectUri + "&callUri=" + callUri;
+        return link;
     }
 
 

@@ -4,22 +4,32 @@ import com.fanap.userOperation.data.modelSrv.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
+import java.util.List;
+
 /**
  * Created By Askarian on 5/28/2019
  */
 public interface UserOperationService {
 
-    @GET("/srv/core/nzh/getUserProfile")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<CustomerProfileSrv>> getUserProfile(
-            @Query("_token_") String token,
-            @Query("_token_issuer_") String token_issuer,
-            @Query("client_id") String client_id,
-            @Query("client_secret") String client_secret);
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("client_id") String client_id,
+            @Field("client_secret") String client_secret);
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/editProfileWithConfirmation")
+    @POST("/srv/core/nzh/doServiceCall")
     Call<ResultSrv<CustomerProfileSrv>> editProfileWithConfirmation(
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
             @Field("firstName") String firstName,
             @Field("lastName") String lastName,
             @Field("nickName") String nickName,
@@ -44,4 +54,34 @@ public interface UserOperationService {
             @Field("_token_issuer_") String token_issuer,
             @Field("client_id") String client_id,
             @Field("client_secret") String client_secret);
+
+
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<CustomerProfileSrv>> confirmEditProfile(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("code") String code,
+            @Field("cellphoneNumber") String cellphoneNumber);
+
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("/srv/core/nzh/doServiceCall")
+    Call<ResultSrv<List<AddressSrv>>> getListAddress(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String token_issuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("offset") String offset,
+            @Field("size") String size);
+
 }

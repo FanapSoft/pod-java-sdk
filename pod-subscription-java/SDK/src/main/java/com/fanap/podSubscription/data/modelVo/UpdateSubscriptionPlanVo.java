@@ -1,6 +1,7 @@
 package com.fanap.podSubscription.data.modelVo;
 
-import com.fanap.podSubscription.exception.PodSubscriptionException;
+import com.fanap.podSubscription.exception.PodException;
+import com.fanap.podSubscription.util.PodServicesEnum;
 import com.fanap.podSubscription.util.TypeConversionUtil;
 
 /**
@@ -19,6 +20,8 @@ public class UpdateSubscriptionPlanVo {
     private String name;
     private String Price;
     private String enable;
+    private static String scProductId;
+
 
     public String getId() {
         return id;
@@ -48,6 +51,10 @@ public class UpdateSubscriptionPlanVo {
         return enable;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public UpdateSubscriptionPlanVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.getId());
@@ -57,6 +64,8 @@ public class UpdateSubscriptionPlanVo {
         this.enable = builder.getEnable();
         this.usageCountLimit = TypeConversionUtil.longToString(builder.getUsageCountLimit());
         this.Price = TypeConversionUtil.longToString(builder.getPrice());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_UPDATE_SUBSCRIPTION_PLAN);
+
     }
 
 
@@ -151,12 +160,12 @@ public class UpdateSubscriptionPlanVo {
             return this;
         }
 
-        public UpdateSubscriptionPlanVo build() throws PodSubscriptionException {
+        public UpdateSubscriptionPlanVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.id != null)
                 return new UpdateSubscriptionPlanVo(this);
-            else throw PodSubscriptionException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
 

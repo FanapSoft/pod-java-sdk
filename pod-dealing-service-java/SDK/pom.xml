@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fanap.podDealing</groupId>
-    <artifactId>PodSubscription</artifactId>
+    <artifactId>PodDealing</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0.0</version>
-    <name>PodSubscription</name>
+    <version>2.0.0.0</version>
+    <name>PodDealing</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,10 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 public class SendInvoicePaymentSmsVo {
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and invoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and invoiceId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String invoiceId;
@@ -13,6 +14,8 @@ public class SendInvoicePaymentSmsVo {
     private String delegationId;
     private String forceDelegation;
     private String wallet;
+    private static String scProductId;
+
 
     public SendInvoicePaymentSmsVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -22,6 +25,8 @@ public class SendInvoicePaymentSmsVo {
         this.delegationId = TypeConversionUtil.longToString(builder.getDelegationId());
         this.forceDelegation = builder.getForceDelegation();
         this.wallet = builder.getWallet();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_SEND_INVOICE_PAYMENT_SMS);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -50,6 +55,10 @@ public class SendInvoicePaymentSmsVo {
 
     public String getWallet() {
         return wallet;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {

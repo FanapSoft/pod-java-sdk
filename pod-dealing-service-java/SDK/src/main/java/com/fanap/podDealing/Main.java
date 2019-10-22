@@ -3,9 +3,9 @@ package com.fanap.podDealing;
 import com.fanap.podDealing.controller.PodDealing;
 import com.fanap.podDealing.data.modelSrv.*;
 import com.fanap.podDealing.data.modelVo.*;
-import com.fanap.podDealing.enums.Enum_Server_type;
 import com.fanap.podDealing.exception.PodException;
 import com.fanap.podDealing.util.OnGetResponseListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,36 +21,43 @@ public class Main {
     public static void main(String[] args) {
 
 
-        // addUserAndBusiness();
-        // listUserCreatedBusiness();
-        // updateBusiness();
-        // getApiTokenForCreatedBusiness();
-        // rateBusiness();
-        // commentBusiness();
-        // businessFavorite();
-        // userBusinessInfos();
-        // commentBusinessList();
-        // confirmComment();
-        // guildList();
+//        addUserAndBusiness();
+//        listUserCreatedBusiness();
+//        updateBusiness();
+//        getApiTokenForCreatedBusiness();
+//        rateBusiness();
+//        commentBusiness();
+//        businessFavorite();
+//        userBusinessInfos();
+//        commentBusinessList();
+//        confirmComment();
+//        guildList();
+        unconfirmComment();
     }
 
 
     private static void addUserAndBusiness() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+
                 .build();
 
         PodDealing podDealing = new PodDealing();
 
+
         List<String> permittedGuildCodeList = new ArrayList<>();
+        String[] tags = {"tags1", "tags2"};
         permittedGuildCodeList.add(GUILD_CODE);
 
         try {
             AddUserAndBusinessVo addUserAndBusinessVo = new AddUserAndBusinessVo.Builder(baseInfoVo)
-                    .setUsername("biz1")
-                    .setBusinessName("biiz11")
+                    .setUsername("biztt12")
+                    .setBusinessName("biieez112")
                     .setEmail("biiz.biz@gmail.com")
                     .setCountry("iran")
                     .setState("khorasan")
@@ -61,11 +68,13 @@ public class Main {
                     .setAgentLastName("biz1111")
                     .setAgentCellphoneNumber("09154961631")
                     .setGuildCode(permittedGuildCodeList)
+                    .setTags(tags)
+
                     .build();
             podDealing.addUserAndBusiness(addUserAndBusinessVo, new OnGetResponseListener<BusinessSrv>() {
                 @Override
                 public void onResponse(ResultVo<BusinessSrv> result) {
-                    System.out.println(result.getResult().getId());
+                    System.out.println(result.getResult().getTags().get(1));
                 }
 
                 @Override
@@ -82,15 +91,17 @@ public class Main {
 
 
     private static void listUserCreatedBusiness() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<Long> permittedBizIdList = new ArrayList<>();
         permittedBizIdList.add(5204L);
         PodDealing podDealing = new PodDealing();
-
 
         try {
             ListUserCreatedBusinessVo listUserCreatedBusinessVo = new ListUserCreatedBusinessVo.Builder(baseInfoVo)
@@ -114,14 +125,19 @@ public class Main {
     }
 
     private static void updateBusiness() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> permittedGuildCodeList = new ArrayList<>();
         permittedGuildCodeList.add(GUILD_CODE);
         PodDealing podDealing = new PodDealing();
+        String[] tagTrees = {"tagTrees1", "tagTrees2"};
+        String[] tags = {"tags1", "tags2"};
 
 
         try {
@@ -134,11 +150,14 @@ public class Main {
                     .setCity("mashhad")
                     .setAddress("fanap")
                     .setDescription("it")
+//                    .setScVoucherHash(scVoucherHashs)
+//                    .setTags(tags)
+//                    .setTagTrees(tagTrees)
                     .build();
             podDealing.updateBusiness(updateBusinessVo, new OnGetResponseListener<BusinessSrv>() {
                 @Override
                 public void onResponse(ResultVo<BusinessSrv> result) {
-                    System.out.println(result.getResult().getName());
+                    System.out.println(result.getResult().getId());
                 }
 
                 @Override
@@ -155,19 +174,20 @@ public class Main {
 
 
     private static void getApiTokenForCreatedBusiness() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
 
-
         try {
             GetApiTokenForCreatedBusinessVo getApiTokenForCreatedBusinessVo = new GetApiTokenForCreatedBusinessVo.Builder(baseInfoVo)
                     .setBusinessId(5188L)
-
                     .build();
             podDealing.getApiTokenForCreatedBusiness(getApiTokenForCreatedBusinessVo, new OnGetResponseListener<BusinessApiTokenSrv>() {
                 @Override
@@ -188,10 +208,13 @@ public class Main {
     }
 
     private static void rateBusiness() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -221,10 +244,13 @@ public class Main {
     }
 
     private static void commentBusiness() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -254,10 +280,13 @@ public class Main {
     }
 
     private static void businessFavorite() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -287,10 +316,13 @@ public class Main {
     }
 
     private static void userBusinessInfos() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<Long> permittedIdList = new ArrayList<>();
         permittedIdList.add(5188L);
@@ -300,8 +332,6 @@ public class Main {
         try {
             UserBusinessInfosVo userBusinessInfosVo = new UserBusinessInfosVo.Builder(baseInfoVo)
                     .setId(permittedIdList)
-
-
                     .build();
             podDealing.userBusinessInfos(userBusinessInfosVo, new OnGetResponseListener<List<UserBusinessInfoSrv>>() {
                 @Override
@@ -323,10 +353,13 @@ public class Main {
 
 
     private static void commentBusinessList() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -357,10 +390,13 @@ public class Main {
     }
 
     private static void confirmComment() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("c26d02dc98b04325b2edb0b86bcf9fe1")
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -369,7 +405,6 @@ public class Main {
         try {
             ConfirmCommentVo confirmCommentVo = new ConfirmCommentVo.Builder(baseInfoVo)
                     .setCommentId(943L)
-
 
                     .build();
             podDealing.confirmComment(confirmCommentVo, new OnGetResponseListener<Boolean>() {
@@ -391,10 +426,13 @@ public class Main {
     }
 
     private static void guildList() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setServerType(Enum_Server_type.PRODUCTION)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -422,4 +460,43 @@ public class Main {
 
 
     }
+
+
+    private static void unconfirmComment() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("c26d02dc98b04325b2edb0b86bcf9fe1")
+                .setToken_issuer(1)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+
+        try {
+            UnconfirmCommentVo unconfirmCommentVo = new UnconfirmCommentVo.Builder(baseInfoVo)
+                    .setCommentId(943L)
+
+                    .build();
+            podDealing.unconfirmComment(unconfirmCommentVo, new OnGetResponseListener<Boolean>() {
+                @Override
+                public void onResponse(ResultVo<Boolean> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+
+    }
+
+
 }

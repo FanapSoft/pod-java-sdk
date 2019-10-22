@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class CommentBusinessListVo {
@@ -11,7 +12,7 @@ public class CommentBusinessListVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType, offset , size and businessId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, offset , size and businessId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
@@ -19,6 +20,8 @@ public class CommentBusinessListVo {
     private String lastId;
     private String offset;
     private String size;
+    private static String scProductId;
+
 
     public String getBusinessId() {
         return businessId;
@@ -40,6 +43,10 @@ public class CommentBusinessListVo {
         return size;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public CommentBusinessListVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
@@ -47,6 +54,7 @@ public class CommentBusinessListVo {
         this.lastId = TypeConversionUtil.longToString(builder.getLastId());
         this.offset = TypeConversionUtil.longToString(builder.getOffset());
         this.size = TypeConversionUtil.longToString(builder.getSize());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_COMMENT_BUSINESS_LIST);
 
 
     }
@@ -62,6 +70,7 @@ public class CommentBusinessListVo {
         private Long lastId;
         private Long offset;
         private Long size;
+
 
         public Long getFirstId() {
             return firstId;
@@ -124,7 +133,6 @@ public class CommentBusinessListVo {
 
         public CommentBusinessListVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null && this.size != null && this.offset != null)
                 return new CommentBusinessListVo(this);

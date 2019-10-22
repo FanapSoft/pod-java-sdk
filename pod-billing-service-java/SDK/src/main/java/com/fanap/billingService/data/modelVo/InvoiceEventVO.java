@@ -1,7 +1,6 @@
 package com.fanap.billingService.data.modelVo;
 
 
-
 import java.io.Serializable;
 import java.util.List;
 

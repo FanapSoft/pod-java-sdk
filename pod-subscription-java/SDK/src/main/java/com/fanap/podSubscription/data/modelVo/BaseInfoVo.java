@@ -2,20 +2,29 @@ package com.fanap.podSubscription.data.modelVo;
 
 import com.fanap.podSubscription.util.TypeConversionUtil;
 
+import java.util.List;
+
 /**
  * Created by Shahab Askarian on 5/28/2019.
  */
 public class BaseInfoVo {
 
+
     private String token;
     private String token_issuer;
     private String ott;
+    public List<String> scVoucherHash;
+    public String scApiKey;
 
     public BaseInfoVo(Builder builder) {
+
         this.token = builder.getToken();
         this.token_issuer = TypeConversionUtil.intToString(builder.getToken_issuer());
         this.ott = builder.getOtt();
+        this.scVoucherHash = builder.getScVoucherHash();
+        this.scApiKey = builder.getScApiKey();
     }
+
 
     public String getOtt() {
         return ott;
@@ -29,10 +38,46 @@ public class BaseInfoVo {
         return token_issuer;
     }
 
+    public List<String> getScVoucherHash() {
+        return scVoucherHash;
+    }
+
+    public String getScApiKey() {
+        return scApiKey;
+    }
+
     public static class Builder {
+
         private String token;
         private Integer token_issuer;
         private String ott;
+        public List<String> scVoucherHash;
+        public String scApiKey;
+
+
+        public List<String> getScVoucherHash() {
+            return scVoucherHash;
+        }
+
+        public Builder setScVoucherHash(List<String> scVoucherHash) {
+            this.scVoucherHash = scVoucherHash;
+            return this;
+        }
+
+        public String getScApiKey() {
+            return scApiKey;
+        }
+
+        public Builder setScApiKey(String scApiKey) {
+            this.scApiKey = scApiKey;
+            return this;
+        }
+
+        public Builder setToken_issuer(Integer token_issuer) {
+            this.token_issuer = token_issuer;
+            return this;
+        }
+
 
         public String getToken() {
             return token;
@@ -64,7 +109,6 @@ public class BaseInfoVo {
         public BaseInfoVo build() {
             return new BaseInfoVo(this);
         }
-
     }
 
 }

@@ -4,11 +4,10 @@ package com.fanap.billingService.data.modelVo;
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.TypeConversionUtil;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class InvoiceItemVO  {
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and invoiceId are required parameters!";
+public class InvoiceItemVO {
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer are required parameters!";
     private BaseInfoVo baseInfoVo;
     private String productId;
     private String bigDecimalPrice;
@@ -17,17 +16,13 @@ public class InvoiceItemVO  {
     private String price;
 
 
-
-
-
-
     public InvoiceItemVO(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
-        this.productId =TypeConversionUtil.longToString(builder.getProductId());
-        this.bigDecimalPrice=TypeConversionUtil.decimalToString(builder.getBigDecimalPrice());
-        this.quantity=TypeConversionUtil.decimalToString(builder.getQuantity());
-        this.description=builder.getDescription();
-        this.price=TypeConversionUtil.longToString(builder.getPrice());
+        this.productId = TypeConversionUtil.longToString(builder.getProductId());
+        this.bigDecimalPrice = TypeConversionUtil.decimalToString(builder.getBigDecimalPrice());
+        this.quantity = TypeConversionUtil.decimalToString(builder.getQuantity());
+        this.description = builder.getDescription();
+        this.price = TypeConversionUtil.longToString(builder.getPrice());
 
     }
 
@@ -55,6 +50,7 @@ public class InvoiceItemVO  {
     public String getPrice() {
         return price;
     }
+
 
     public static class Builder {
 

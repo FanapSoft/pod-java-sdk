@@ -248,6 +248,25 @@ public class PodDealing {
 
         return this;
     }
+    /**
+     * unConfirm Comment .
+     *
+     * @param unconfirmCommentVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                              InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public PodDealing unconfirmComment(UnconfirmCommentVo unconfirmCommentVo,
+                                     OnGetResponseListener onGetResponseListener)
+            throws PodException {
 
+        if (onGetResponseListener != null)
+            service.unconfirmComment(unconfirmCommentVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
 
 }

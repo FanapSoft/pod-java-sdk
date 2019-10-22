@@ -1,7 +1,7 @@
 package com.fanap.podSubscription.util;
 
 import com.fanap.podSubscription.data.modelVo.ResultVo;
-import com.fanap.podSubscription.exception.PodSubscriptionException;
+import com.fanap.podSubscription.exception.PodException;
 
 /**
  * Created By Khojasteh on 2/26/2019
@@ -9,6 +9,6 @@ import com.fanap.podSubscription.exception.PodSubscriptionException;
 public interface OnGetResponseListener<T> {
     void onResponse(ResultVo<T> result);
 
-    void onFailed(PodSubscriptionException e);
+    void onFailed(PodException e);
 
 }

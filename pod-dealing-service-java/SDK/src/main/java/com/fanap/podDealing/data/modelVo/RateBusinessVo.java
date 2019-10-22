@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 public class RateBusinessVo {
@@ -11,11 +12,13 @@ public class RateBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType , businessId  and rate  are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer , businessId  and rate  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
     private String rate;
+    private static String scProductId;
+
 
     public String getRate() {
         return rate;
@@ -25,10 +28,15 @@ public class RateBusinessVo {
         return businessId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public RateBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
         this.rate = TypeConversionUtil.longToString(builder.getRate());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_RATE_BUSINESS);
 
 
     }
@@ -41,6 +49,7 @@ public class RateBusinessVo {
         private BaseInfoVo baseInfoVo;
         private Long businessId;
         private Long rate;
+
 
         public Long getRate() {
             return rate;
@@ -76,7 +85,6 @@ public class RateBusinessVo {
 
         public RateBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null && this.rate != null)

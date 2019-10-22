@@ -1,39 +1,46 @@
 package com.fanap.podBaseService.data.modelVo;
 
 import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podBaseService.util.PodServicesEnum;
 import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import java.util.List;
 
 /**
  * Created by Z.gholinia on 9/2/2019.
  */
-public class GetTagTreeListVo {
+public class GetTagTreeListVo  {
 
 
-        private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, offset and size are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, levelCount and categoryId are required parameters!";
 
-        private BaseInfoVo baseInfoVo;
-        private String categoryId ;
-        private String parentId;
-        private String levelCount ;
-        private String level;
-        private String id;
+    private BaseInfoVo baseInfoVo;
+    private String categoryId;
+    private String parentId;
+    private String levelCount;
+    private String level;
+    private String id;
+    private static String scProductId;
 
-        public GetTagTreeListVo(Builder builder) {
-            this.baseInfoVo = builder.getBaseInfoVo();
-            this.id = TypeConversionUtil.longToString(builder.getId());
-            this.categoryId =TypeConversionUtil.longToString(builder.getCategoryId());
-            this.parentId =TypeConversionUtil.longToString(builder.getParentId());
-            this.levelCount = TypeConversionUtil.intToString(builder.getLevelCount());
-            this.level = TypeConversionUtil.intToString(builder.getLevel());
-        }
 
-        public BaseInfoVo getBaseInfoVo() {
-            return baseInfoVo;
-        }
+    public GetTagTreeListVo(Builder builder) {
+        this.baseInfoVo = builder.getBaseInfoVo();
+        this.id = TypeConversionUtil.longToString(builder.getId());
+        this.categoryId = TypeConversionUtil.longToString(builder.getCategoryId());
+        this.parentId = TypeConversionUtil.longToString(builder.getParentId());
+        this.levelCount = TypeConversionUtil.intToString(builder.getLevelCount());
+        this.level = TypeConversionUtil.intToString(builder.getLevel());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_TAG_TREE_LIST);
 
-        public String getId() {
-            return id;
-        }
+    }
+
+    public BaseInfoVo getBaseInfoVo() {
+        return baseInfoVo;
+    }
+
+    public String getId() {
+        return id;
+    }
 
     public String getCategoryId() {
         return categoryId;
@@ -51,81 +58,86 @@ public class GetTagTreeListVo {
         return level;
     }
 
-    public static class Builder {
+    public static String getScProductId() {
+        return scProductId;
+    }
 
-            private BaseInfoVo baseInfoVo;
-            private Long categoryId ;
-            private Long parentId;
-            private Integer levelCount ;
-            private int level;
-            private Long id;
+    public static class Builder  {
 
-            public Builder(BaseInfoVo baseInfoVo) {
-                this.baseInfoVo = baseInfoVo;
-            }
+        private BaseInfoVo baseInfoVo;
+        private Long categoryId;
+        private Long parentId;
+        private Integer levelCount;
+        private int level;
+        private Long id;
 
-            public Long getId() {
-                return id;
-            }
 
-            public Builder setId(Long id) {
-                this.id = id;
-                return this;
-            }
+        public Builder(BaseInfoVo baseInfoVo) {
+            this.baseInfoVo = baseInfoVo;
+        }
 
-            public Long getCategoryId() {
-                return categoryId;
-            }
+        public Long getId() {
+            return id;
+        }
 
-            public Builder setCategoryId(Long categoryId) {
-                this.categoryId = categoryId;
-                return this;
-            }
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
 
-            public Long getParentId() {
-                return parentId;
-            }
+        public Long getCategoryId() {
+            return categoryId;
+        }
 
-            public Builder setParentId(Long parentId) {
-                this.parentId = parentId;
-                return this;
-            }
+        public Builder setCategoryId(Long categoryId) {
+            this.categoryId = categoryId;
+            return this;
+        }
 
-            public int getLevelCount() {
-                return levelCount;
-            }
+        public Long getParentId() {
+            return parentId;
+        }
 
-            public Builder setLevelCount(int levelCount) {
-                this.levelCount = levelCount;
-                return this;
-            }
+        public Builder setParentId(Long parentId) {
+            this.parentId = parentId;
+            return this;
+        }
 
-            public int getLevel() {
-                return level;
-            }
+        public int getLevelCount() {
+            return levelCount;
+        }
 
-            public Builder setLevel(int level) {
-                this.level = level;
-                return this;
-            }
+        public Builder setLevelCount(int levelCount) {
+            this.levelCount = levelCount;
+            return this;
+        }
 
-            public BaseInfoVo getBaseInfoVo() {
-                return baseInfoVo;
-            }
+        public int getLevel() {
+            return level;
+        }
 
-            public Builder setBaseInfoVo(BaseInfoVo baseInfoVo) {
-                this.baseInfoVo = baseInfoVo;
-                return this;
-            }
+        public Builder setLevel(int level) {
+            this.level = level;
+            return this;
+        }
 
-            public GetTagTreeListVo build() throws PodException {
-                if (this.baseInfoVo != null &&
-                        this.baseInfoVo.getToken() != null &&
-                        this.baseInfoVo.getToken_issuer() != null &&
-                        this.levelCount != null &&
-                        this.categoryId != null)
-                    return new GetTagTreeListVo(this);
-                else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
-            }
+        public BaseInfoVo getBaseInfoVo() {
+            return baseInfoVo;
+        }
+
+        public Builder setBaseInfoVo(BaseInfoVo baseInfoVo) {
+            this.baseInfoVo = baseInfoVo;
+            return this;
+        }
+
+        public GetTagTreeListVo build() throws PodException {
+            if (this.baseInfoVo != null &&
+                    this.baseInfoVo.getToken() != null &&
+                    this.baseInfoVo.getToken_issuer() != null &&
+                    this.levelCount != null &&
+                    this.categoryId != null)
+                return new GetTagTreeListVo(this);
+            else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
+}

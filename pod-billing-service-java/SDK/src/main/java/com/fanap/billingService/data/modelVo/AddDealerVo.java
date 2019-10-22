@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 
@@ -11,17 +12,20 @@ import com.fanap.billingService.util.TypeConversionUtil;
 public class AddDealerVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, severType and dealerBizId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, dealerBizId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String dealerBizId;
     private String allProductAllow;
+    private static String scProductId;
 
 
     public AddDealerVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.dealerBizId = TypeConversionUtil.longToString(builder.getDealerBizId());
         this.allProductAllow = TypeConversionUtil.booleanToString(builder.isAllProductAllow());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_DEALER);
+
 
     }
 
@@ -37,6 +41,10 @@ public class AddDealerVo {
         return allProductAllow;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
@@ -46,6 +54,7 @@ public class AddDealerVo {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public Long getDealerBizId() {
             return dealerBizId;

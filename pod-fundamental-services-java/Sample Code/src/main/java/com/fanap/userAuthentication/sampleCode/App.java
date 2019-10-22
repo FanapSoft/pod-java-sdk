@@ -6,6 +6,9 @@ import com.fanap.SsoService.data.modelVo.*;
 import com.fanap.SsoService.exception.PodException;
 import com.fanap.SsoService.util.interfaces.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Hello world!
  */
@@ -386,4 +389,33 @@ public class App {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
+
+
+    private static String getLoginUrl() {
+        SsoService ssoService = new SsoService();
+        List<String> scops=new ArrayList<>();
+        scops.add("email");
+        String url;
+
+
+        LoginUrlVo loginUrlVo = null;
+        try {
+            loginUrlVo = new LoginUrlVo.Builder()
+
+                    .setClientId("4123bc2f4ac38cd3e684b7929319")
+                    .setResponseType("code")
+                    .setRedirectUri("http%3A%2F%2Ffams.fanapsoft.ir%2FTSK_API%2Fapi%2FAuth%2FAuth")
+                    .setScope(scops)
+                    .build();
+        } catch (PodException e) {
+            e.printStackTrace();
+        }
+        url = loginUrlVo.getLink();
+
+        return url;
+
+
+
+    }
+
 }

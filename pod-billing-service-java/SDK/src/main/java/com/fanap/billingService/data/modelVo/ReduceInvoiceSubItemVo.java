@@ -9,9 +9,6 @@ import java.math.BigDecimal;
 public class ReduceInvoiceSubItemVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ott, productInfos and guildCode are required parameters!";
-
-
     private Long id;
     private Long price;
     private String description;

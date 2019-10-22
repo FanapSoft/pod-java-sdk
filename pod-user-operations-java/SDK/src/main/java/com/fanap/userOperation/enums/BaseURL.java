@@ -5,7 +5,7 @@ package com.fanap.userOperation.enums;
  */
 public enum BaseURL {
 
-    SANDBOX("http://sandbox.pod.land"),
+//    SANDBOX("http://sandbox.pod.land"),
     PRODUCTION("https://api.pod.land");
 
     private final String value;

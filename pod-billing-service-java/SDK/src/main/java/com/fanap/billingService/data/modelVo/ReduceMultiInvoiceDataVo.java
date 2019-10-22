@@ -9,8 +9,6 @@ import java.util.List;
 public class ReduceMultiInvoiceDataVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ott, productInfos and guildCode are required parameters!";
-
     //  private BaseInfoVo baseInfoVo;
     private String PreferredTaxRate;
     private ReduceInvoiceItemVO MainInvoice;

@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class ListUserCreatedBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and serverType are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private List<String> bizId;
@@ -34,6 +35,8 @@ public class ListUserCreatedBusinessVo {
     private String economicCode;
     private String email;
     private String cellphone;
+    private static String scProductId;
+
 
     public List<String> getBizId() {
         return bizId;
@@ -111,6 +114,10 @@ public class ListUserCreatedBusinessVo {
         return cellphone;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public ListUserCreatedBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.bizId = TypeConversionUtil.longToString(builder.getBizId());
@@ -132,6 +139,7 @@ public class ListUserCreatedBusinessVo {
         this.economicCode = builder.getEconomicCode();
         this.email = builder.getEmail();
         this.cellphone = builder.getCellphone();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_LIST_USER_CREATED_BUSINESS);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -163,6 +171,7 @@ public class ListUserCreatedBusinessVo {
         public List<Long> getBizId() {
             return bizId;
         }
+
 
         public Builder setBizId(List<Long> bizId) {
             this.bizId = bizId;
@@ -346,7 +355,6 @@ public class ListUserCreatedBusinessVo {
 
         public ListUserCreatedBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
                 return new ListUserCreatedBusinessVo(this);

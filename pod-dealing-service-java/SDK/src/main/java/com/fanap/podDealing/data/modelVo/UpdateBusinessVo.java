@@ -1,7 +1,9 @@
 package com.fanap.podDealing.data.modelVo;
 
 import com.fanap.podDealing.exception.PodException;
+import com.fanap.podDealing.util.PodServicesEnum;
 import com.fanap.podDealing.util.TypeConversionUtil;
+
 import java.util.List;
 
 public class UpdateBusinessVo {
@@ -12,7 +14,7 @@ public class UpdateBusinessVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,serverType, bizId, businessName,guildCode, " +
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, bizId, businessName,guildCode, " +
             "country, state, city, address and description  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
@@ -55,6 +57,8 @@ public class UpdateBusinessVo {
     private String agentCellphoneNumber;
     private String agentNationalCode;
     private String changeAgent;
+    private static String scProductId;
+
 
     public String getBizId() {
         return bizId;
@@ -212,6 +216,10 @@ public class UpdateBusinessVo {
         return changeAgent;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public UpdateBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.bizId = TypeConversionUtil.longToString(builder.getBizId());
@@ -253,6 +261,8 @@ public class UpdateBusinessVo {
         this.agentCellphoneNumber = builder.getAgentCellphoneNumber();
         this.agentNationalCode = builder.getAgentNationalCode();
         this.changeAgent = builder.getChangeAgent();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_UPDATE_BUSINESS);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -304,6 +314,7 @@ public class UpdateBusinessVo {
         public Long getBizId() {
             return bizId;
         }
+
 
         public Builder setBizId(Long bizId) {
             this.bizId = bizId;
@@ -557,8 +568,8 @@ public class UpdateBusinessVo {
             return tags;
         }
 
-        public Builder setTags(String tags) {
-            this.tags = tags;
+        public Builder setTags(String[] tags) {
+            this.tags = String.join(",", tags);
             return this;
         }
 
@@ -566,8 +577,8 @@ public class UpdateBusinessVo {
             return tagTrees;
         }
 
-        public Builder setTagTrees(String tagTrees) {
-            this.tagTrees = tagTrees;
+        public Builder setTagTrees(String[] tagTrees) {
+            this.tagTrees = String.join(",", tagTrees);
             return this;
         }
 
@@ -669,7 +680,6 @@ public class UpdateBusinessVo {
         public UpdateBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
-                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.bizId != null && this.businessName != null &&
                     this.guildCode != null && this.country != null &&

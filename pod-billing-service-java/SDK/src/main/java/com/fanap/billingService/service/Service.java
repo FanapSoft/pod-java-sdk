@@ -1,9 +1,6 @@
 package com.fanap.billingService.service;
 
-import com.fanap.billingService.data.modelSrv.BusinessDealerSrv;
-import com.fanap.billingService.data.modelSrv.DealerProductPermissionSrv;
-import com.fanap.billingService.data.modelSrv.ExportServiceSrv;
-import com.fanap.billingService.data.modelSrv.InvoiceSrv;
+import com.fanap.billingService.data.modelSrv.*;
 import com.fanap.billingService.data.modelVo.*;
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.*;
@@ -23,7 +20,10 @@ public class Service {
 
         new GetResult<String>(service.ott(
                 ottVo.getBaseInfoVo().getToken(),
-                ottVo.getBaseInfoVo().getToken_issuer()
+                ottVo.getBaseInfoVo().getToken_issuer(),
+                ottVo.getScProductId(),
+                ottVo.getBaseInfoVo().getScVoucherHash(),
+                ottVo.getBaseInfoVo().getScApiKey()
         ), onGetResponseListener).get();
     }
 
@@ -38,12 +38,15 @@ public class Service {
                 issueInvoiceVo.getBaseInfoVo().getToken(),
                 issueInvoiceVo.getBaseInfoVo().getToken_issuer(),
                 issueInvoiceVo.getBaseInfoVo().getOtt(),
+                issueInvoiceVo.getScProductId(),
+                issueInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                issueInvoiceVo.getBaseInfoVo().getScApiKey(),
                 issueInvoiceVo.getRedirectURL(),
                 issueInvoiceVo.getUserId(),
                 issueInvoiceVo.getBillNumber(),
                 issueInvoiceVo.getDescription(),
                 issueInvoiceVo.getDeadline(),
-                issueInvoiceVo.getProductId(),
+                issueInvoiceVo.getEntityId(),
                 issueInvoiceVo.getPrice(),
                 issueInvoiceVo.getQuantity(),
                 issueInvoiceVo.getProductDescription(),
@@ -77,10 +80,15 @@ public class Service {
 
         new GetResultCreatePreInvoice<String>(service.createPreInvoice(
                 createPreInvoiceVo.getBaseInfoVo().getToken(),
+                createPreInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                createPreInvoiceVo.getScProductId(),
+                createPreInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                createPreInvoiceVo.getBaseInfoVo().getScApiKey(),
+                createPreInvoiceVo.getToken(),
                 createPreInvoiceVo.getBaseInfoVo().getOtt(),
                 createPreInvoiceVo.getRedirectURL(),
                 createPreInvoiceVo.getUserId(),
-                createPreInvoiceVo.getProductId(),
+                createPreInvoiceVo.getEntityId(),
                 createPreInvoiceVo.getPrice(),
                 createPreInvoiceVo.getQuantity(),
                 createPreInvoiceVo.getProductDescription(),
@@ -106,6 +114,9 @@ public class Service {
         new GetResult<List<InvoiceSrv>>(service.getInvoiceList(
                 getInvoiceListVo.getBaseInfoVo().getToken(),
                 getInvoiceListVo.getBaseInfoVo().getToken_issuer(),
+                getInvoiceListVo.getScProductId(),
+                getInvoiceListVo.getBaseInfoVo().getScVoucherHash(),
+                getInvoiceListVo.getBaseInfoVo().getScApiKey(),
                 getInvoiceListVo.getId(),
                 getInvoiceListVo.getBillNumber(),
                 getInvoiceListVo.getUniqueNumber(),
@@ -124,7 +135,7 @@ public class Service {
                 getInvoiceListVo.getFirstId(),
                 getInvoiceListVo.getLastId(),
                 getInvoiceListVo.getOffset(),
-                getInvoiceListVo.getProductIdList(),
+                getInvoiceListVo.getEntityIdList(),
                 getInvoiceListVo.getSize()
         ),
                 onGetResponseListener).get();
@@ -141,6 +152,10 @@ public class Service {
         new GetResult<List<InvoiceSrv>>(service.getInvoiceListByMetadata(
                 getInvoiceListByMetadataVo.getBaseInfoVo().getToken(),
                 getInvoiceListByMetadataVo.getBaseInfoVo().getToken_issuer(),
+                getInvoiceListByMetadataVo.getScProductId(),
+                getInvoiceListByMetadataVo.getBaseInfoVo().getScVoucherHash(),
+                getInvoiceListByMetadataVo.getBaseInfoVo().getScApiKey(),
+                getInvoiceListByMetadataVo.getMetaQuery(),
                 getInvoiceListByMetadataVo.getIsCanceled(),
                 getInvoiceListByMetadataVo.getIsPayed(),
                 getInvoiceListByMetadataVo.getOffset(),
@@ -160,6 +175,9 @@ public class Service {
         new GetResult<ExportServiceSrv>(service.getInvoiceListAsFile(
                 getInvoiceListAsFileVo.getBaseInfoVo().getToken(),
                 getInvoiceListAsFileVo.getBaseInfoVo().getToken_issuer(),
+                getInvoiceListAsFileVo.getScProductId(),
+                getInvoiceListAsFileVo.getBaseInfoVo().getScVoucherHash(),
+                getInvoiceListAsFileVo.getBaseInfoVo().getScApiKey(),
                 getInvoiceListAsFileVo.getId(),
                 getInvoiceListAsFileVo.getBillNumber(),
                 getInvoiceListAsFileVo.getUniqueNumber(),
@@ -174,7 +192,7 @@ public class Service {
                 getInvoiceListAsFileVo.getReferenceNumber(),
                 getInvoiceListAsFileVo.getUserId(),
                 getInvoiceListAsFileVo.getQuery(),
-                getInvoiceListAsFileVo.getProductIdList(),
+                getInvoiceListAsFileVo.getEntityIdList(),
                 getInvoiceListAsFileVo.getLastNRows(),
                 getInvoiceListAsFileVo.getCallbackUrl()
         ),
@@ -192,6 +210,9 @@ public class Service {
         new GetResult<Boolean>(service.cancelInvoice(
                 cancelInvoiceVo.getBaseInfoVo().getToken(),
                 cancelInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                cancelInvoiceVo.getScProductId(),
+                cancelInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                cancelInvoiceVo.getBaseInfoVo().getScApiKey(),
                 cancelInvoiceVo.getId()
         ),
                 onGetResponseListener).get();
@@ -208,6 +229,9 @@ public class Service {
         new GetResult<InvoiceSrv>(service.verifyAndCloseInvoice(
                 verifyAndCloseInvoiceVo.getBaseInfoVo().getToken(),
                 verifyAndCloseInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                verifyAndCloseInvoiceVo.getScProductId(),
+                verifyAndCloseInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                verifyAndCloseInvoiceVo.getBaseInfoVo().getScApiKey(),
                 verifyAndCloseInvoiceVo.getId()
         ),
                 onGetResponseListener).get();
@@ -224,6 +248,9 @@ public class Service {
         new GetResult<Boolean>(service.closeInvoice(
                 closeInvoiceVo.getBaseInfoVo().getToken(),
                 closeInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                closeInvoiceVo.getScProductId(),
+                closeInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                closeInvoiceVo.getBaseInfoVo().getScApiKey(),
                 closeInvoiceVo.getId()
         ),
                 onGetResponseListener).get();
@@ -240,6 +267,9 @@ public class Service {
         new GetResult<String>(service.getInvoicePaymentLink(
                 getInvoicePaymentLinkVo.getBaseInfoVo().getToken(),
                 getInvoicePaymentLinkVo.getBaseInfoVo().getToken_issuer(),
+                getInvoicePaymentLinkVo.getScProductId(),
+                getInvoicePaymentLinkVo.getBaseInfoVo().getScVoucherHash(),
+                getInvoicePaymentLinkVo.getBaseInfoVo().getScApiKey(),
                 getInvoicePaymentLinkVo.getInvoiceId()
         ),
                 onGetResponseListener).get();
@@ -254,6 +284,9 @@ public class Service {
         new GetResult<Boolean>(service.payInvoice(
                 payInvoiceVo.getBaseInfoVo().getToken(),
                 payInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceVo.getScProductId(),
+                payInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                payInvoiceVo.getBaseInfoVo().getScApiKey(),
                 payInvoiceVo.getInvoiceId()
         ), onGetResponseListener).get();
     }
@@ -267,6 +300,9 @@ public class Service {
         new GetResult<Boolean>(service.payInvoiceByCredit(
                 payInvoiceByCreditVo.getBaseInfoVo().getToken(),
                 payInvoiceByCreditVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceByCreditVo.getScProductId(),
+                payInvoiceByCreditVo.getBaseInfoVo().getScVoucherHash(),
+                payInvoiceByCreditVo.getBaseInfoVo().getScApiKey(),
                 payInvoiceByCreditVo.getBaseInfoVo().getOtt(),
                 payInvoiceByCreditVo.getInvoiceId(),
                 payInvoiceByCreditVo.getDelegationHash(),
@@ -285,6 +321,9 @@ public class Service {
         new GetResult<Boolean>(service.payAnyInvoiceByCredit(
                 payAnyInvoiceByCreditVo.getBaseInfoVo().getToken(),
                 payAnyInvoiceByCreditVo.getBaseInfoVo().getToken_issuer(),
+                payAnyInvoiceByCreditVo.getScProductId(),
+                payAnyInvoiceByCreditVo.getBaseInfoVo().getScVoucherHash(),
+                payAnyInvoiceByCreditVo.getBaseInfoVo().getScApiKey(),
                 payAnyInvoiceByCreditVo.getBaseInfoVo().getOtt(),
                 payAnyInvoiceByCreditVo.getInvoiceId(),
                 payAnyInvoiceByCreditVo.getDelegationHash(),
@@ -303,6 +342,9 @@ public class Service {
         new GetResult<Boolean>(service.sendInvoicePaymentSMS(
                 sendInvoicePaymentSMSVo.getBaseInfoVo().getToken(),
                 sendInvoicePaymentSMSVo.getBaseInfoVo().getToken_issuer(),
+                sendInvoicePaymentSMSVo.getScProductId(),
+                sendInvoicePaymentSMSVo.getBaseInfoVo().getScVoucherHash(),
+                sendInvoicePaymentSMSVo.getBaseInfoVo().getScApiKey(),
                 sendInvoicePaymentSMSVo.getInvoiceId(),
                 sendInvoicePaymentSMSVo.getDelegationId(),
                 sendInvoicePaymentSMSVo.getWallet(),
@@ -322,6 +364,9 @@ public class Service {
         new GetResult<Boolean>(service.payInvoiceInFuture(
                 payInvoiceInFutureVo.getBaseInfoVo().getToken(),
                 payInvoiceInFutureVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceInFutureVo.getScProductId(),
+                payInvoiceInFutureVo.getBaseInfoVo().getScVoucherHash(),
+                payInvoiceInFutureVo.getBaseInfoVo().getScApiKey(),
                 payInvoiceInFutureVo.getInvoiceId(),
                 payInvoiceInFutureVo.getDate(),
                 payInvoiceInFutureVo.getWallet(),
@@ -339,6 +384,9 @@ public class Service {
         new GetResult<Boolean>(service.payInvoiceByInvoice(
                 payInvoiceByInvoiceVo.getBaseInfoVo().getToken(),
                 payInvoiceByInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                payInvoiceByInvoiceVo.getScProductId(),
+                payInvoiceByInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                payInvoiceByInvoiceVo.getBaseInfoVo().getScApiKey(),
                 payInvoiceByInvoiceVo.getCreditorInvoiceId(),
                 payInvoiceByInvoiceVo.getDebtorInvoiceId()
         ), onGetResponseListener).get();
@@ -353,6 +401,9 @@ public class Service {
         new GetResult<BusinessDealerSrv>(service.addDealer(
                 addDealerVo.getBaseInfoVo().getToken(),
                 addDealerVo.getBaseInfoVo().getToken_issuer(),
+                addDealerVo.getScProductId(),
+                addDealerVo.getBaseInfoVo().getScVoucherHash(),
+                addDealerVo.getBaseInfoVo().getScApiKey(),
                 addDealerVo.getDealerBizId(),
                 addDealerVo.getAllProductAllow()
         ), onGetResponseListener).get();
@@ -367,6 +418,9 @@ public class Service {
         new GetResult<List<BusinessDealerSrv>>(service.dealerList(
                 dealerListVo.getBaseInfoVo().getToken(),
                 dealerListVo.getBaseInfoVo().getToken_issuer(),
+                dealerListVo.getScProductId(),
+                dealerListVo.getBaseInfoVo().getScVoucherHash(),
+                dealerListVo.getBaseInfoVo().getScApiKey(),
                 dealerListVo.getDealerBizId(),
                 dealerListVo.getEnable(),
                 dealerListVo.getOffset(),
@@ -383,6 +437,9 @@ public class Service {
         new GetResult<BusinessDealerSrv>(service.enableDealer(
                 enableDealerVo.getBaseInfoVo().getToken(),
                 enableDealerVo.getBaseInfoVo().getToken_issuer(),
+                enableDealerVo.getScProductId(),
+                enableDealerVo.getBaseInfoVo().getScVoucherHash(),
+                enableDealerVo.getBaseInfoVo().getScApiKey(),
                 enableDealerVo.getDealerBizId()
         ), onGetResponseListener).get();
     }
@@ -396,6 +453,9 @@ public class Service {
         new GetResult<BusinessDealerSrv>(service.disableDealer(
                 disableDealerVo.getBaseInfoVo().getToken(),
                 disableDealerVo.getBaseInfoVo().getToken_issuer(),
+                disableDealerVo.getScProductId(),
+                disableDealerVo.getBaseInfoVo().getScVoucherHash(),
+                disableDealerVo.getBaseInfoVo().getScApiKey(),
                 disableDealerVo.getDealerBizId()
         ), onGetResponseListener).get();
     }
@@ -410,6 +470,9 @@ public class Service {
         new GetResult<List<BusinessDealerSrv>>(service.businessDealingList(
                 businessDealingListVo.getBaseInfoVo().getToken(),
                 businessDealingListVo.getBaseInfoVo().getToken_issuer(),
+                businessDealingListVo.getScProductId(),
+                businessDealingListVo.getBaseInfoVo().getScVoucherHash(),
+                businessDealingListVo.getBaseInfoVo().getScApiKey(),
                 businessDealingListVo.getDealingBusinessId(),
                 businessDealingListVo.getEnable(),
                 businessDealingListVo.getOffset(),
@@ -426,6 +489,9 @@ public class Service {
         new GetResult<InvoiceSrv>(service.issueMultiInvoice(
                 issueMultiInvoiceVo.getBaseInfoVo().getToken(),
                 issueMultiInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                issueMultiInvoiceVo.getScProductId(),
+                issueMultiInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                issueMultiInvoiceVo.getBaseInfoVo().getScApiKey(),
                 issueMultiInvoiceVo.getData(),
                 issueMultiInvoiceVo.getDelegationHash(),
                 issueMultiInvoiceVo.getDelegatorId(),
@@ -442,7 +508,10 @@ public class Service {
         new GetResult<DealerProductPermissionSrv>(service.addDealerProductPermission(
                 addDealerProductPermissionVo.getBaseInfoVo().getToken(),
                 addDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
-                addDealerProductPermissionVo.getProductId(),
+                addDealerProductPermissionVo.getScProductId(),
+                addDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                addDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                addDealerProductPermissionVo.getEntityId(),
                 addDealerProductPermissionVo.getDealerBizId()
         ), onGetResponseListener).get();
     }
@@ -456,11 +525,14 @@ public class Service {
         new GetResult<List<DealerProductPermissionSrv>>(service.dealerProductPermissionList(
                 dealerProductPermissionListVo.getBaseInfoVo().getToken(),
                 dealerProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
-                dealerProductPermissionListVo.getProductId(),
+                dealerProductPermissionListVo.getScProductId(),
+                dealerProductPermissionListVo.getBaseInfoVo().getScVoucherHash(),
+                dealerProductPermissionListVo.getBaseInfoVo().getScApiKey(),
+                dealerProductPermissionListVo.getEntityId(),
                 dealerProductPermissionListVo.getDealerBizId(),
-                dealerProductPermissionListVo.getEnable(),
                 dealerProductPermissionListVo.getOffset(),
-                dealerProductPermissionListVo.getSize()
+                dealerProductPermissionListVo.getSize(),
+                dealerProductPermissionListVo.getEnable()
         ), onGetResponseListener).get();
     }
 
@@ -473,7 +545,10 @@ public class Service {
         new GetResult<List<DealerProductPermissionSrv>>(service.dealingProductPermissionList(
                 dealingProductPermissionListVo.getBaseInfoVo().getToken(),
                 dealingProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
-                dealingProductPermissionListVo.getProductId(),
+                dealingProductPermissionListVo.getScProductId(),
+                dealingProductPermissionListVo.getBaseInfoVo().getScVoucherHash(),
+                dealingProductPermissionListVo.getBaseInfoVo().getScApiKey(),
+                dealingProductPermissionListVo.getEntityId(),
                 dealingProductPermissionListVo.getDealingBusinessId(),
                 dealingProductPermissionListVo.getOffset(),
                 dealingProductPermissionListVo.getSize(),
@@ -491,7 +566,10 @@ public class Service {
         new GetResult<DealerProductPermissionSrv>(service.disableDealerProductPermission(
                 disableDealerProductPermissionVo.getBaseInfoVo().getToken(),
                 disableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
-                disableDealerProductPermissionVo.getProductId(),
+                disableDealerProductPermissionVo.getScProductId(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                disableDealerProductPermissionVo.getEntityId(),
                 disableDealerProductPermissionVo.getDealerBizId()
 
         ), onGetResponseListener).get();
@@ -506,7 +584,10 @@ public class Service {
         new GetResult<DealerProductPermissionSrv>(service.enableDealerProductPermission(
                 enableDealerProductPermissionVo.getBaseInfoVo().getToken(),
                 enableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
-                enableDealerProductPermissionVo.getProductId(),
+                enableDealerProductPermissionVo.getScProductId(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                enableDealerProductPermissionVo.getEntityId(),
                 enableDealerProductPermissionVo.getDealerBizId()
 
         ), onGetResponseListener).get();
@@ -521,6 +602,9 @@ public class Service {
         new GetResult<InvoiceSrv>(service.reduceMultiInvoice(
                 reduceMultiInvoiceVo.getBaseInfoVo().getToken(),
                 reduceMultiInvoiceVo.getBaseInfoVo().getToken_issuer(),
+                reduceMultiInvoiceVo.getScProductId(),
+                reduceMultiInvoiceVo.getBaseInfoVo().getScVoucherHash(),
+                reduceMultiInvoiceVo.getBaseInfoVo().getScApiKey(),
                 reduceMultiInvoiceVo.getData()
 
 
@@ -536,9 +620,461 @@ public class Service {
         new GetResult<InvoiceSrv>(service.reduceMultiInvoiceAndCashout(
                 reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getToken(),
                 reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getToken_issuer(),
+                reduceMultiInvoiceAndCashoutVo.getScProductId(),
+                reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getScVoucherHash(),
+                reduceMultiInvoiceAndCashoutVo.getBaseInfoVo().getScApiKey(),
                 reduceMultiInvoiceAndCashoutVo.getData(),
                 reduceMultiInvoiceAndCashoutVo.getToolCode()
 
         ), onGetResponseListener).get();
     }
+
+
+    public void defineCreditVoucher(DefineCreditVoucherVo defineCreditVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        defineCreditVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<VoucherSrv>>(service.defineCreditVoucher(
+                defineCreditVoucherVo.getBaseInfoVo().getToken(),
+                defineCreditVoucherVo.getBaseInfoVo().getToken_issuer(),
+                defineCreditVoucherVo.getScProductId(),
+                defineCreditVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                defineCreditVoucherVo.getBaseInfoVo().getScApiKey(),
+                defineCreditVoucherVo.getGuildCode(),
+                defineCreditVoucherVo.getExpireDate(),
+                defineCreditVoucherVo.getCount(),
+                defineCreditVoucherVo.getAmount(),
+                defineCreditVoucherVo.getName(),
+                defineCreditVoucherVo.getDescription(),
+                defineCreditVoucherVo.getLimitedConsumerId(),
+                defineCreditVoucherVo.getCurrencyCode(),
+                defineCreditVoucherVo.getHashCode()
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void defineDiscountAmountVoucher(DefineDiscountAmountVoucherVo defineDiscountAmountVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        defineDiscountAmountVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<VoucherSrv>>(service.defineDiscountAmountVoucher(
+                defineDiscountAmountVoucherVo.getBaseInfoVo().getToken(),
+                defineDiscountAmountVoucherVo.getBaseInfoVo().getToken_issuer(),
+                defineDiscountAmountVoucherVo.getScProductId(),
+                defineDiscountAmountVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                defineDiscountAmountVoucherVo.getBaseInfoVo().getScApiKey(),
+                defineDiscountAmountVoucherVo.getGuildCode(),
+                defineDiscountAmountVoucherVo.getExpireDate(),
+                defineDiscountAmountVoucherVo.getCount(),
+                defineDiscountAmountVoucherVo.getAmount(),
+                defineDiscountAmountVoucherVo.getEntityId(),
+                defineDiscountAmountVoucherVo.getDealerBusinessId(),
+                defineDiscountAmountVoucherVo.getName(),
+                defineDiscountAmountVoucherVo.getDescription(),
+                defineDiscountAmountVoucherVo.getLimitedConsumerId(),
+                defineDiscountAmountVoucherVo.getCurrencyCode(),
+                defineDiscountAmountVoucherVo.getHashCode()
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void defineDiscountPercentageVoucher(DefineDiscountPercentageVoucherVo defineDiscountPercentageVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        defineDiscountPercentageVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<VoucherSrv>>(service.defineDiscountPercentageVoucher(
+                defineDiscountPercentageVoucherVo.getBaseInfoVo().getToken(),
+                defineDiscountPercentageVoucherVo.getBaseInfoVo().getToken_issuer(),
+                defineDiscountPercentageVoucherVo.getScProductId(),
+                defineDiscountPercentageVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                defineDiscountPercentageVoucherVo.getBaseInfoVo().getScApiKey(),
+                defineDiscountPercentageVoucherVo.getGuildCode(),
+                defineDiscountPercentageVoucherVo.getExpireDate(),
+                defineDiscountPercentageVoucherVo.getCount(),
+                defineDiscountPercentageVoucherVo.getAmount(),
+                defineDiscountPercentageVoucherVo.getDiscountPercentage(),
+                defineDiscountPercentageVoucherVo.getEntityId(),
+                defineDiscountPercentageVoucherVo.getDealerBusinessId(),
+                defineDiscountPercentageVoucherVo.getName(),
+                defineDiscountPercentageVoucherVo.getDescription(),
+                defineDiscountPercentageVoucherVo.getLimitedConsumerId(),
+                defineDiscountPercentageVoucherVo.getType(),
+                defineDiscountPercentageVoucherVo.getCurrencyCode(),
+                defineDiscountPercentageVoucherVo.getHashCode()
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void applyVoucher(ApplyVoucherVo applyVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        applyVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<InvoiceSrv>(service.applyVoucher(
+                applyVoucherVo.getBaseInfoVo().getToken(),
+                applyVoucherVo.getBaseInfoVo().getToken_issuer(),
+                applyVoucherVo.getScProductId(),
+                applyVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                applyVoucherVo.getBaseInfoVo().getScApiKey(),
+                applyVoucherVo.getBaseInfoVo().getOtt(),
+                applyVoucherVo.getInvoiceId(),
+                applyVoucherVo.getVoucherHash(),
+                applyVoucherVo.getPreview()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void deactivateVoucher(DeactivateVoucherVo deactivateVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        deactivateVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<VoucherSrv>(service.deactivateVoucher(
+                deactivateVoucherVo.getBaseInfoVo().getToken(),
+                deactivateVoucherVo.getBaseInfoVo().getToken_issuer(),
+                deactivateVoucherVo.getScProductId(),
+                deactivateVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                deactivateVoucherVo.getBaseInfoVo().getScApiKey(),
+                deactivateVoucherVo.getVoucherId()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void activateVoucher(ActivateVoucherVo activateVoucherVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        activateVoucherVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<VoucherSrv>(service.activateVoucher(
+                activateVoucherVo.getBaseInfoVo().getToken(),
+                activateVoucherVo.getBaseInfoVo().getToken_issuer(),
+                activateVoucherVo.getScProductId(),
+                activateVoucherVo.getBaseInfoVo().getScVoucherHash(),
+                activateVoucherVo.getBaseInfoVo().getScApiKey(),
+                activateVoucherVo.getVoucherId()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void getVoucherList(GetVoucherListVo getVoucherListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getVoucherListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<VoucherSrv>>(service.getVoucherList(
+                getVoucherListVo.getBaseInfoVo().getToken(),
+                getVoucherListVo.getBaseInfoVo().getToken_issuer(),
+                getVoucherListVo.getScProductId(),
+                getVoucherListVo.getBaseInfoVo().getScVoucherHash(),
+                getVoucherListVo.getBaseInfoVo().getScApiKey(),
+                getVoucherListVo.getConsumerId(),
+                getVoucherListVo.getHashCode(),
+                getVoucherListVo.getName(),
+                getVoucherListVo.getType(),
+                getVoucherListVo.getGuildCode(),
+                getVoucherListVo.getCurrencyCode(),
+                getVoucherListVo.getAmountFrom(),
+                getVoucherListVo.getAmountTo(),
+                getVoucherListVo.getDiscountPercentageFrom(),
+                getVoucherListVo.getDiscountPercentageTo(),
+                getVoucherListVo.getExpireDateFrom(),
+                getVoucherListVo.getExpireDateTo(),
+                getVoucherListVo.getEntityId(),
+                getVoucherListVo.getConsumDateFrom(),
+                getVoucherListVo.getConsumDateTo(),
+                getVoucherListVo.getUsedAmountFrom(),
+                getVoucherListVo.getUsedAmountTo(),
+                getVoucherListVo.getActive(),
+                getVoucherListVo.getUsed(),
+                getVoucherListVo.getOffset(),
+                getVoucherListVo.getSize()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void defineDirectWithdraw(DefineDirectWithdrawVo defineDirectWithdrawVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        defineDirectWithdrawVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<DirectWithdrawSrv>(service.defineDirectWithdraw(
+                defineDirectWithdrawVo.getBaseInfoVo().getToken(),
+                defineDirectWithdrawVo.getBaseInfoVo().getToken_issuer(),
+                defineDirectWithdrawVo.getScProductId(),
+                defineDirectWithdrawVo.getBaseInfoVo().getScVoucherHash(),
+                defineDirectWithdrawVo.getBaseInfoVo().getScApiKey(),
+                defineDirectWithdrawVo.getUsername(),
+                defineDirectWithdrawVo.getPrivateKey(),
+                defineDirectWithdrawVo.getDepositNumber(),
+                defineDirectWithdrawVo.getOnDemand(),
+                defineDirectWithdrawVo.getMinAmount(),
+                defineDirectWithdrawVo.getMaxAmount(),
+                defineDirectWithdrawVo.getWallet()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void directWithdrawList(DirectWithdrawListVo directWithdrawListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        directWithdrawListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<DirectWithdrawSrv>>(service.directWithdrawList(
+                directWithdrawListVo.getBaseInfoVo().getToken(),
+                directWithdrawListVo.getBaseInfoVo().getToken_issuer(),
+                directWithdrawListVo.getScProductId(),
+                directWithdrawListVo.getBaseInfoVo().getScVoucherHash(),
+                directWithdrawListVo.getBaseInfoVo().getScApiKey(),
+                directWithdrawListVo.getWallet(),
+                directWithdrawListVo.getOffset(),
+                directWithdrawListVo.getSize()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void updateDirectWithdraw(UpdateDirectWithdrawVo updateDirectWithdrawVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        updateDirectWithdrawVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<DirectWithdrawSrv>(service.updateDirectWithdraw(
+                updateDirectWithdrawVo.getBaseInfoVo().getToken(),
+                updateDirectWithdrawVo.getBaseInfoVo().getToken_issuer(),
+                updateDirectWithdrawVo.getScProductId(),
+                updateDirectWithdrawVo.getBaseInfoVo().getScVoucherHash(),
+                updateDirectWithdrawVo.getBaseInfoVo().getScApiKey(),
+                updateDirectWithdrawVo.getId(),
+                updateDirectWithdrawVo.getUsername(),
+                updateDirectWithdrawVo.getPrivateKey(),
+                updateDirectWithdrawVo.getDepositNumber(),
+                updateDirectWithdrawVo.getOnDemand(),
+                updateDirectWithdrawVo.getMinAmount(),
+                updateDirectWithdrawVo.getMaxAmount(),
+                updateDirectWithdrawVo.getWallet()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void revokeDirectWithdraw(RevokeDirectWithdrawVo revokeDirectWithdrawVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        revokeDirectWithdrawVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.revokeDirectWithdraw(
+                revokeDirectWithdrawVo.getBaseInfoVo().getToken(),
+                revokeDirectWithdrawVo.getBaseInfoVo().getToken_issuer(),
+                revokeDirectWithdrawVo.getScProductId(),
+                revokeDirectWithdrawVo.getBaseInfoVo().getScVoucherHash(),
+                revokeDirectWithdrawVo.getBaseInfoVo().getScApiKey(),
+                revokeDirectWithdrawVo.getId()
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void getExportList(GetExportListVo getExportListVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        getExportListVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<ExportServiceSrv>>(service.getExportList(
+                getExportListVo.getBaseInfoVo().getToken(),
+                getExportListVo.getBaseInfoVo().getToken_issuer(),
+                getExportListVo.getScProductId(),
+                getExportListVo.getBaseInfoVo().getScVoucherHash(),
+                getExportListVo.getBaseInfoVo().getScApiKey(),
+                getExportListVo.getOffset(),
+                getExportListVo.getSize(),
+                getExportListVo.getId(),
+                getExportListVo.getStatusCode(),
+                getExportListVo.getServiceUrl()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void requestGuildSettlement(RequestGuildSettlementVo requestGuildSettlementVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        requestGuildSettlementVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<SettlementRequestSrv>(service.requestGuildSettlement(
+                requestGuildSettlementVo.getBaseInfoVo().getToken(),
+                requestGuildSettlementVo.getBaseInfoVo().getToken_issuer(),
+                requestGuildSettlementVo.getBaseInfoVo().getOtt(),
+                requestGuildSettlementVo.getScProductId(),
+                requestGuildSettlementVo.getBaseInfoVo().getScVoucherHash(),
+                requestGuildSettlementVo.getBaseInfoVo().getScApiKey(),
+                requestGuildSettlementVo.getFirstName(),
+                requestGuildSettlementVo.getLastName(),
+                requestGuildSettlementVo.getSheba(),
+                requestGuildSettlementVo.getAmount(),
+                requestGuildSettlementVo.getGuildCode(),
+                requestGuildSettlementVo.getCurrencyCode(),
+                requestGuildSettlementVo.getUniqueId(),
+                requestGuildSettlementVo.getDescription()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void requestWalletSettlement(RequestWalletSettlementVo requestWalletSettlementVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        requestWalletSettlementVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<SettlementRequestSrv>(service.requestWalletSettlement(
+                requestWalletSettlementVo.getBaseInfoVo().getToken(),
+                requestWalletSettlementVo.getBaseInfoVo().getToken_issuer(),
+                requestWalletSettlementVo.getBaseInfoVo().getOtt(),
+                requestWalletSettlementVo.getScProductId(),
+                requestWalletSettlementVo.getBaseInfoVo().getScVoucherHash(),
+                requestWalletSettlementVo.getBaseInfoVo().getScApiKey(),
+                requestWalletSettlementVo.getWallet(),
+                requestWalletSettlementVo.getFirstName(),
+                requestWalletSettlementVo.getLastName(),
+                requestWalletSettlementVo.getSheba(),
+                requestWalletSettlementVo.getAmount(),
+                requestWalletSettlementVo.getCurrenncyCode(),
+                requestWalletSettlementVo.getUniqueId(),
+                requestWalletSettlementVo.getDescription()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void requestSettlementByTool(RequestSettlementByToolVo requestSettlementByToolVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        requestSettlementByToolVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<SettlementRequestSrv>(service.requestSettlementByTool(
+                requestSettlementByToolVo.getBaseInfoVo().getToken(),
+                requestSettlementByToolVo.getBaseInfoVo().getToken_issuer(),
+                requestSettlementByToolVo.getBaseInfoVo().getOtt(),
+                requestSettlementByToolVo.getScProductId(),
+                requestSettlementByToolVo.getBaseInfoVo().getScVoucherHash(),
+                requestSettlementByToolVo.getBaseInfoVo().getScApiKey(),
+                requestSettlementByToolVo.getFirstName(),
+                requestSettlementByToolVo.getLastName(),
+                requestSettlementByToolVo.getToolCode(),
+                requestSettlementByToolVo.getToolId(),
+                requestSettlementByToolVo.getAmount(),
+                requestSettlementByToolVo.getGuildCode(),
+                requestSettlementByToolVo.getCurrenncyCode(),
+                requestSettlementByToolVo.getUniqueId(),
+                requestSettlementByToolVo.getDescription()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void listSettlements(ListSettlementsVo listSettlementsVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        listSettlementsVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<List<SettlementRequestSrv>>(service.listSettlements(
+                listSettlementsVo.getBaseInfoVo().getToken(),
+                listSettlementsVo.getBaseInfoVo().getToken_issuer(),
+                listSettlementsVo.getScProductId(),
+                listSettlementsVo.getBaseInfoVo().getScVoucherHash(),
+                listSettlementsVo.getBaseInfoVo().getScApiKey(),
+                listSettlementsVo.getStatusCode(),
+                listSettlementsVo.getCurrencyCode(),
+                listSettlementsVo.getFromAmount(),
+                listSettlementsVo.getToAmount(),
+                listSettlementsVo.getFromDate(),
+                listSettlementsVo.getToDate(),
+                listSettlementsVo.getOffset(),
+                listSettlementsVo.getUniqueId(),
+                listSettlementsVo.getSize(),
+                listSettlementsVo.getId(),
+                listSettlementsVo.getFirstName(),
+                listSettlementsVo.getLastName(),
+                listSettlementsVo.getToolCode(),
+                listSettlementsVo.getToolId()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
+    public void addAutoSettlement(AddAutoSettlementVo addAutoSettlementVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        addAutoSettlementVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.addAutoSettlement(
+                addAutoSettlementVo.getBaseInfoVo().getToken(),
+                addAutoSettlementVo.getBaseInfoVo().getToken_issuer(),
+                addAutoSettlementVo.getScProductId(),
+                addAutoSettlementVo.getBaseInfoVo().getScVoucherHash(),
+                addAutoSettlementVo.getBaseInfoVo().getScApiKey(),
+                addAutoSettlementVo.getFirstName(),
+                addAutoSettlementVo.getLastName(),
+                addAutoSettlementVo.getSheba(),
+                addAutoSettlementVo.getGuildCode(),
+                addAutoSettlementVo.getCurrencyCode(),
+                addAutoSettlementVo.getInstant()
+
+
+        ), onGetResponseListener).get();
+    }
+
+    public void removeAutoSettlement(RemoveAutoSettlementVo removeAutoSettlementVo, OnGetResponseListener onGetResponseListener) {
+        BillingService service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(new Throwable().getStackTrace()[0].getMethodName(),
+                        removeAutoSettlementVo.getBaseInfoVo().getServerType()))
+                .create(BillingService.class);
+
+        new GetResult<Boolean>(service.removeAutoSettlement(
+                removeAutoSettlementVo.getBaseInfoVo().getToken(),
+                removeAutoSettlementVo.getBaseInfoVo().getToken_issuer(),
+                removeAutoSettlementVo.getScProductId(),
+                removeAutoSettlementVo.getBaseInfoVo().getScVoucherHash(),
+                removeAutoSettlementVo.getBaseInfoVo().getScApiKey(),
+                removeAutoSettlementVo.getGuildCode(),
+                removeAutoSettlementVo.getCurrencyCode()
+
+
+        ), onGetResponseListener).get();
+    }
+
+
 }

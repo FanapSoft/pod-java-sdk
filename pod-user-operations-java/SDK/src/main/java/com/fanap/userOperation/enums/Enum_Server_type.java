@@ -5,7 +5,7 @@ package com.fanap.userOperation.enums;
  */
 public enum Enum_Server_type {
 
-    SANDBOX("sandbox"),
+//    SANDBOX("sandbox"),
     PRODUCTION("production");
 
     private final String value;

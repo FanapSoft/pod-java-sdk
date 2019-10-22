@@ -1,13 +1,12 @@
 package com.fanap.podSubscription.data.modelSrv;
 
 
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by Z.gholinia on 7/29/2019.
+ * Created by M.Vahedi on 3/5/2019.
  */
 public class SubscriptionPlanSrv implements Serializable {
     private long id;

@@ -1,25 +1,28 @@
 package com.fanap.userOperation.data.modelVo;
 
-import com.fanap.userOperation.enums.Enum_Server_type;
+import java.util.List;
+
+import java.util.List;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
  */
 public class BaseInfoVo {
 
-    private Enum_Server_type serverType = Enum_Server_type.SANDBOX;
+
     private String token;
     private String token_issuer;
     private String client_id;
     private String client_secret;
+    public List<String> scVoucherHash;
+    public String scApiKey;
 
-    public Enum_Server_type getServerType() {
-        return serverType;
+    public List<String> getScVoucherHash() {
+        return scVoucherHash;
     }
 
-    public BaseInfoVo setServerType(Enum_Server_type serverType) {
-        this.serverType = serverType;
-        return this;
+    public String getScApiKey() {
+        return scApiKey;
     }
 
     public String getToken() {
@@ -55,6 +58,17 @@ public class BaseInfoVo {
 
     public BaseInfoVo setClient_secret(String client_secret) {
         this.client_secret = client_secret;
+        return this;
+    }
+
+
+    public BaseInfoVo setScVoucherHash(List<String> scVoucherHash) {
+        this.scVoucherHash = scVoucherHash;
+        return this;
+    }
+
+    public BaseInfoVo setScApiKey(String scApiKey) {
+        this.scApiKey = scApiKey;
         return this;
     }
 }

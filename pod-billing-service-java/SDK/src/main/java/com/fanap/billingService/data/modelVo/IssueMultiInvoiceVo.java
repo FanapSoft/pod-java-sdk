@@ -1,9 +1,12 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.DelegationInfo;
 import com.fanap.billingService.util.JsonUtil;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +24,9 @@ public class IssueMultiInvoiceVo {
     private List<String> delegatorId;
     private List<String> delegationHash;
     private String forceDelegation;
+    private DelegationInfo[] delegationInfos;
+    private static String scProductId;
+
 
     public String getData() {
         return data;
@@ -38,14 +44,18 @@ public class IssueMultiInvoiceVo {
         return forceDelegation;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
 
     public IssueMultiInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.data = builder.getData();
-        this.delegatorId = TypeConversionUtil.longToString(builder.getDelegatorId());
         this.delegationHash = builder.getDelegationHash();
-        ;
+        this.delegatorId = TypeConversionUtil.longToString(builder.getDelegatorId());
         this.forceDelegation = TypeConversionUtil.booleanToString(builder.isForceDelegation());
+        this.delegationInfos = builder.getDelegationInfos();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ISSUE_MULTI_INVOICE);
 
 
     }
@@ -61,6 +71,7 @@ public class IssueMultiInvoiceVo {
         private List<Long> delegatorId;
         private List<String> delegationHash;
         private boolean forceDelegation;
+        private DelegationInfo[] delegationInfos;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
@@ -89,16 +100,27 @@ public class IssueMultiInvoiceVo {
             return delegatorId;
         }
 
-        public Builder setDelegatorId(List<Long> delegatorId) {
-            this.delegatorId = delegatorId;
-            return this;
-        }
 
         public List<String> getDelegationHash() {
             return delegationHash;
         }
 
-        public Builder setDelegationHash(List<String> delegationHash) {
+        public DelegationInfo[] getDelegationInfos() {
+            return delegationInfos;
+        }
+
+        public Builder setDelegationInfos(DelegationInfo[] delegationInfos) {
+            List<Long> delegatorId = new ArrayList<>();
+            List<String> delegationHash = new ArrayList<>();
+
+
+            for (int i = 0; i < delegationInfos.length; i++) {
+                if (delegationInfos[i] != null) {
+                    delegatorId.add(i, delegationInfos[i].getDelegatorId());
+                    delegationHash.add(i, delegationInfos[i].getDelegationHash());
+                }
+            }
+            this.delegatorId = delegatorId;
             this.delegationHash = delegationHash;
             return this;
         }
@@ -115,11 +137,13 @@ public class IssueMultiInvoiceVo {
 
         public IssueMultiInvoiceVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getOtt() != null && this.data!=null)
+                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getOtt() != null && this.data != null)
                 return new IssueMultiInvoiceVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
+
+
 }
 
 

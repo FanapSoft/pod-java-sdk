@@ -1,6 +1,7 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 import java.time.LocalDateTime;
@@ -32,8 +33,9 @@ public class GetInvoiceListVo {
     private String firstId;
     private String lastId;
     private String offset;
-    private List<String> productIdList;
+    private List<String> entityIdList;
     private String size;
+    private static String scProductId;
 
     public GetInvoiceListVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -55,8 +57,10 @@ public class GetInvoiceListVo {
         this.firstId = TypeConversionUtil.longToString(builder.getFirstId());
         this.lastId = TypeConversionUtil.longToString(builder.getLastId());
         this.offset = TypeConversionUtil.longToString(builder.getOffset());
-        this.productIdList = TypeConversionUtil.longToString(builder.getProductIdList());
+        this.entityIdList = TypeConversionUtil.longToString(builder.getEntityIdList());
         this.size = TypeConversionUtil.longToString(builder.getSize());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_LIST);
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -135,12 +139,16 @@ public class GetInvoiceListVo {
         return offset;
     }
 
-    public List<String> getProductIdList() {
-        return productIdList;
+    public List<String> getEntityIdList() {
+        return entityIdList;
     }
 
     public String getSize() {
         return size;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {
@@ -164,12 +172,13 @@ public class GetInvoiceListVo {
         private Long firstId;
         private Long lastId;
         private Long offset;
-        private List<Long> productIdList;
+        private List<Long> entityIdList;
         private Long size;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;
@@ -342,12 +351,12 @@ public class GetInvoiceListVo {
             return this;
         }
 
-        public List<Long> getProductIdList() {
-            return productIdList;
+        public List<Long> getEntityIdList() {
+            return entityIdList;
         }
 
-        public Builder setProductIdList(List<Long> productIdList) {
-            this.productIdList = productIdList;
+        public Builder setEntityIdList(List<Long> productIdList) {
+            this.entityIdList = productIdList;
             return this;
         }
 

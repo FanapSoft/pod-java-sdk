@@ -7,7 +7,7 @@
     <groupId>com.fanap.SsoService</groupId>
     <artifactId>UserOperation</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0.0</version>
+    <version>2.0.0.0</version>
     <name>UserOperation</name>
 
     <properties>

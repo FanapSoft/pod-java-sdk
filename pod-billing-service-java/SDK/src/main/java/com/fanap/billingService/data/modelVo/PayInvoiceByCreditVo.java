@@ -1,7 +1,12 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.DelegationInfo;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -12,10 +17,13 @@ public class PayInvoiceByCreditVo {
 
     private BaseInfoVo baseInfoVo;
     private String invoiceId;
-    private String delegatorId;
-    private String delegationHash;
+    private List<String> delegatorId;
+    private List<String> delegationHash;
     private String forceDelegation;
     private String wallet;
+    private DelegationInfo[] delegationInfos;
+    private static String scProductId;
+
 
     public PayInvoiceByCreditVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
@@ -24,6 +32,10 @@ public class PayInvoiceByCreditVo {
         this.delegatorId = TypeConversionUtil.longToString(builder.getDelegatorId());
         this.forceDelegation = builder.getForceDelegation();
         this.wallet = builder.getWallet();
+        this.delegationInfos = builder.getDelegationInfos();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_PAY_INVOICE_BY_CREDIT);
+
+
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -38,11 +50,11 @@ public class PayInvoiceByCreditVo {
         return invoiceId;
     }
 
-    public String getDelegatorId() {
+    public List<String> getDelegatorId() {
         return delegatorId;
     }
 
-    public String getDelegationHash() {
+    public List<String> getDelegationHash() {
         return delegationHash;
     }
 
@@ -50,18 +62,28 @@ public class PayInvoiceByCreditVo {
         return forceDelegation;
     }
 
+    public DelegationInfo[] getDelegationInfos() {
+        return delegationInfos;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public static class Builder {
 
         private BaseInfoVo baseInfoVo;
         private Long invoiceId;
-        private Long delegatorId;
-        private String delegationHash;
+        private List<Long> delegatorId;
+        private List<String> delegationHash;
         private String forceDelegation;
         private String wallet;
+        private DelegationInfo[] delegationInfos;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public String getWallet() {
             return wallet;
@@ -72,20 +94,31 @@ public class PayInvoiceByCreditVo {
             return this;
         }
 
-        public Long getDelegatorId() {
+        public List<Long> getDelegatorId() {
             return delegatorId;
         }
 
-        public Builder setDelegatorId(Long delegatorId) {
-            this.delegatorId = delegatorId;
-            return this;
-        }
 
-        public String getDelegationHash() {
+        public List<String> getDelegationHash() {
             return delegationHash;
         }
 
-        public Builder setDelegationHash(String delegationHash) {
+        public DelegationInfo[] getDelegationInfos() {
+            return delegationInfos;
+        }
+
+        public Builder setDelegationInfos(DelegationInfo[] delegationInfos) {
+            List<Long> delegatorId = new ArrayList<>();
+            List<String> delegationHash = new ArrayList<>();
+
+
+            for (int i = 0; i < delegationInfos.length; i++) {
+                if (delegationInfos[i] != null) {
+                    delegatorId.add(i, delegationInfos[i].getDelegatorId());
+                    delegationHash.add(i, delegationInfos[i].getDelegationHash());
+                }
+            }
+            this.delegatorId = delegatorId;
             this.delegationHash = delegationHash;
             return this;
         }

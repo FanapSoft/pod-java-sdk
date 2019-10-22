@@ -2,9 +2,9 @@ package com.fanap.billingService.data.modelVo;
 
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,18 +12,20 @@ import java.util.List;
  */
 
 
-public class ReduceInvoiceItemVO implements Serializable {
+public class ReduceInvoiceItemVO {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and invoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer  are required parameters!";
     private BaseInfoVo baseInfoVo;
     private String id;
     private List<ReduceInvoiceSubItemVo> reduceInvoiceItemVOs;
+    private static String scProductId;
 
     public ReduceInvoiceItemVO(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.getId());
         this.reduceInvoiceItemVOs = builder.getReduceInvoiceItemVOs();
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_REDUCE_INVOICE);
 
 
     }
@@ -34,6 +36,10 @@ public class ReduceInvoiceItemVO implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public List<ReduceInvoiceSubItemVo> getReduceInvoiceItemVOs() {
@@ -49,6 +55,7 @@ public class ReduceInvoiceItemVO implements Serializable {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public Long getId() {
             return id;

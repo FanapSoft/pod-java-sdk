@@ -2,6 +2,8 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.JsonUtil;
+import com.fanap.billingService.util.PodServicesEnum;
+import com.fanap.billingService.util.TypeConversionUtil;
 
 /**
  * Created by  Z.Gholinia on 8/28/2019.
@@ -10,21 +12,23 @@ import com.fanap.billingService.util.JsonUtil;
 public class ReduceMultiInvoiceAndCashoutVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType and data are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and data are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String data;
     private String toolCode;
+    private static String scProductId;
 
     public String getToolCode() {
         return toolCode;
     }
 
+
     public ReduceMultiInvoiceAndCashoutVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.data = builder.getData();
         this.toolCode = builder.getToolCode();
-
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_REDUCE_MULTI_INVOICE_AND_CASHOUT);
 
     }
 
@@ -34,6 +38,10 @@ public class ReduceMultiInvoiceAndCashoutVo {
 
     public String getData() {
         return data;
+    }
+
+    public static String getScProductId() {
+        return scProductId;
     }
 
     public static class Builder {

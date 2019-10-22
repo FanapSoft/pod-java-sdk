@@ -1,15 +1,17 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
+import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
 
 public class PayInvoiceByInvoiceVo {
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType, creditorInvoiceId and debtorInvoiceId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, creditorInvoiceId and debtorInvoiceId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String creditorInvoiceId;
     private String debtorInvoiceId;
+    private static String scProductId;
 
 
     public String getCreditorInvoiceId() {
@@ -20,10 +22,16 @@ public class PayInvoiceByInvoiceVo {
         return debtorInvoiceId;
     }
 
+    public static String getScProductId() {
+        return scProductId;
+    }
+
     public PayInvoiceByInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.creditorInvoiceId = TypeConversionUtil.longToString(builder.getCreditorInvoiceId());
         this.debtorInvoiceId = TypeConversionUtil.longToString(builder.getDebtorInvoiceId());
+        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_PAY_INVOICE_BY_INVOICE);
+
 
     }
 
@@ -42,6 +50,7 @@ public class PayInvoiceByInvoiceVo {
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
         }
+
 
         public BaseInfoVo getBaseInfoVo() {
             return baseInfoVo;
