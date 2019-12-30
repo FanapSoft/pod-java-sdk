@@ -2,12 +2,15 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.data.modelSrv.LinkSrv;
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -118,7 +121,10 @@ public class CreatePreInvoiceVo {
         this.verificationNeeded = builder.getVerificationNeeded();
         this.callUrl = builder.getCallUrl();
         this.token = builder.getToken();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.SERVICE_CREAT_PRE_INVOICE);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.SERVICE_CREAT_PRE_INVOICE);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.SERVICE_CREAT_PRE_INVOICE);
 
     }
 
@@ -282,7 +288,7 @@ public class CreatePreInvoiceVo {
 
         LinkSrv linkSrv = new LinkSrv();
         linkSrv.setHashCode(hashCode);
-        linkSrv.setRedirectUrl("https://pay.pod.land/v1/pbc/preinvoice/" + hashCode);
+        linkSrv.setRedirectUrl("https://pay.pod.ir/v1/pbc/preinvoice/" + hashCode);
 
         return linkSrv;
     }

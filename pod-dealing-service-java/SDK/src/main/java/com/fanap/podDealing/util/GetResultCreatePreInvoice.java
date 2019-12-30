@@ -1,8 +1,8 @@
 package com.fanap.podDealing.util;
 
+import com.fanap.podBaseService.exception.PodException;
 import com.fanap.podDealing.data.modelSrv.ResultSrvCreatePreInvoice;
 import com.fanap.podDealing.data.modelVo.ResultVo;
-import com.fanap.podDealing.exception.PodException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

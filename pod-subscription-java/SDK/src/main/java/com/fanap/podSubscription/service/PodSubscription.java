@@ -16,7 +16,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<SubscriptionFullSrv>>> subscriptionList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -31,7 +31,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SubscriptionSrv>> consumeSubscription(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -45,7 +45,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SubscriptionPlanSrv>> updateSubscriptionPlan(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -65,7 +65,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SubscriptionPlanSrv>> addSubscriptionPlan(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -88,7 +88,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<SubscriptionPlanSrv>>> subscriptionPlanList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -112,7 +112,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SubscriptionSrv>> requestSubscription(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -125,7 +125,7 @@ public interface PodSubscription {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SubscriptionSrv>> confirmSubscription(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,

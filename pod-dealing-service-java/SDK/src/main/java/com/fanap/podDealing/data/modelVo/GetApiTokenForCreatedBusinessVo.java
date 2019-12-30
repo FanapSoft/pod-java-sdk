@@ -1,8 +1,11 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class GetApiTokenForCreatedBusinessVo {
 
@@ -30,8 +33,10 @@ public class GetApiTokenForCreatedBusinessVo {
     public GetApiTokenForCreatedBusinessVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_API_TOKEN_FOR_CREATED_BUSINESS);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_API_TOKEN_FOR_CREATED_BUSINESS);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_API_TOKEN_FOR_CREATED_BUSINESS);
 
     }
 

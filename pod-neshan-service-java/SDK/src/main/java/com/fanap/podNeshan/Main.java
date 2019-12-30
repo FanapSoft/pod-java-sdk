@@ -23,12 +23,12 @@ public class Main {
     public static void main(String[] args) {
 
         search();
-        reverseGeo();
-        direction();
-        noTrafficDirection();
-        distanceMatrix();
-        noTrafficDistanceMatrix();
-        mapMatching();
+//        reverseGeo();
+//        direction();
+//        noTrafficDirection();
+//        distanceMatrix();
+//        noTrafficDistanceMatrix();
+//        mapMatching();
     }
 
 

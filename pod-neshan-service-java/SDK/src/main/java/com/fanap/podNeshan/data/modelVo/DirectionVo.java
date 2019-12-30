@@ -8,10 +8,10 @@ import com.fanap.podNeshan.util.TypeConversionUtil;
 /**
  * Created by Z.gholinia on 9/22/2019.
  */
-public class DirectionVo {
+public class DirectionVo{
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,scApiKey, origin , destination are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, ServerType,productId,apiKey, origin , destination are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String origin;
@@ -46,13 +46,13 @@ public class DirectionVo {
         return alternative;
     }
 
-    public static String getScProductId() {
+    public  String getScProductId() {
         return scProductId;
     }
 
     public DirectionVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
-        this.scProductId = TypeConversionUtil.intToString(NeshanProductId.DRRECTION);
+        this.scProductId = TypeConversionUtil.intToString(NeshanProductId.DIRECTION);
         this.origin = builder.getOrigin();
         this.destination = builder.getDestination();
         this.waypoints = builder.getWaypoints();
@@ -156,6 +156,8 @@ public class DirectionVo {
                 return new DirectionVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
+
+
 
 
     }

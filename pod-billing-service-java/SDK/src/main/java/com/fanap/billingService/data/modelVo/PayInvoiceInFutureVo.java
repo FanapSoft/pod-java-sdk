@@ -1,10 +1,13 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
 
 import java.time.LocalDate;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class PayInvoiceInFutureVo {
 
@@ -25,8 +28,10 @@ public class PayInvoiceInFutureVo {
         this.date = builder.getDate();
         this.guildCode = builder.getGuildCode();
         this.wallet = builder.getWallet();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_PAY_INVOICE_IN_FUTURE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_PAY_INVOICE_IN_FUTURE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_PAY_INVOICE_IN_FUTURE);
 
     }
 
@@ -126,9 +131,12 @@ public class PayInvoiceInFutureVo {
 
         public PayInvoiceInFutureVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null && this.getInvoiceId() != null && this.getDate() != null && this.baseInfoVo.getOtt() != null)
-                return new PayInvoiceInFutureVo(this);
+                    this.baseInfoVo.getToken_issuer() != null && this.getInvoiceId() != null && this.getDate() != null )
+                if (this.wallet != null && this.guildCode == null || this.wallet == null && this.guildCode != null)
+                    return new PayInvoiceInFutureVo(this);
+                else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+
         }
 
 

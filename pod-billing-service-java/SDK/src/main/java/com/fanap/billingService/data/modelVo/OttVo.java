@@ -1,10 +1,13 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -20,7 +23,10 @@ public class OttVo {
     public OttVo(Builder builder) {
 
         this.baseInfoVo = builder.getBaseInfoVo();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_OTT);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_OTT);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_OTT);
 
     }
 

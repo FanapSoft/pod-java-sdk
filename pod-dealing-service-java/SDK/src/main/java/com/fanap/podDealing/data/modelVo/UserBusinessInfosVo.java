@@ -1,17 +1,18 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+/**
+ * Created by Z.gholinia on 7/31/2019.
+ */
 
 import java.util.List;
 
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
+
 public class UserBusinessInfosVo {
-
-
-    /**
-     * Created by Z.gholinia on 7/31/2019.
-     */
 
 
     private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and id are required parameters!";
@@ -24,7 +25,10 @@ public class UserBusinessInfosVo {
     public UserBusinessInfosVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.getId());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_USER_BUSINESS_INFOS);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_USER_BUSINESS_INFOS);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_USER_BUSINESS_INFOS);
 
 
     }
@@ -71,7 +75,6 @@ public class UserBusinessInfosVo {
 
         public UserBusinessInfosVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.id != null)
                 return new UserBusinessInfosVo(this);

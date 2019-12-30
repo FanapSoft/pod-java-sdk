@@ -1,10 +1,13 @@
 package com.fanap.podProduct.data.modelVo;
 
-import com.fanap.podProduct.exception.PodException;
-import com.fanap.podProduct.util.PodServicesEnum;
-import com.fanap.podProduct.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.podProduct.util.ScProductIdPodServicesProduction;
 
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/11/2019.
@@ -139,7 +142,10 @@ public class SearchProductVo {
         this.orderByPrice = builder.getOrderByPrice();
         this.tags = builder.getTags();
         this.tagTrees = builder.getTagTrees();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_SEARCH_PRODUCT);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_SEARCH_PRODUCT);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_SEARCH_PRODUCT);
 
 
     }

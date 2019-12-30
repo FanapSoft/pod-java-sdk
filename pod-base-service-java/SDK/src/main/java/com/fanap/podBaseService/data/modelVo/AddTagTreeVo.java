@@ -1,10 +1,11 @@
 package com.fanap.podBaseService.data.modelVo;
 
 import com.fanap.podBaseService.exception.PodException;
-import com.fanap.podBaseService.util.PodServicesEnum;
+import com.fanap.podBaseService.util.ScProductIdPodServicesProduction;
+import com.fanap.podBaseService.util.ScProductIdPodServicesSandBox;
 import com.fanap.podBaseService.util.TypeConversionUtil;
 
-import java.util.List;
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/2/2019.
@@ -12,14 +13,13 @@ import java.util.List;
 public class AddTagTreeVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, categoryId  and name are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType, categoryId  and name are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String name;
     private String categoryId;
     private String parentId;
     private static String scProductId;
-
 
 
     public String getName() {
@@ -34,7 +34,7 @@ public class AddTagTreeVo {
         return parentId;
     }
 
-    public static  String getScProductId() {
+    public static String getScProductId() {
         return scProductId;
     }
 
@@ -43,8 +43,10 @@ public class AddTagTreeVo {
         this.name = builder.getName();
         this.categoryId = TypeConversionUtil.longToString(builder.getCategoryId());
         this.parentId = TypeConversionUtil.longToString(builder.getParentId());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_TAG_TREE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_ADD_TAG_TREE);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_ADD_TAG_TREE);
 
     }
 
@@ -52,12 +54,11 @@ public class AddTagTreeVo {
         return baseInfoVo;
     }
 
-    public static class Builder  {
+    public static class Builder {
         private BaseInfoVo baseInfoVo;
         private String name;
         private Long categoryId;
         private Long parentId;
-
 
 
         public String getName() {
@@ -103,7 +104,7 @@ public class AddTagTreeVo {
 
         public AddTagTreeVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
+                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getServerType() != null &&
                     this.name != null && this.categoryId != null)
                 return new AddTagTreeVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

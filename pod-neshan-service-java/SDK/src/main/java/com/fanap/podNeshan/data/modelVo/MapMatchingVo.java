@@ -5,13 +5,15 @@ import com.fanap.podNeshan.util.NeshanProductId;
 import com.fanap.podNeshan.util.Point;
 import com.fanap.podNeshan.util.TypeConversionUtil;
 
+import java.util.List;
+
 /**
  * Created by Z.gholinia on 9/22/2019.
  */
 public class MapMatchingVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,scApiKey, path are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType ,productId,apiKey, path are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String path;
@@ -22,7 +24,7 @@ public class MapMatchingVo {
         return path;
     }
 
-    public static String getScProductId() {
+    public  String getScProductId() {
         return scProductId;
     }
 
@@ -38,7 +40,7 @@ public class MapMatchingVo {
         return baseInfoVo;
     }
 
-    public static class Builder {
+    public static class Builder{
         private BaseInfoVo baseInfoVo;
         private String path;
 
@@ -75,7 +77,6 @@ public class MapMatchingVo {
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
-
     public static String creatStringPoint(Point[] doublePoints) {
         String result = "";
         for (int i = 0; i < doublePoints.length; i++) {

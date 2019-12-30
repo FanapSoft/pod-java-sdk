@@ -6,12 +6,22 @@ import java.util.Map;
  * Created By Khojasteh on 2/27/2019
  */
 public class ResultVo<T> {
+
+    private boolean hasError;
     private Long messageId;
     private String referenceNumber;
     private Map<String, Object> aggregations;
     private long count;
     private String ott;
     private T result;
+
+    public boolean isHasError() {
+        return hasError;
+    }
+
+    public void setHasError(boolean hasError) {
+        this.hasError = hasError;
+    }
 
     public Long getMessageId() {
         return messageId;

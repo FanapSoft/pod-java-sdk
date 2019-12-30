@@ -2,7 +2,7 @@ package com.fanap.billingService.data.modelVo;
 
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.io.Serializable;
 import java.util.List;

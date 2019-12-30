@@ -1,11 +1,14 @@
 package com.fanap.podSubscription.data.modelVo;
 
-import com.fanap.podSubscription.exception.PodException;
-import com.fanap.podSubscription.util.PodServicesEnum;
-import com.fanap.podSubscription.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podSubscription.util.ScProductIdPodServicesProduction;
+import com.fanap.podSubscription.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -46,7 +49,10 @@ public class AddSubscriptionPlanVo {
         this.currencyCode = builder.getCurrencyCode();
         this.usageAmountLimit = TypeConversionUtil.longToString(builder.getUsageAmountLimit());
         this.usageCountLimit = TypeConversionUtil.longToString(builder.getUsageCountLimit());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_SUBSCRIPTION_PLAN);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_ADD_SUBSCRIPTION_PLAN);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_ADD_SUBSCRIPTION_PLAN);
 
     }
 
@@ -263,12 +269,8 @@ public class AddSubscriptionPlanVo {
                     this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.periodTypeCode != null &&
-                    this.permittedGuildCode != null &&
-                    this.permittedGuildCode.size() != 0 &&
                     this.permittedBusinessId != null &&
                     this.permittedBusinessId.size() != 0 &&
-                    this.permittedProductId != null &&
-                    this.permittedProductId.size() != 0 &&
                     this.entityId != null &&
                     this.name != null &&
                     this.price != null &&

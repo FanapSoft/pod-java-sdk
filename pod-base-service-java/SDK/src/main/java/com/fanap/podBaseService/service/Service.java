@@ -7,6 +7,7 @@ import com.fanap.podBaseService.data.modelVo.*;
 import com.fanap.podBaseService.util.GetResult;
 import com.fanap.podBaseService.util.OnGetResponseListener;
 import com.fanap.podBaseService.util.RetrofitUtil;
+import com.fanap.podBaseService.util.ServerTypeSelectionUtil;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Service {
                                    OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addTagTreeCategoryVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<TagTreeCategorySrv>(service.addTagTreeCategory(
@@ -38,7 +39,7 @@ public class Service {
                                        OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(getTagTreeCategoryListVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<List<TagTreeCategorySrv>>(service.getTagTreeCategoryList(
@@ -59,7 +60,7 @@ public class Service {
                                       OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateTagTreeCategoryVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<TagTreeCategorySrv>(service.updateTagTreeCategory(
@@ -80,7 +81,7 @@ public class Service {
                            OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addTagTreeVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<TagTreeSrv>(service.addTagTree(
@@ -101,7 +102,7 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(getTagTreeListVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<List<TagTreeSrv>>(service.getTagTreeList(
@@ -124,7 +125,7 @@ public class Service {
                               OnGetResponseListener onGetResponseListener) {
 
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateTagTreeVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<TagTreeSrv>(service.updateTagTree(
@@ -142,7 +143,7 @@ public class Service {
     }
     public void getCurrencyList(CurrencyListVo currencyListVo, OnGetResponseListener onGetResponseListener) {
         PodBaseService service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(currencyListVo.getBaseInfoVo().getServerType()))
                 .create(PodBaseService.class);
 
         new GetResult<List<GuildSrv>>(service.getCurrencyList(

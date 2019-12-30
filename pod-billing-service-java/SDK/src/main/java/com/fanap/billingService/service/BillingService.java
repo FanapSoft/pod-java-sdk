@@ -14,7 +14,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<String>> ott(
             @Field("_token_") String token,
             @Field("_token_issuer_") String token_issuer,
@@ -24,7 +24,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> issueInvoice(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -63,7 +63,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrvCreatePreInvoice<String>> createPreInvoice(
             @Header("_token_") String _token_,
             @Header("_token_issuer_") String tokenIssuer,
@@ -91,7 +91,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<InvoiceSrv>>> getInvoiceList(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -121,7 +121,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<InvoiceSrv>>> getInvoiceListByMetadata(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -136,7 +136,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<ExportServiceSrv>> getInvoiceListAsFile(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -164,7 +164,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> cancelInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -176,7 +176,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> verifyAndCloseInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -188,7 +188,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> closeInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -200,7 +200,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<String>> getInvoicePaymentLink(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -212,7 +212,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -224,7 +224,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoiceByCredit(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -241,7 +241,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payAnyInvoiceByCredit(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -259,7 +259,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> sendInvoicePaymentSMS(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -276,7 +276,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoiceInFuture(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -292,7 +292,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> payInvoiceByInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -304,77 +304,10 @@ public interface BillingService {
 
     );
 
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<BusinessDealerSrv>> addDealer(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("dealerBizId") String dealerBizId,
-            @Field("allProductAllow") String allProductAllow
-    );
-
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<List<BusinessDealerSrv>>> dealerList(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("dealerBizId") String dealerBizId,
-            @Field("enable") String enable,
-            @Field("offset") String offset,
-            @Field("size") String size
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<BusinessDealerSrv>> enableDealer(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("dealerBizId") String dealerBizId
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<BusinessDealerSrv>> disableDealer(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("dealerBizId") String dealerBizId
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<List<BusinessDealerSrv>>> businessDealingList(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("dealingBusinessId") String dealingBusinessId,
-            @Field("enable") String enable,
-            @Field("offset") String offset,
-            @Field("size") String size
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> issueMultiInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -391,79 +324,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<DealerProductPermissionSrv>> addDealerProductPermission(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("productId") String productId,
-            @Field("dealerBizId") String dealerBizId
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealerProductPermissionList(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("productId") String productId,
-            @Field("dealerBizId") String dealerBizId,
-            @Field("offset") String offset,
-            @Field("size") String size,
-            @Field("enable") String enable
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealingProductPermissionList(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("productId") String productId,
-            @Field("dealingBusinessId") String dealingBusinessId,
-            @Field("offset") String offset,
-            @Field("size") String size,
-            @Field("enable") String enable
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<DealerProductPermissionSrv>> disableDealerProductPermission(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("productId") String productId,
-            @Field("dealerBizId") String dealerBizId
-    );
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
-    Call<ResultSrv<DealerProductPermissionSrv>> enableDealerProductPermission(
-            @Field("_token_") String token,
-            @Field("_token_issuer_") String tokenIssuer,
-            @Field("scProductId") String scProductId,
-            @Field("scVoucherHash") List<String> scVoucherHash,
-            @Field("scApiKey") String scApiKey,
-            @Field("productId") String productId,
-            @Field("dealerBizId") String dealerBizId
-    );
-
-
-    @FormUrlEncoded
-    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> reduceMultiInvoice(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -477,7 +338,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> reduceMultiInvoiceAndCashout(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -493,7 +354,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<VoucherSrv>>> defineCreditVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -515,7 +376,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<VoucherSrv>>> defineDiscountAmountVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -538,7 +399,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<VoucherSrv>>> defineDiscountPercentageVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -563,7 +424,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<InvoiceSrv>> applyVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -579,7 +440,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<VoucherSrv>> deactivateVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -591,7 +452,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<VoucherSrv>> activateVoucher(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -603,7 +464,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<VoucherSrv>>> getVoucherList(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -637,7 +498,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<DirectWithdrawSrv>> defineDirectWithdraw(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -655,7 +516,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<DirectWithdrawSrv>>> directWithdrawList(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -670,7 +531,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<DirectWithdrawSrv>> updateDirectWithdraw(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -689,7 +550,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> revokeDirectWithdraw(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -702,7 +563,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<ExportServiceSrv>>> getExportList(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -719,7 +580,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SettlementRequestSrv>> requestGuildSettlement(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -740,7 +601,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SettlementRequestSrv>> requestWalletSettlement(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -761,7 +622,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SettlementRequestSrv>> requestSettlementByTool(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -783,7 +644,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<SettlementRequestSrv>>> listSettlements(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -808,7 +669,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> addAutoSettlement(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -825,7 +686,7 @@ public interface BillingService {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> removeAutoSettlement(
             @Field("_token_") String token,
             @Field("_token_issuer_") String tokenIssuer,
@@ -836,6 +697,34 @@ public interface BillingService {
             @Field("currencyCode") String currencyCode
     );
 
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<InvoiceSrv>> verifyInvoice(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id,
+            @Field("billNumber") String billNumber
+    );
 
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<InvoiceSrv>> reduceInvoice(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("id") String id,
+            @Field("invoiceItemId[]") List<String> invoiceItemId,
+            @Field("price[]") List<String> price,
+            @Field("itemDescription[]") List<String> itemDescription,
+            @Field("quantity[]") List<String> quantity,
+            @Field("preferredTaxRate") String preferredTaxRate
+    );
 
 }

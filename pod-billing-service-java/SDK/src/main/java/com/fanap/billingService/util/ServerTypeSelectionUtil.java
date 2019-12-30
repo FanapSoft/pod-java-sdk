@@ -34,26 +34,48 @@ public class ServerTypeSelectionUtil {
             case "businessDealingList":
             case "issueMultiInvoiceVo":
             case "addDealerProductPermission":
-            case " dealerProductPermissionList":
+            case "dealerProductPermissionList":
             case "dealingProductPermissionList":
             case "disabeDealerProductPermission":
             case "enableDealerProductPermission":
             case "reduceMultiInvoice":
             case "reduceMultiInvoiceAndCashout":
             case "createPreInvoice":
-//                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
-                return EnumBaseURLPlatform.PRODUCTION.getValue();
-//                else
-//                    return EnumBaseURLPlatform.SANDBOX.getValue();
+            case "verifyInvoice":
+            case "reduceInvoice":
+            case "addAutoSettlement":
+            case "getExportList":
+            case "listSettlements":
+            case "removeAutoSettlement":
+            case "requestGuildSettlement":
+            case "requestSettlementByTool":
+            case "requestWalletSettlement":
+            case "defineCreditVoucher":
+            case "defineDiscountAmountVoucher":
+            case "defineDiscountPercentageVoucher":
+            case "applyVoucher":
+            case "getVoucherList":
+            case "deactivateVoucher":
+            case "activateVoucher":
+            case "defineDirectWithdraw":
+            case "directWithdrawList":
+            case "updateDirectWithdraw":
+            case "revokeDirectWithdraw":
+            case "issueMultiInvoice":
+                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
+                    return EnumBaseURLPlatform.PRODUCTION.getValue();
+                else
+                    return EnumBaseURLPlatform.SANDBOX.getValue();
 
 
             case "payInvoiceByUniqueNumber":
-                return EnumBaseURLPrivate.PRODUCTION.getValue();
 
-//                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
 
-//                else
-//                    return EnumBaseURLPrivate.SANDBOX.getValue();
+                if (enum_server_type.getValue().equals(Enum_Server_type.PRODUCTION.getValue()))
+                    return EnumBaseURLPrivate.PRODUCTION.getValue();
+
+                else
+                    return EnumBaseURLPrivate.SANDBOX.getValue();
             default:
                 return EnumBaseURLPlatform.PRODUCTION.getValue();
 //        }

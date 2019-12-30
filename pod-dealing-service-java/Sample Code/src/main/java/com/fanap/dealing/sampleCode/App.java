@@ -1,9 +1,10 @@
 package com.fanap.dealing.sampleCode;
 
+import com.fanap.podBaseService.enums.Enum_Server_type;
+import com.fanap.podBaseService.exception.PodException;
 import com.fanap.podDealing.controller.PodDealing;
 import com.fanap.podDealing.data.modelSrv.*;
 import com.fanap.podDealing.data.modelVo.*;
-import com.fanap.podDealing.exception.PodException;
 import com.fanap.podDealing.util.OnGetResponseListener;
 
 import java.util.ArrayList;
@@ -21,18 +22,28 @@ public class App {
     public static void main(String[] args) {
 
 
-        addUserAndBusiness();
-        listUserCreatedBusiness();
-        updateBusiness();
-        getApiTokenForCreatedBusiness();
-        rateBusiness();
-        commentBusiness();
-        businessFavorite();
-        userBusinessInfos();
-        commentBusinessList();
-        confirmComment();
-        guildList();
-        unconfirmComment();
+//        addUserAndBusiness();
+//        listUserCreatedBusiness();
+//        updateBusiness();
+//        getApiTokenForCreatedBusiness();
+//        rateBusiness();
+//        commentBusiness();
+//        businessFavorite();
+//        userBusinessInfos();
+//        commentBusinessList();
+//        confirmComment();
+//        guildList();
+//        unconfirmComment();
+//        addDealerProductPermission();
+//        dealerProductPermissionList();
+//        dealingProductPermissionList();
+//        disableDealerProductPermission();
+//        enableDealerProductPermission();
+//        addDealer();
+//        dealerList();
+//        enableDealer();
+//        disableDealer();
+//        businessDealingList();
     }
 
 
@@ -42,6 +53,7 @@ public class App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("SDFJKSHFJwshfJshfDJH")
 //                .setScVoucherHash(scVoucherHashs)
 
@@ -56,9 +68,9 @@ public class App {
 
         try {
             AddUserAndBusinessVo addUserAndBusinessVo = new AddUserAndBusinessVo.Builder(baseInfoVo)
-                    .setUsername("biztt12")
-                    .setBusinessName("biieez112")
-                    .setEmail("biiz.biz@gmail.com")
+                    .setUsername("qghx")
+                    .setBusinessName("rfghggb")
+                    .setEmail("biiz.1biz@gmail.com")
                     .setCountry("iran")
                     .setState("khorasan")
                     .setCity("mashhad")
@@ -68,13 +80,13 @@ public class App {
                     .setAgentLastName("biz1111")
                     .setAgentCellphoneNumber("09154961631")
                     .setGuildCode(permittedGuildCodeList)
-                    .setTags(tags)
+//                    .setTags(tags)
 
                     .build();
             podDealing.addUserAndBusiness(addUserAndBusinessVo, new OnGetResponseListener<BusinessSrv>() {
                 @Override
                 public void onResponse(ResultVo<BusinessSrv> result) {
-                    System.out.println(result.getResult().getTags().get(1));
+                    System.out.println(result.getResult().getName());
                 }
 
                 @Override
@@ -91,12 +103,13 @@ public class App {
 
 
     private static void listUserCreatedBusiness() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setScApiKey("")
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<Long> permittedBizIdList = new ArrayList<>();
@@ -125,11 +138,12 @@ public class App {
     }
 
     private static void updateBusiness() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -174,12 +188,13 @@ public class App {
 
 
     private static void getApiTokenForCreatedBusiness() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-                .setScApiKey("")
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
 
@@ -187,7 +202,7 @@ public class App {
 
         try {
             GetApiTokenForCreatedBusinessVo getApiTokenForCreatedBusinessVo = new GetApiTokenForCreatedBusinessVo.Builder(baseInfoVo)
-                    .setBusinessId(5188L)
+                    .setBusinessId(12564L)
                     .build();
             podDealing.getApiTokenForCreatedBusiness(getApiTokenForCreatedBusinessVo, new OnGetResponseListener<BusinessApiTokenSrv>() {
                 @Override
@@ -208,12 +223,13 @@ public class App {
     }
 
     private static void rateBusiness() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken(TOKEN)
+                .setToken("6ed0ae116a5644b99fef974201ab01be")
                 .setToken_issuer(1)
-                .setScApiKey("")
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
 
@@ -222,7 +238,7 @@ public class App {
 
         try {
             RateBusinessVo rateBusinessVo = new RateBusinessVo.Builder(baseInfoVo)
-                    .setBusinessId(4887L)
+                    .setBusinessId(12564L)
                     .setRate(2L)
                     .build();
             podDealing.rateBusiness(rateBusinessVo, new OnGetResponseListener<RateSrv>() {
@@ -244,11 +260,12 @@ public class App {
     }
 
     private static void commentBusiness() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -258,13 +275,13 @@ public class App {
 
         try {
             CommentBusinessVo commentBusinessVo = new CommentBusinessVo.Builder(baseInfoVo)
-                    .setBusinessId(5188L)
-                    .setText("khooooob")
+                    .setBusinessId(12564L)
+                    .setText("akhjooon")
                     .build();
             podDealing.commentBusiness(commentBusinessVo, new OnGetResponseListener<Long>() {
                 @Override
                 public void onResponse(ResultVo<Long> result) {
-                    System.out.println(result.getMessageId());
+                    System.out.println(result.getResult());
                 }
 
                 @Override
@@ -280,13 +297,12 @@ public class App {
     }
 
     private static void businessFavorite() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
-//                .setScApiKey("")
-//                .setScVoucherHash(scVoucherHashs)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         PodDealing podDealing = new PodDealing();
@@ -316,11 +332,12 @@ public class App {
     }
 
     private static void userBusinessInfos() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -353,11 +370,12 @@ public class App {
 
 
     private static void commentBusinessList() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -368,8 +386,7 @@ public class App {
         try {
             CommentBusinessListVo commentBusinessListVo = new CommentBusinessListVo.Builder(baseInfoVo)
                     .setBusinessId(5188L)
-                    .setOffset(1L)
-                    .setSize(1L)
+                    .setOffset(0)
                     .build();
             podDealing.commentBusinessList(commentBusinessListVo, new OnGetResponseListener<List<CommentSrv>>() {
                 @Override
@@ -390,11 +407,12 @@ public class App {
     }
 
     private static void confirmComment() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("c26d02dc98b04325b2edb0b86bcf9fe1")
+                .setToken("475fd39223cd47289a8977d0f73f1bf7")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -404,7 +422,7 @@ public class App {
 
         try {
             ConfirmCommentVo confirmCommentVo = new ConfirmCommentVo.Builder(baseInfoVo)
-                    .setCommentId(943L)
+                    .setCommentId(7224L)
 
                     .build();
             podDealing.confirmComment(confirmCommentVo, new OnGetResponseListener<Boolean>() {
@@ -426,11 +444,12 @@ public class App {
     }
 
     private static void guildList() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -440,8 +459,8 @@ public class App {
 
         try {
             GuildListVo guildListVo = new GuildListVo.Builder(baseInfoVo)
-                    .setOffset(1L)
-                    .setSize(3L)
+                    .setOffset(1)
+                    .setSize(3)
                     .build();
             podDealing.guildList(guildListVo, new OnGetResponseListener<List<GuildSrv>>() {
                 @Override
@@ -463,11 +482,12 @@ public class App {
 
 
     private static void unconfirmComment() {
-        //        List<String> scVoucherHashs = new ArrayList<>();
+//        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("c26d02dc98b04325b2edb0b86bcf9fe1")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -498,5 +518,345 @@ public class App {
 
     }
 
+
+    private static void addDealer() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            AddDealerVo addDealerVo = new AddDealerVo.Builder(baseInfoVo)
+                    .setDealerBizId(9364L)
+                    .build();
+            podDealing.addDealer(addDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
+                @Override
+                public void onResponse(ResultVo<BusinessDealerSrv> result) {
+                    System.out.println(result.getResult().getBusiness().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void dealerList() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+        try {
+            DealerListVo dealerListVo = new DealerListVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .build();
+            podDealing.dealerList(dealerListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<BusinessDealerSrv>> result) {
+                    System.out.println(result.getResult().get(0).getBusiness().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void enableDealer() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+        try {
+            EnableDealerVo enableDealerVo = new EnableDealerVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .build();
+            podDealing.enableDealer(enableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
+                @Override
+                public void onResponse(ResultVo<BusinessDealerSrv> result) {
+                    System.out.println(result.getResult().getBusiness().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void disableDealer() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            DisableDealerVo disableDealerVo = new DisableDealerVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .build();
+            podDealing.disableDealer(disableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
+                @Override
+                public void onResponse(ResultVo<BusinessDealerSrv> result) {
+                    System.out.println(result.getResult().getBusiness().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void businessDealingList() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("9a36df05377e45fb943d22543996498c")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            BusinessDealingListVo businessDealingListVo = new BusinessDealingListVo.Builder(baseInfoVo)
+                    .build();
+            podDealing.businessDealingList(businessDealingListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<BusinessDealerSrv>> result) {
+                    System.out.println(result.getResult().size());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void addDealerProductPermission() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            AddDealerProductPermissionVo addDealerProductPermissionVo = new AddDealerProductPermissionVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .setEntityId(30343L)
+                    .build();
+            podDealing.addDealerProductPermission(addDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
+                @Override
+                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
+                    System.out.println(result.getResult().getProduct().getEntityId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void dealerProductPermissionList() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("99cb42376f6d4ec8ba6bbab265c79ff1")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+        try {
+            DealerProductPermissionListVo dealerProductPermissionListVo = new DealerProductPermissionListVo.Builder(baseInfoVo)
+                    .build();
+            podDealing.dealerProductPermissionList(dealerProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<DealerProductPermissionSrv>> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+
+    private static void dealingProductPermissionList() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("9a36df05377e45fb943d22543996498c")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+        try {
+            DealingProductPermissionListVo dealingProductPermissionListVo = new DealingProductPermissionListVo.Builder(baseInfoVo)
+                    .setSize(5)
+                    .build();
+            podDealing.dealingProductPermissionList(dealingProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
+                @Override
+                public void onResponse(ResultVo<List<DealerProductPermissionSrv>> result) {
+                    System.out.println(result.getResult());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void disableDealerProductPermission() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            DisableDealerProductPermissionVo disableDealerProductPermissionVo = new DisableDealerProductPermissionVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .setEntityId(30343L)
+                    .build();
+            podDealing.disableDealerProductPermission(disableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
+                @Override
+                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
+                    System.out.println(result.getResult().getProduct().getEntityId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
+
+    private static void enableDealerProductPermission() {
+//        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("ghjdshfjshf");
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("SDFJKSHFJwshfJshfDJH")
+//                .setScVoucherHash(scVoucherHashs)
+                .build();
+
+        PodDealing podDealing = new PodDealing();
+
+        try {
+            EnableDealerProductPermissionVo enableDealerProductPermissionVo = new EnableDealerProductPermissionVo.Builder(baseInfoVo)
+                    .setDealerBizId(9373L)
+                    .setEntityId(30343L)
+                    .build();
+            podDealing.enableDealerProductPermission(enableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
+                @Override
+                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
+                    System.out.println(result.getResult().getProduct().getEntityId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+    }
 
 }

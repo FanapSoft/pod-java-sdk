@@ -13,7 +13,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<BusinessSrv>> addUserAndBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -56,7 +56,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<BusinessSrv>>> listUserCreatedBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -86,7 +86,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<BusinessSrv>> updateBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -135,7 +135,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<BusinessApiTokenSrv>> getApiTokenForCreatedBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -147,7 +147,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<RateSrv>> rateBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -160,7 +160,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Long>> commentBusiness(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -173,7 +173,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> businessFavorite(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -186,7 +186,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<UserBusinessInfoSrv>>> userBusinessInfos(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -197,7 +197,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<CommentSrv>>> commentBusinessList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -213,7 +213,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> confirmComment(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -225,7 +225,7 @@ public interface PodDealing {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<GuildSrv>>> guildList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -237,10 +237,9 @@ public interface PodDealing {
             @Field("size ") String size);
 
 
-
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<Boolean>> unconfirmComment(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -248,6 +247,146 @@ public interface PodDealing {
             @Field("scVoucherHash") List<String> scVoucherHash,
             @Field("scApiKey") String scApiKey,
             @Field("commentId") String commentId);
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<DealerProductPermissionSrv>> addDealerProductPermission(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealerProductPermissionList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("offset") String offset,
+            @Field("size") String size,
+            @Field("enable") String enable
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<List<DealerProductPermissionSrv>>> dealingProductPermissionList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("productId") String productId,
+            @Field("dealingBusinessId") String dealingBusinessId,
+            @Field("offset") String offset,
+            @Field("size") String size,
+            @Field("enable") String enable
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<DealerProductPermissionSrv>> disableDealerProductPermission(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<DealerProductPermissionSrv>> enableDealerProductPermission(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("productId") String productId,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<BusinessDealerSrv>> addDealer(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("allProductAllow") String allProductAllow
+    );
+
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<List<BusinessDealerSrv>>> dealerList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("dealerBizId") String dealerBizId,
+            @Field("enable") String enable,
+            @Field("offset") String offset,
+            @Field("size") String size
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<BusinessDealerSrv>> enableDealer(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<BusinessDealerSrv>> disableDealer(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("dealerBizId") String dealerBizId
+    );
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
+    @POST("nzh/doServiceCall")
+    Call<ResultSrv<List<BusinessDealerSrv>>> businessDealingList(
+            @Field("_token_") String token,
+            @Field("_token_issuer_") String tokenIssuer,
+            @Field("scProductId") String scProductId,
+            @Field("scVoucherHash") List<String> scVoucherHash,
+            @Field("scApiKey") String scApiKey,
+            @Field("dealingBusinessId") String dealingBusinessId,
+            @Field("enable") String enable,
+            @Field("offset") String offset,
+            @Field("size") String size
+    );
 
 
 }

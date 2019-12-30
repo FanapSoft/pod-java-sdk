@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class SendInvoicePaymentSmsVo {
     private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and invoiceId are required parameters!";
@@ -23,10 +26,12 @@ public class SendInvoicePaymentSmsVo {
         this.callbackUri = builder.getCallbackUri();
         this.redirectUri = builder.getRedirectUri();
         this.delegationId = TypeConversionUtil.longToString(builder.getDelegationId());
-        this.forceDelegation = builder.getForceDelegation();
+        this.forceDelegation = TypeConversionUtil.booleanToString(builder.getForceDelegation());
         this.wallet = builder.getWallet();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_SEND_INVOICE_PAYMENT_SMS);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_SEND_INVOICE_PAYMENT_SMS);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_SEND_INVOICE_PAYMENT_SMS);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -68,7 +73,7 @@ public class SendInvoicePaymentSmsVo {
         private String callbackUri;
         private String redirectUri;
         private Long delegationId;
-        private String forceDelegation;
+        private Boolean forceDelegation;
         private String wallet;
 
         public Builder(BaseInfoVo baseInfoVo) {
@@ -120,11 +125,11 @@ public class SendInvoicePaymentSmsVo {
             return this;
         }
 
-        public String getForceDelegation() {
+        public Boolean getForceDelegation() {
             return forceDelegation;
         }
 
-        public Builder setForceDelegation(String forceDelegation) {
+        public Builder setForceDelegation(Boolean forceDelegation) {
             this.forceDelegation = forceDelegation;
             return this;
         }

@@ -1,11 +1,14 @@
 package com.fanap.podSubscription.data.modelVo;
 
-import com.fanap.podSubscription.exception.PodException;
-import com.fanap.podSubscription.util.PodServicesEnum;
-import com.fanap.podSubscription.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podSubscription.util.ScProductIdPodServicesProduction;
+import com.fanap.podSubscription.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -48,7 +51,10 @@ public class SubscriptionPlanListVo {
         this.periodTypeCountFrom = TypeConversionUtil.longToString(builder.getPeriodTypeCountFrom());
         this.periodTypeCountTo = TypeConversionUtil.longToString(builder.getPeriodTypeCountTo());
         this.toPrice = TypeConversionUtil.decimalToString(builder.getToPrice());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_SUBSCRIPTION_PLAN_LIST);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_SUBSCRIPTION_PLAN_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_SUBSCRIPTION_PLAN_LIST);
 
     }
 

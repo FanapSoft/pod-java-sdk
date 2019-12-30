@@ -1,5 +1,6 @@
 package com.fanap.podNeshan.data.modelVo;
 
+import com.fanap.podNeshan.enums.Enum_Server_type;
 import com.fanap.podNeshan.util.TypeConversionUtil;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class BaseInfoVo {
         this.token = builder.getToken();
         this.token_issuer = TypeConversionUtil.intToString(builder.getToken_issuer());
         this.ott = builder.getOtt();
-        this.scApiKey = builder.getScApiKey();
-        this.scVoucherHash = builder.getScVoucherHash();
+        this.scApiKey=builder.getScApiKey();
+        this.scVoucherHash=builder.getScVoucherHash();
     }
 
 
@@ -76,6 +77,7 @@ public class BaseInfoVo {
             this.token_issuer = token_issuer;
             return this;
         }
+
 
 
         public String getToken() {

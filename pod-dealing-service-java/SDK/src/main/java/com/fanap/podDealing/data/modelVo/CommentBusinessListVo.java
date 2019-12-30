@@ -1,8 +1,11 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class CommentBusinessListVo {
 
@@ -12,7 +15,7 @@ public class CommentBusinessListVo {
      */
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, offset , size and businessId are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType offset  and businessId are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String businessId;
@@ -52,10 +55,12 @@ public class CommentBusinessListVo {
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
         this.firstId = TypeConversionUtil.longToString(builder.getFirstId());
         this.lastId = TypeConversionUtil.longToString(builder.getLastId());
-        this.offset = TypeConversionUtil.longToString(builder.getOffset());
-        this.size = TypeConversionUtil.longToString(builder.getSize());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_COMMENT_BUSINESS_LIST);
-
+        this.offset = TypeConversionUtil.intToString(builder.getOffset());
+        this.size = TypeConversionUtil.intToString(builder.getSize());
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_COMMENT_BUSINESS_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_COMMENT_BUSINESS_LIST);
 
     }
 
@@ -68,8 +73,8 @@ public class CommentBusinessListVo {
         private Long businessId;
         private Long firstId;
         private Long lastId;
-        private Long offset;
-        private Long size;
+        private Integer offset;
+        private Integer size;
 
 
         public Long getFirstId() {
@@ -90,20 +95,20 @@ public class CommentBusinessListVo {
             return this;
         }
 
-        public Long getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(Long offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
-        public Long getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(Long size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }
@@ -134,9 +139,18 @@ public class CommentBusinessListVo {
         public CommentBusinessListVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
-                    this.businessId != null && this.size != null && this.offset != null)
-                return new CommentBusinessListVo(this);
+                    this.businessId != null)
+                if (this.offset != null && this.lastId != null && this.firstId != null || this.offset != null && this.lastId != null
+                        || this.offset != null && this.firstId != null || this.lastId != null && this.firstId != null)
+                    throw PodException.invalidParameter("\n" +
+                            "The pagination parameters should be entered as follows:" +
+                            "offset without lastId and firstId or lastId without firstId and offset or " +
+                            "firstId without offset and lastId ");
+                else
+                    return new CommentBusinessListVo(this);
+
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
+
         }
     }
 

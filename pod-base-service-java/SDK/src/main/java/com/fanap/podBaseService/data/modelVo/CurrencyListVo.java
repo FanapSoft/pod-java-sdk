@@ -2,15 +2,16 @@ package com.fanap.podBaseService.data.modelVo;
 
 
 import com.fanap.podBaseService.exception.PodException;
-import com.fanap.podBaseService.util.PodServicesEnum;
+import com.fanap.podBaseService.util.ScProductIdPodServicesProduction;
+import com.fanap.podBaseService.util.ScProductIdPodServicesSandBox;
 import com.fanap.podBaseService.util.TypeConversionUtil;
 
-import java.util.List;
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class CurrencyListVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and serverType, are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private static String scProductId;
@@ -18,8 +19,10 @@ public class CurrencyListVo {
 
     public CurrencyListVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_CURRENCY_LIST);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_CURRENCY_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_CURRENCY_LIST);
 
     }
 
@@ -32,7 +35,7 @@ public class CurrencyListVo {
     }
 
 
-    public static class Builder{
+    public static class Builder {
 
         private BaseInfoVo baseInfoVo;
 
@@ -52,6 +55,7 @@ public class CurrencyListVo {
 
         public CurrencyListVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
+                    this.baseInfoVo.getServerType() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
                 return new CurrencyListVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

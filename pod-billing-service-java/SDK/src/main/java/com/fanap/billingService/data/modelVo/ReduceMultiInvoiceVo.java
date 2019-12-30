@@ -2,9 +2,12 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.JsonUtil;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class ReduceMultiInvoiceVo {
 
@@ -19,8 +22,10 @@ public class ReduceMultiInvoiceVo {
     public ReduceMultiInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.data = builder.getData();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_REDUCE_MULTI_INVOICE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_REDUCE_MULTI_INVOICE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_REDUCE_MULTI_INVOICE);
 
     }
 

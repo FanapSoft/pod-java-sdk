@@ -1,8 +1,11 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class RateBusinessVo {
 
@@ -36,7 +39,10 @@ public class RateBusinessVo {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.businessId = TypeConversionUtil.longToString(builder.getBusinessId());
         this.rate = TypeConversionUtil.longToString(builder.getRate());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_RATE_BUSINESS);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_RATE_BUSINESS);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_RATE_BUSINESS);
 
 
     }
@@ -85,7 +91,6 @@ public class RateBusinessVo {
 
         public RateBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
                     this.baseInfoVo.getToken_issuer() != null &&
                     this.businessId != null && this.rate != null)
                 return new RateBusinessVo(this);

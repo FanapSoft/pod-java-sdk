@@ -5,7 +5,7 @@ package com.fanap.SsoService.config;
  */
 public enum BaseURL {
 
-    SSO_ADDRESS("https://accounts.pod.land");
+    SSO_ADDRESS("https://accounts.pod.ir");
 
     private final String value;
 

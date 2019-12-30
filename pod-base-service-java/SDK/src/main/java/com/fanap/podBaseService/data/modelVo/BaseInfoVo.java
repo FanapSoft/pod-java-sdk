@@ -20,7 +20,9 @@ public class BaseInfoVo {
     public BaseInfoVo(Builder builder) {
 
         this.token = builder.getToken();
+        if (builder.getToken_issuer()!=null)
         this.token_issuer = TypeConversionUtil.intToString(builder.getToken_issuer());
+        this.serverType = builder.getServerType();
         this.ott = builder.getOtt();
         this.scVoucherHash=builder.getScVoucherHash();
         this.scApiKey=builder.getScApiKey();
@@ -46,8 +48,12 @@ public class BaseInfoVo {
         return token_issuer;
     }
 
-    public static class Builder {
+    public Enum_Server_type getServerType() {
+        return serverType;
+    }
 
+    public static class Builder {
+        private Enum_Server_type serverType = Enum_Server_type.SANDBOX;;
         private String token;
         private Integer token_issuer;
         private String ott;
@@ -60,6 +66,15 @@ public class BaseInfoVo {
 
         public Builder setScVoucherHash(List<String> scVoucherHash) {
             this.scVoucherHash = scVoucherHash;
+            return this;
+        }
+
+        public Enum_Server_type getServerType() {
+            return serverType;
+        }
+
+        public Builder setServerType(Enum_Server_type serverType) {
+            this.serverType = serverType;
             return this;
         }
 
@@ -87,7 +102,7 @@ public class BaseInfoVo {
             return this;
         }
 
-        public int getToken_issuer() {
+        public Integer getToken_issuer() {
             return token_issuer;
         }
 

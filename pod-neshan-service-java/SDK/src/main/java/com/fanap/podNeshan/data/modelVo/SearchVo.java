@@ -4,14 +4,16 @@ import com.fanap.podNeshan.exception.PodException;
 import com.fanap.podNeshan.util.NeshanProductId;
 import com.fanap.podNeshan.util.TypeConversionUtil;
 
+import java.util.List;
+
 /**
  * Created by Z.gholinia on 9/22/2019.
  */
 
-public class SearchVo {
+public class SearchVo  {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,scApiKey, lat , lng and term are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType ,productId,apiKey, lat , lng and term are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String term;
@@ -31,7 +33,7 @@ public class SearchVo {
         return lng;
     }
 
-    public static String getScProductId() {
+    public String getScProductId() {
         return scProductId;
     }
 

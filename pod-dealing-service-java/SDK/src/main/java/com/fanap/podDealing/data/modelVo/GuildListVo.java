@@ -1,8 +1,11 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class GuildListVo {
 
@@ -38,10 +41,13 @@ public class GuildListVo {
 
     public GuildListVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
-        this.size = TypeConversionUtil.longToString(builder.getSize());
-        this.offset = TypeConversionUtil.longToString(builder.getOffset());
+        this.size = TypeConversionUtil.intToString(builder.getSize());
+        this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.name = builder.getName();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_GUILD_LIST);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_GUILD_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_GUILD_LIST);
 
     }
 
@@ -52,8 +58,8 @@ public class GuildListVo {
     public static class Builder {
         private BaseInfoVo baseInfoVo;
         private String name;
-        private Long offset;
-        private Long size;
+        private Integer offset;
+        private Integer size;
 
 
         public String getName() {
@@ -65,20 +71,20 @@ public class GuildListVo {
             return this;
         }
 
-        public Long getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(Long offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
-        public Long getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(Long size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }
@@ -99,9 +105,7 @@ public class GuildListVo {
 
         public GuildListVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
-                    this.size != null && this.offset != null)
+                    this.baseInfoVo.getToken_issuer() != null)
                 return new GuildListVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }

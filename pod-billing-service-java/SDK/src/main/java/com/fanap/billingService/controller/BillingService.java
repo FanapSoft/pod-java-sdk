@@ -339,103 +339,6 @@ public class BillingService {
 
         return this;
     }
-    /**
-     * add Dealer.
-     *
-     * @param addDealerVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService addDealer(AddDealerVo addDealerVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.addDealer(addDealerVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-
-    /**
-     * dealer List .
-     *
-     * @param dealerListVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService dealerList(DealerListVo dealerListVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.dealerList(dealerListVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-    /**
-     * enable Dealer .
-     *
-     * @param enableDealerVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService enableDealer(EnableDealerVo enableDealerVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.enableDealer(enableDealerVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-    /**
-     * disableDealer .
-     *
-     * @param disableDealerVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService disableDealer(DisableDealerVo disableDealerVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.disableDealer(disableDealerVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-
-    /**
-     * business Dealing List .
-     *
-     * @param businessDealingListVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService businessDealingList(BusinessDealingListVo businessDealingListVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.businessDealingList(businessDealingListVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
 
     /**
      * issue Multi Invoice .
@@ -457,103 +360,6 @@ public class BillingService {
         return this;
     }
 
-    /**
-     * add Dealer Product Permission .
-     *
-     * @param addDealerProductPermissionVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService addDealerProductPermission(AddDealerProductPermissionVo addDealerProductPermissionVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.addDealerProductPermission(addDealerProductPermissionVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-    /**
-     * dealer Product Permission List .
-     *
-     * @param dealerProductPermissionListVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService dealerProductPermissionList(DealerProductPermissionListVo dealerProductPermissionListVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.dealerProductPermissionList(dealerProductPermissionListVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-    /**
-     * dealing Product Permission List .
-     *
-     * @param dealingProductPermissionListVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService dealingProductPermissionList(DealingProductPermissionListVo dealingProductPermissionListVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.dealingProductPermissionList(dealingProductPermissionListVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-
-    /**
-     * disable Dealer Product Permission .
-     *
-     * @param disableDealerProductPermissionVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService disableDealerProductPermission(DisableDealerProductPermissionVo disableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.disableDealerProductPermission(disableDealerProductPermissionVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
-
-    /**
-     * enable Dealer Product Permission .
-     *
-     * @param enableDealerProductPermissionVo
-     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
-     *                              InvalidParameterException will be thrown.
-     * @return
-     * @throws PodException
-     */
-    public BillingService enableDealerProductPermission(EnableDealerProductPermissionVo  enableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener)
-            throws PodException {
-
-        if (onGetResponseListener != null)
-            service.enableDealerProductPermission(enableDealerProductPermissionVo, onGetResponseListener);
-
-        else throw PodException.invalidParameter(MESSAGE);
-
-        return this;
-    }
 
     /**
      * reduce Multi Invoice .
@@ -966,6 +772,43 @@ public class BillingService {
 
         return this;
     }
+    /**
+     *verify Invoice.
+     *
+     * @param verifyInvoiceVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                              InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public BillingService verifyInvoice(VerifyInvoiceVo verifyInvoiceVo, OnGetResponseListener onGetResponseListener)
+            throws PodException {
 
+        if (onGetResponseListener != null)
+            service.verifyInvoice(verifyInvoiceVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
+    /**
+     *reduce Invoice.
+     *
+     * @param reduceInvoiceVo
+     * @param onGetResponseListener A generic listener based on type of the output for receiving response. If the onGetResponseListenerGetAccessToken is null,
+     *                              InvalidParameterException will be thrown.
+     * @return
+     * @throws PodException
+     */
+    public BillingService reduceInvoice(ReduceInvoiceVo reduceInvoiceVo, OnGetResponseListener onGetResponseListener)
+            throws PodException {
+
+        if (onGetResponseListener != null)
+            service.reduceInvoice(reduceInvoiceVo, onGetResponseListener);
+
+        else throw PodException.invalidParameter(MESSAGE);
+
+        return this;
+    }
 
 }

@@ -1,12 +1,13 @@
 package com.fanap.userOperation.sampleCode;
 
-import com.fanap.podSubscription.controller.PodProduct;
-import com.fanap.podSubscription.data.modelSrv.AttributeTemplateSrv;
-import com.fanap.podSubscription.data.modelSrv.ProductSrv;
-import com.fanap.podSubscription.data.modelSrv.SearchProductSrv;
-import com.fanap.podSubscription.data.modelVo.*;
-import com.fanap.podSubscription.exception.PodException;
-import com.fanap.podSubscription.util.OnGetResponseListener;
+import com.fanap.podBaseService.enums.Enum_Server_type;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.controller.PodProduct;
+import com.fanap.podProduct.data.modelSrv.AttributeTemplateSrv;
+import com.fanap.podProduct.data.modelSrv.ProductSrv;
+import com.fanap.podProduct.data.modelSrv.SearchProductSrv;
+import com.fanap.podProduct.data.modelVo.*;
+import com.fanap.podProduct.util.OnGetResponseListener;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,24 +24,29 @@ public class App {
 
     public static void main(String[] args) {
 
-        addProduct();
-        addProducts();
-        updateProduct();
-        updateProducts();
-        getProductList();
-        getBusinessProductList();
-        getAttributeTemplateList();
-        addSubProduct();
+//        addProduct();
+//        addProducts();
+//        updateProduct();
+//        updateProducts();
+//        getProductList();
+//        getBusinessProductList();
+//        getAttributeTemplateList();
+//        addSubProduct();
         searchProduct();
-        searchSubProduct();
+//        searchSubProduct();
 
     }
 
 
     private static void addProduct() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("ce75cca723fe43bba437e07214651a89")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> attCode = new ArrayList<>();
         attCode.add("gender");
@@ -103,9 +109,14 @@ public class App {
     }
 
     private static void addProducts() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                //                .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> attCode = new ArrayList<>();
         attCode.add("gender");
@@ -198,9 +209,14 @@ public class App {
     }
 
     private static void updateProduct() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScApiKey("dhfsdhfhsdfuhfuwehuiSEfihdfhe")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> attCode = new ArrayList<>();
         attCode.add("gender");
@@ -216,8 +232,7 @@ public class App {
         String[] tags = {"tags1", "tags2"};
         String[] tagTres = {"tagTrees1", "tagTrees2"};
         PodProduct podProduct = new PodProduct();
-//        List<String> scVoucherHashs =new ArrayList<>();
-//        scVoucherHashs.add("YELZF7WUHRLD");
+
 
         try {
             UpdateProductVo updateProductVo = new UpdateProductVo.Builder(baseInfoVo)
@@ -253,7 +268,6 @@ public class App {
 //                   .setPreviewImage("")
 //                   .setPreferredTaxRate(0D)
 //                   .setQuantityPrecision(0D)
-//                    .setScVoucherHash(scVoucherHashs)
 
                     .build();
             podProduct.updateProduct(updateProductVo, new OnGetResponseListener<ProductSrv>() {
@@ -274,9 +288,14 @@ public class App {
 
 
     private static void updateProducts() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                //   .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> attCode = new ArrayList<>();
         attCode.add("gender");
@@ -332,9 +351,14 @@ public class App {
     }
 
     private static void getProductList() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                //  .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<Long> ids = new ArrayList<>();
         ids.add(0L);
@@ -395,9 +419,13 @@ public class App {
     }
 
     private static void getBusinessProductList() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                //  .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<Long> ids = new ArrayList<>();
         ids.add(0L);
@@ -459,9 +487,14 @@ public class App {
 
 
     private static void getAttributeTemplateList() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                // .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> guildCodes = new ArrayList<>();
         guildCodes.add("FOOD_GUILD");
@@ -497,9 +530,14 @@ public class App {
     }
 
     private static void addSubProduct() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                // .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> attCode = new ArrayList<>();
         attCode.add("size");
@@ -545,9 +583,14 @@ public class App {
 
 
     private static void searchProduct() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                // .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
         List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("YELZF7WUHRLD");
@@ -592,15 +635,21 @@ public class App {
         }
     }
 
+
     private static void searchSubProduct() {
+        //        List<String> scVoucherHashs =new ArrayList<>();
+//        scVoucherHashs.add("YELZF7WUHRLD");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                // .setScApiKey("")
+//                .setScVoucherHash(scVoucherHashs)
                 .build();
 //        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("YELZF7WUHRLD");
 
-        List<Long> productGroupIds=new ArrayList<>();
+        List<Long> productGroupIds = new ArrayList<>();
         productGroupIds.add(1903L);
         PodProduct podProduct = new PodProduct();
 
@@ -631,5 +680,6 @@ public class App {
             System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
     }
+
 
 }

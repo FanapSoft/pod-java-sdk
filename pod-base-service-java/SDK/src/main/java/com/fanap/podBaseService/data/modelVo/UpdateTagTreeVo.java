@@ -1,17 +1,18 @@
 package com.fanap.podBaseService.data.modelVo;
 
 import com.fanap.podBaseService.exception.PodException;
-import com.fanap.podBaseService.util.PodServicesEnum;
+import com.fanap.podBaseService.util.ScProductIdPodServicesProduction;
+import com.fanap.podBaseService.util.ScProductIdPodServicesSandBox;
 import com.fanap.podBaseService.util.TypeConversionUtil;
 
-import java.util.List;
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/2/2019.
  */
 public class UpdateTagTreeVo {
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer and id are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType, and id are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String id;
@@ -27,8 +28,10 @@ public class UpdateTagTreeVo {
         this.name = builder.getName();
         this.parentId = TypeConversionUtil.longToString(builder.getParentId());
         this.enable = TypeConversionUtil.booleanToString(builder.getEnable());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_UPDATE_TAG_TREE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_UPDATE_TAG_TREE);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_UPDATE_TAG_TREE);
 
     }
 
@@ -56,7 +59,7 @@ public class UpdateTagTreeVo {
         return scProductId;
     }
 
-    public static class Builder{
+    public static class Builder {
 
         private BaseInfoVo baseInfoVo;
         private Long id;
@@ -118,7 +121,7 @@ public class UpdateTagTreeVo {
         public UpdateTagTreeVo build() throws PodException {
             if (this.baseInfoVo != null &&
                     this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
+                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getServerType() != null &&
                     this.id != null)
                 return new UpdateTagTreeVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

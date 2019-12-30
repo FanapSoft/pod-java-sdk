@@ -1,11 +1,15 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by  Z.Gholinia on 9/30/2019.
@@ -63,8 +67,10 @@ public class GetVoucherListVo {
         this.used = TypeConversionUtil.booleanToString(builder.getUsed());
         this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.size = TypeConversionUtil.intToString(builder.getSize());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_VOUCHER_LIST);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_VOUCHER_LIST);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_VOUCHER_LIST);
     }
 
     public BaseInfoVo getBaseInfoVo() {

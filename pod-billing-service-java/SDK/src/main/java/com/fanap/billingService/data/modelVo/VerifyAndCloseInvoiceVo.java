@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -19,8 +22,10 @@ public class VerifyAndCloseInvoiceVo {
     public VerifyAndCloseInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.id);
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_VERIFY_AND_CLOSE_INVOICE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_VERIFY_AND_CLOSE_INVOICE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_VERIFY_AND_CLOSE_INVOICE);
     }
 
     public BaseInfoVo getBaseInfoVo() {

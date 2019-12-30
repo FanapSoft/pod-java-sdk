@@ -12,17 +12,16 @@ import java.util.Date;
  * Created By Khojasteh on 2/25/2019
  */
 public class RetrofitUtil {
-    private static final String BASE_URL = EnumBaseURLPlatform.PRODUCTION.getValue();
     private static Retrofit retrofit = null;
 
-    public static synchronized Retrofit getInstance() {
+    public static synchronized Retrofit getInstance(String baseURL) {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Date.class, new MyDateTypeAdapter())
                     .create();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseURL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }

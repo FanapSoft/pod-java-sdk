@@ -2,13 +2,17 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.enums.Enum_Server_type_Percent;
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
 import com.fanap.billingService.util.Voucher;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by  Z.Gholinia on 9/30/2019.
@@ -53,8 +57,10 @@ public class DefineDiscountPercentageVoucherVo {
         this.hashCode = builder.getHashCode();
 
         this.vouchers = builder.getVouchers();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_DEFINE_DISCOUNT_PERCENTAGE_VOUCHER);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_DEFINE_DISCOUNT_PERCENTAGE_VOUCHER);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_DEFINE_DISCOUNT_PERCENTAGE_VOUCHER);
 
     }
 

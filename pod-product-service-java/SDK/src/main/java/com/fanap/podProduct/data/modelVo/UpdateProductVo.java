@@ -1,11 +1,14 @@
 package com.fanap.podProduct.data.modelVo;
 
-import com.fanap.podProduct.exception.PodException;
-import com.fanap.podProduct.util.PodServicesEnum;
-import com.fanap.podProduct.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.podProduct.util.ScProductIdPodServicesProduction;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/11/2019.
@@ -218,8 +221,10 @@ public class UpdateProductVo {
         this.tagTreeCategoryName = builder.getTagTreeCategoryName();
         this.preferredTaxRate = TypeConversionUtil.doubleToString(builder.getPreferredTaxRate());
         this.quantityPrecision = TypeConversionUtil.doubleToString(builder.getQuantityPrecision());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_UPDATE_PRODUCT);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_UPDATE_PRODUCT);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_UPDATE_PRODUCT);
 
 
     }
@@ -228,7 +233,7 @@ public class UpdateProductVo {
         return baseInfoVo;
     }
 
-    public static class Builder  {
+    public static class Builder {
         private BaseInfoVo baseInfoVo;
         private Long parentProductId;
         private String name;

@@ -28,7 +28,6 @@ public class MyDateTypeAdapter extends TypeAdapter<Date> {
             if (in.peek().equals(JsonToken.NUMBER)) {
 
                 return new Date(in.nextLong());
-
             }
         }
         return null;

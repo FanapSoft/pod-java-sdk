@@ -1,8 +1,11 @@
 package com.fanap.podSubscription.data.modelVo;
 
-import com.fanap.podSubscription.exception.PodException;
-import com.fanap.podSubscription.util.PodServicesEnum;
-import com.fanap.podSubscription.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podSubscription.util.ScProductIdPodServicesProduction;
+import com.fanap.podSubscription.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 7/31/2019.
@@ -34,8 +37,10 @@ public class ConsumeSubscriptionVo {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.id = TypeConversionUtil.longToString(builder.getId());
         this.usedAmount = TypeConversionUtil.longToString(builder.getUsedAmount());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_CONSUME_SUBSCRIPTION);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_CONSUME_SUBSCRIPTION);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_CONSUME_SUBSCRIPTION);
 
     }
 

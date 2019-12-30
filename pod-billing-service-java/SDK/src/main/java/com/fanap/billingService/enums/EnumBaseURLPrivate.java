@@ -5,8 +5,8 @@ package com.fanap.billingService.enums;
  */
 public enum EnumBaseURLPrivate {
 
-//    SANDBOX("https://sandbox.pod.land:1033"),
-    PRODUCTION("https://pay.pod.land");
+    SANDBOX("https://sandbox.pod.ir:1033"),
+    PRODUCTION("https://pay.pod.ir");
 
     private final String value;
 

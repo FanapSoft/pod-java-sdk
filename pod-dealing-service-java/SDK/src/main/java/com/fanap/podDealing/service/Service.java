@@ -1,10 +1,11 @@
 package com.fanap.podDealing.service;
 
+import com.fanap.podBaseService.util.RetrofitUtil;
+import com.fanap.podBaseService.util.ServerTypeSelectionUtil;
 import com.fanap.podDealing.data.modelSrv.*;
 import com.fanap.podDealing.data.modelVo.*;
 import com.fanap.podDealing.util.GetResult;
 import com.fanap.podDealing.util.OnGetResponseListener;
-import com.fanap.podDealing.util.RetrofitUtil;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Service {
                                    OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addUserAndBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<BusinessSrv>(service.addUserAndBusiness(
@@ -39,8 +40,8 @@ public class Service {
                 addUserAndBusinessVo.getGuildCode(),
                 addUserAndBusinessVo.getCellphone(),
                 addUserAndBusinessVo.getPhone(),
-                addUserAndBusinessVo.getPostalCode(),
                 addUserAndBusinessVo.getFax(),
+                addUserAndBusinessVo.getPostalCode(),
                 addUserAndBusinessVo.getCountry(),
                 addUserAndBusinessVo.getState(),
                 addUserAndBusinessVo.getCity(),
@@ -68,7 +69,7 @@ public class Service {
                                         OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(listUserCreatedBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<List<BusinessSrv>>(service.listUserCreatedBusiness(
@@ -105,7 +106,7 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<BusinessSrv>(service.updateBusiness(
@@ -162,7 +163,7 @@ public class Service {
                                               OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(getApiTokenForCreatedBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<BusinessApiTokenSrv>(service.getApiTokenForCreatedBusiness(
@@ -181,7 +182,7 @@ public class Service {
                              OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(rateBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<RateSrv>(service.rateBusiness(
@@ -200,7 +201,7 @@ public class Service {
                                 OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(commentBusinessVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<Long>(service.commentBusiness(
@@ -219,7 +220,7 @@ public class Service {
                                  OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(businessFavoriteVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<Boolean>(service.businessFavorite(
@@ -239,7 +240,7 @@ public class Service {
                                   OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(userBusinessInfosVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<List<UserBusinessInfoSrv>>(service.userBusinessInfos(
@@ -259,7 +260,7 @@ public class Service {
                                     OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(commentBusinessListVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<List<CommentSrv>>(service.commentBusinessList(
@@ -271,8 +272,8 @@ public class Service {
                 commentBusinessListVo.getBusinessId(),
                 commentBusinessListVo.getFirstId(),
                 commentBusinessListVo.getLastId(),
-                commentBusinessListVo.getSize(),
-                commentBusinessListVo.getOffset()
+                commentBusinessListVo.getOffset(),
+                commentBusinessListVo.getSize()
 
 
         ), onGetResponseListener).get();
@@ -282,7 +283,7 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(confirmCommentVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<Boolean>(service.confirmComment(
@@ -301,7 +302,7 @@ public class Service {
                           OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(guildListVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<List<GuildSrv>>(service.guildList(
@@ -322,7 +323,7 @@ public class Service {
                                  OnGetResponseListener onGetResponseListener) {
 
         PodDealing service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(unconfirmCommentVo.getBaseInfoVo().getServerType()))
                 .create(PodDealing.class);
 
         new GetResult<Boolean>(service.unconfirmComment(
@@ -336,4 +337,179 @@ public class Service {
 
         ), onGetResponseListener).get();
     }
+
+
+    public void addDealerProductPermission(AddDealerProductPermissionVo addDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.addDealerProductPermission(
+                addDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                addDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                addDealerProductPermissionVo.getScProductId(),
+                addDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                addDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                addDealerProductPermissionVo.getEntityId(),
+                addDealerProductPermissionVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealerProductPermissionList(DealerProductPermissionListVo dealerProductPermissionListVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(dealerProductPermissionListVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<List<DealerProductPermissionSrv>>(service.dealerProductPermissionList(
+                dealerProductPermissionListVo.getBaseInfoVo().getToken(),
+                dealerProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
+                dealerProductPermissionListVo.getScProductId(),
+                dealerProductPermissionListVo.getBaseInfoVo().getScVoucherHash(),
+                dealerProductPermissionListVo.getBaseInfoVo().getScApiKey(),
+                dealerProductPermissionListVo.getEntityId(),
+                dealerProductPermissionListVo.getDealerBizId(),
+                dealerProductPermissionListVo.getOffset(),
+                dealerProductPermissionListVo.getSize(),
+                dealerProductPermissionListVo.getEnable()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealingProductPermissionList(DealingProductPermissionListVo dealingProductPermissionListVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(dealingProductPermissionListVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<List<DealerProductPermissionSrv>>(service.dealingProductPermissionList(
+                dealingProductPermissionListVo.getBaseInfoVo().getToken(),
+                dealingProductPermissionListVo.getBaseInfoVo().getToken_issuer(),
+                dealingProductPermissionListVo.getScProductId(),
+                dealingProductPermissionListVo.getBaseInfoVo().getScVoucherHash(),
+                dealingProductPermissionListVo.getBaseInfoVo().getScApiKey(),
+                dealingProductPermissionListVo.getEntityId(),
+                dealingProductPermissionListVo.getDealingBusinessId(),
+                dealingProductPermissionListVo.getOffset(),
+                dealingProductPermissionListVo.getSize(),
+                dealingProductPermissionListVo.getEnable()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void disableDealerProductPermission(DisableDealerProductPermissionVo disableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(disableDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.disableDealerProductPermission(
+                disableDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                disableDealerProductPermissionVo.getScProductId(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                disableDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                disableDealerProductPermissionVo.getEntityId(),
+                disableDealerProductPermissionVo.getDealerBizId()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void enableDealerProductPermission(EnableDealerProductPermissionVo enableDealerProductPermissionVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(enableDealerProductPermissionVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<DealerProductPermissionSrv>(service.enableDealerProductPermission(
+                enableDealerProductPermissionVo.getBaseInfoVo().getToken(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getToken_issuer(),
+                enableDealerProductPermissionVo.getScProductId(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getScVoucherHash(),
+                enableDealerProductPermissionVo.getBaseInfoVo().getScApiKey(),
+                enableDealerProductPermissionVo.getEntityId(),
+                enableDealerProductPermissionVo.getDealerBizId()
+
+        ), onGetResponseListener).get();
+    }
+
+    public void addDealer(AddDealerVo addDealerVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addDealerVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<BusinessDealerSrv>(service.addDealer(
+                addDealerVo.getBaseInfoVo().getToken(),
+                addDealerVo.getBaseInfoVo().getToken_issuer(),
+                addDealerVo.getScProductId(),
+                addDealerVo.getBaseInfoVo().getScVoucherHash(),
+                addDealerVo.getBaseInfoVo().getScApiKey(),
+                addDealerVo.getDealerBizId(),
+                addDealerVo.getAllProductAllow()
+        ), onGetResponseListener).get();
+    }
+
+    public void dealerList(DealerListVo dealerListVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(dealerListVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<List<BusinessDealerSrv>>(service.dealerList(
+                dealerListVo.getBaseInfoVo().getToken(),
+                dealerListVo.getBaseInfoVo().getToken_issuer(),
+                dealerListVo.getScProductId(),
+                dealerListVo.getBaseInfoVo().getScVoucherHash(),
+                dealerListVo.getBaseInfoVo().getScApiKey(),
+                dealerListVo.getDealerBizId(),
+                dealerListVo.getEnable(),
+                dealerListVo.getOffset(),
+                dealerListVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+    public void enableDealer(EnableDealerVo enableDealerVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(enableDealerVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<BusinessDealerSrv>(service.enableDealer(
+                enableDealerVo.getBaseInfoVo().getToken(),
+                enableDealerVo.getBaseInfoVo().getToken_issuer(),
+                enableDealerVo.getScProductId(),
+                enableDealerVo.getBaseInfoVo().getScVoucherHash(),
+                enableDealerVo.getBaseInfoVo().getScApiKey(),
+                enableDealerVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+    public void disableDealer(DisableDealerVo disableDealerVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(disableDealerVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<BusinessDealerSrv>(service.disableDealer(
+                disableDealerVo.getBaseInfoVo().getToken(),
+                disableDealerVo.getBaseInfoVo().getToken_issuer(),
+                disableDealerVo.getScProductId(),
+                disableDealerVo.getBaseInfoVo().getScVoucherHash(),
+                disableDealerVo.getBaseInfoVo().getScApiKey(),
+                disableDealerVo.getDealerBizId()
+        ), onGetResponseListener).get();
+    }
+
+
+    public void businessDealingList(BusinessDealingListVo businessDealingListVo, OnGetResponseListener onGetResponseListener) {
+        PodDealing service = RetrofitUtil
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(businessDealingListVo.getBaseInfoVo().getServerType()))
+                .create(PodDealing.class);
+
+        new GetResult<List<BusinessDealerSrv>>(service.businessDealingList(
+                businessDealingListVo.getBaseInfoVo().getToken(),
+                businessDealingListVo.getBaseInfoVo().getToken_issuer(),
+                businessDealingListVo.getScProductId(),
+                businessDealingListVo.getBaseInfoVo().getScVoucherHash(),
+                businessDealingListVo.getBaseInfoVo().getScApiKey(),
+                businessDealingListVo.getDealingBusinessId(),
+                businessDealingListVo.getEnable(),
+                businessDealingListVo.getOffset(),
+                businessDealingListVo.getSize()
+        ), onGetResponseListener).get();
+    }
+
+
 }

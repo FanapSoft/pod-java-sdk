@@ -1,11 +1,12 @@
 package com.fanap.podProduct;
 
+import com.fanap.podBaseService.enums.Enum_Server_type;
+import com.fanap.podBaseService.exception.PodException;
 import com.fanap.podProduct.controller.PodProduct;
 import com.fanap.podProduct.data.modelSrv.AttributeTemplateSrv;
 import com.fanap.podProduct.data.modelSrv.ProductSrv;
 import com.fanap.podProduct.data.modelSrv.SearchProductSrv;
 import com.fanap.podProduct.data.modelVo.*;
-import com.fanap.podProduct.exception.PodException;
 import com.fanap.podProduct.util.OnGetResponseListener;
 
 import java.math.BigDecimal;
@@ -31,7 +32,7 @@ public class Main {
 //        getBusinessProductList();
 //        getAttributeTemplateList();
 //        addSubProduct();
-//        searchProduct();
+        searchProduct();
 //        searchSubProduct();
 
     }
@@ -43,6 +44,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("ce75cca723fe43bba437e07214651a89")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -112,6 +114,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -211,6 +214,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("dhfsdhfhsdfuhfuwehuiSEfihdfhe")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -289,6 +293,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 //   .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -351,6 +356,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 //  .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -486,6 +492,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 // .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -528,6 +535,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 // .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -580,6 +588,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 // .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -633,6 +642,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 // .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();

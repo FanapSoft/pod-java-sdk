@@ -1,17 +1,20 @@
 package com.fanap.podProduct.data.modelVo;
 
-import com.fanap.podProduct.exception.PodException;
-import com.fanap.podProduct.util.PodServicesEnum;
-import com.fanap.podProduct.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.podProduct.util.ScProductIdPodServicesProduction;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/11/2019.
  */
 
-public class AddProductVo  {
+public class AddProductVo {
 
 
     private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, name , description, canComment, canLike, enable, availableCount, price, and discount are required parameters!";
@@ -213,8 +216,10 @@ public class AddProductVo  {
         this.preferredTaxRate = TypeConversionUtil.doubleToString(builder.getPreferredTaxRate());
         this.quantityPrecision = TypeConversionUtil.doubleToString(builder.getQuantityPrecision());
         this.entityId = TypeConversionUtil.longToString(builder.getEntityId());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_PRODUCT);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_ADD_PRODUCT);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_ADD_PRODUCT);
 
 
     }
@@ -223,7 +228,7 @@ public class AddProductVo  {
         return baseInfoVo;
     }
 
-    public static class Builder  {
+    public static class Builder {
         private BaseInfoVo baseInfoVo;
         private Long parentProductId;
         private String name;
@@ -553,7 +558,7 @@ public class AddProductVo  {
 
         public AddProductVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
+                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getServerType()!=null &&
                     this.name != null && this.canComment != null && this.canLike != null && this.enable != null
                     && this.availableCount != null && this.price != null && this.discount != null)
                 return new AddProductVo(this);

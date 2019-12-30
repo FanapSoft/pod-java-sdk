@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
 import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -19,7 +22,10 @@ public class PayInvoiceVo {
     public PayInvoiceVo(Builder builder) {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.invoiceId = TypeConversionUtil.longToString(builder.getInvoiceId());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_PAY_INVOICE);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_PAY_INVOICE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_PAY_INVOICE);
 
     }
 

@@ -1,6 +1,7 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.enums.Enum_Server_type;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class BaseInfoVo {
 
-
+    private Enum_Server_type serverType;
     private String token;
     private String token_issuer;
     private String ott;
@@ -21,6 +22,7 @@ public class BaseInfoVo {
         this.token = builder.getToken();
         this.token_issuer = TypeConversionUtil.intToString(builder.getToken_issuer());
         this.ott = builder.getOtt();
+        this.serverType=builder.getServerType();
         this.scApiKey = builder.getScApiKey();
         this.scVoucherHash = builder.getScVoucherHash();
     }
@@ -46,8 +48,12 @@ public class BaseInfoVo {
         return scApiKey;
     }
 
-    public static class Builder {
+    public Enum_Server_type getServerType() {
+        return serverType;
+    }
 
+    public static class Builder {
+        private Enum_Server_type serverType;
         private String token;
         private Integer token_issuer;
         private String ott;
@@ -60,6 +66,15 @@ public class BaseInfoVo {
 
         public Builder setScVoucherHash(List<String> scVoucherHash) {
             this.scVoucherHash = scVoucherHash;
+            return this;
+        }
+
+        public Enum_Server_type getServerType() {
+            return serverType;
+        }
+
+        public Builder setServerType(Enum_Server_type serverType) {
+            this.serverType = serverType;
             return this;
         }
 
@@ -86,13 +101,8 @@ public class BaseInfoVo {
             return this;
         }
 
-        public int getToken_issuer() {
+        public Integer getToken_issuer() {
             return token_issuer;
-        }
-
-        public Builder setToken_issuer(int token_issuer) {
-            this.token_issuer = token_issuer;
-            return this;
         }
 
         public String getOtt() {

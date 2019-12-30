@@ -1,8 +1,13 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import java.time.LocalDate;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class ListSettlementsVo {
 
@@ -36,15 +41,17 @@ public class ListSettlementsVo {
         this.toAmount = TypeConversionUtil.doubleToString(builder.getToAmount());
         this.currencyCode = builder.getCurrencyCode();
         this.uniqueId = builder.getUniqueId();
-        this.fromDate = builder.getFromDate();
-        this.toDate = builder.getToDate();
+        this.fromDate = TypeConversionUtil.localDateToString(builder.getFromDate());
+        this.toDate = TypeConversionUtil.localDateToString(builder.getToDate());
         this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.size = TypeConversionUtil.intToString(builder.getSize());
         this.id = TypeConversionUtil.longToString(builder.getId());
         this.toolCode = builder.getToolCode();
         this.toolId = builder.getToolId();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_LIST_SETTLEMENTS);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_LIST_SETTLEMENTS);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_LIST_SETTLEMENTS);
 
     }
 
@@ -119,8 +126,8 @@ public class ListSettlementsVo {
         private String currencyCode;
         private Double fromAmount;
         private Double toAmount;
-        private String fromDate;
-        private String toDate;
+        private LocalDate fromDate;
+        private LocalDate toDate;
         private Integer offset;
         private String uniqueId;
         private Integer size;
@@ -168,20 +175,20 @@ public class ListSettlementsVo {
         }
 
 
-        public String getFromDate() {
+        public LocalDate getFromDate() {
             return fromDate;
         }
 
-        public Builder setFromDate(String fromDate) {
+        public Builder setFromDate(LocalDate fromDate) {
             this.fromDate = fromDate;
             return this;
         }
 
-        public String getToDate() {
+        public LocalDate getToDate() {
             return toDate;
         }
 
-        public Builder setToDate(String toDate) {
+        public Builder setToDate(LocalDate toDate) {
             this.toDate = toDate;
             return this;
         }

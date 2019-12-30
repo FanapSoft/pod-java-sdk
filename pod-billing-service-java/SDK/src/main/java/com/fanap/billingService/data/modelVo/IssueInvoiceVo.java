@@ -1,11 +1,16 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -179,17 +184,19 @@ public class IssueInvoiceVo {
         this.verifyAfterTimeout = TypeConversionUtil.booleanToString(builder.getVerifyAfterTimeout());
         this.preview = TypeConversionUtil.booleanToString(builder.getPreview());
         this.metadata = builder.getMetadata();
-        this.safe = builder.getSafe();
-        this.postVoucherEnabled = builder.getPostVoucherEnabled();
-        this.hasEvent = builder.getHasEvent();
+        this.safe = TypeConversionUtil.booleanToString(builder.getSafe());
+        this.postVoucherEnabled =TypeConversionUtil.booleanToString(builder.getPostVoucherEnabled());
+        this.hasEvent = TypeConversionUtil.booleanToString(builder.getHasEvent());
         this.eventTitle = builder.getEventTitle();
         this.eventTimeZone = builder.getEventTimeZone();
         this.eventReminders = builder.getEventReminders();
         this.eventDescription = builder.getEventDescription();
         this.eventMetadata = builder.getEventMetadata();
         this.cellphoneNumber = builder.getCellphoneNumber();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ISSUE_INVOICE);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_ISSUE_INVOICE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_ISSUE_INVOICE);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -214,12 +221,12 @@ public class IssueInvoiceVo {
         private Boolean verifyAfterTimeout;
         private Boolean preview;
         private String metadata;
-        private String safe;
-        private String postVoucherEnabled;
-        private String hasEvent;
+        private Boolean safe;
+        private Boolean postVoucherEnabled;
+        private Boolean hasEvent;
         private String eventTitle;
         private String eventTimeZone;
-        private List<String> eventReminders = new ArrayList<>();
+        private List<String> eventReminders;
         private String eventDescription;
         private String eventMetadata;
         private String cellphoneNumber;
@@ -231,6 +238,10 @@ public class IssueInvoiceVo {
         public Builder setProductInfos(List<ProductInfo> productInfos) {
             this.productInfos = productInfos;
             return this;
+        }
+
+        public List<String> getEventReminders() {
+            return eventReminders;
         }
 
         public Builder setEventReminders(List<String> eventReminders) {
@@ -377,29 +388,29 @@ public class IssueInvoiceVo {
             return this;
         }
 
-        public String getSafe() {
+        public Boolean getSafe() {
             return safe;
         }
 
-        public Builder setSafe(String safe) {
+        public Builder setSafe(Boolean safe) {
             this.safe = safe;
             return this;
         }
 
-        public String getPostVoucherEnabled() {
+        public Boolean getPostVoucherEnabled() {
             return postVoucherEnabled;
         }
 
-        public Builder setPostVoucherEnabled(String postVoucherEnabled) {
+        public Builder setPostVoucherEnabled(Boolean postVoucherEnabled) {
             this.postVoucherEnabled = postVoucherEnabled;
             return this;
         }
 
-        public String getHasEvent() {
+        public Boolean getHasEvent() {
             return hasEvent;
         }
 
-        public Builder setHasEvent(String hasEvent) {
+        public Builder setHasEvent(Boolean hasEvent) {
             this.hasEvent = hasEvent;
             return this;
         }
@@ -422,14 +433,6 @@ public class IssueInvoiceVo {
             return this;
         }
 
-        public List<String> getEventReminders() {
-            return eventReminders;
-        }
-
-        public Builder setEventReminders(ArrayList<String> eventReminders) {
-            this.eventReminders = eventReminders;
-            return this;
-        }
 
         public String getEventDescription() {
             return eventDescription;

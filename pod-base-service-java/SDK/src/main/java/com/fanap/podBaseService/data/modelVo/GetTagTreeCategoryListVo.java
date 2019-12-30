@@ -1,10 +1,11 @@
 package com.fanap.podBaseService.data.modelVo;
 
 import com.fanap.podBaseService.exception.PodException;
-import com.fanap.podBaseService.util.PodServicesEnum;
+import com.fanap.podBaseService.util.ScProductIdPodServicesProduction;
+import com.fanap.podBaseService.util.ScProductIdPodServicesSandBox;
 import com.fanap.podBaseService.util.TypeConversionUtil;
 
-import java.util.List;
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/2/2019.
@@ -12,7 +13,7 @@ import java.util.List;
 public class GetTagTreeCategoryListVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, offset and size are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType, offset and size are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String id;
@@ -29,8 +30,10 @@ public class GetTagTreeCategoryListVo {
         this.query = builder.getQuery();
         this.size = TypeConversionUtil.intToString(builder.getSize());
         this.offset = TypeConversionUtil.intToString(builder.getOffset());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_TAG_TREE_CATEGORY_LIST);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_TAG_TREE_CATEGORY_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_TAG_TREE_CATEGORY_LIST);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -83,20 +86,20 @@ public class GetTagTreeCategoryListVo {
             return this;
         }
 
-        public int getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(int offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
-        public int getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(int size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }
@@ -131,7 +134,7 @@ public class GetTagTreeCategoryListVo {
         public GetTagTreeCategoryListVo build() throws PodException {
             if (this.baseInfoVo != null &&
                     this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
+                    this.baseInfoVo.getToken_issuer() != null && this.baseInfoVo.getServerType() != null &&
                     this.offset != null &&
                     this.size != null)
                 return new GetTagTreeCategoryListVo(this);

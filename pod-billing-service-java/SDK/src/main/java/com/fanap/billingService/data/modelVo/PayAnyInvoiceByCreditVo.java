@@ -2,11 +2,14 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.DelegationInfo;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class PayAnyInvoiceByCreditVo {
 
@@ -30,8 +33,10 @@ public class PayAnyInvoiceByCreditVo {
         this.forceDelegation = builder.getForceDelegation();
         this.wallet = builder.getWallet();
         this.delegationInfos = builder.getDelegationInfos();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_PAY_ANY_INVOICE_BY_CREDIT);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_PAY_ANY_INVOICE_BY_CREDIT);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_PAY_ANY_INVOICE_BY_CREDIT);
     }
 
     public BaseInfoVo getBaseInfoVo() {

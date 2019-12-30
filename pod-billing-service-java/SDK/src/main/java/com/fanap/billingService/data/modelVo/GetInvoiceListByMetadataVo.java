@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -24,11 +27,13 @@ public class GetInvoiceListByMetadataVo {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.isCanceled = TypeConversionUtil.booleanToString(builder.getIsCanceled());
         this.isPayed = TypeConversionUtil.booleanToString(builder.getIsPayed());
-        this.offset = TypeConversionUtil.longToString(builder.getOffset());
-        this.size = TypeConversionUtil.longToString(builder.getSize());
+        this.offset = TypeConversionUtil.intToString(builder.getOffset());
+        this.size = TypeConversionUtil.intToString(builder.getSize());
         this.metaQuery = builder.getMetaQuery();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_LIST_BY_METADATA);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_INVOICE_LIST_BY_METADATA);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_INVOICE_LIST_BY_METADATA);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -65,8 +70,8 @@ public class GetInvoiceListByMetadataVo {
         private String metaQuery;
         private Boolean isCanceled;
         private Boolean isPayed;
-        private Long offset;
-        private Long size;
+        private Integer offset;
+        private Integer size;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
@@ -100,20 +105,20 @@ public class GetInvoiceListByMetadataVo {
             return this;
         }
 
-        public Long getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(Long offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
-        public Long getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(Long size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }

@@ -5,13 +5,15 @@ import com.fanap.podNeshan.util.NeshanProductId;
 import com.fanap.podNeshan.util.Point;
 import com.fanap.podNeshan.util.TypeConversionUtil;
 
+import java.util.List;
+
 /**
  * Created by Z.gholinia on 9/22/2019.
  */
 public class DistanceMatrixVo {
 
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer,scApiKey, origins , destinations  are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType,productId,apiKey, origins , destinations  are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String origins;
@@ -27,7 +29,7 @@ public class DistanceMatrixVo {
         return destinations;
     }
 
-    public static String getScProductId() {
+    public  String getScProductId() {
         return scProductId;
     }
 
@@ -92,6 +94,8 @@ public class DistanceMatrixVo {
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
+
+
 
 
     public static String creatStringPoint(Point[] doublePoints) {

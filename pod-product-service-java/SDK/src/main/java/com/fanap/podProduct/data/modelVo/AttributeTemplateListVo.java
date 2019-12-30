@@ -1,10 +1,13 @@
 package com.fanap.podProduct.data.modelVo;
 
-import com.fanap.podProduct.exception.PodException;
-import com.fanap.podProduct.util.PodServicesEnum;
-import com.fanap.podProduct.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.podProduct.util.ScProductIdPodServicesProduction;
 
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/11/2019.
@@ -30,7 +33,10 @@ public class AttributeTemplateListVo {
         this.lastId = TypeConversionUtil.longToString(builder.getLastId());
         this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.size = TypeConversionUtil.intToString(builder.getSize());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_ATTRIBUTE_TEMPLATE_LIST);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_ATTRIBUTE_TEMPLATE_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_ATTRIBUTE_TEMPLATE_LIST);
 
     }
 
@@ -62,7 +68,7 @@ public class AttributeTemplateListVo {
         return scProductId;
     }
 
-    public static class Builder  {
+    public static class Builder {
         private BaseInfoVo baseInfoVo;
         private List<String> guildCode;
         private Long firstId;
@@ -73,7 +79,6 @@ public class AttributeTemplateListVo {
         public List<String> getGuildCode() {
             return guildCode;
         }
-
 
 
         public Builder setGuildCode(List<String> guildCode) {
@@ -132,7 +137,7 @@ public class AttributeTemplateListVo {
         }
 
         public AttributeTemplateListVo build() throws PodException {
-            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
+            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null && this.baseInfoVo.getServerType()!=null &&
                     this.baseInfoVo.getToken_issuer() != null) {
                 if (this.firstId == null && this.lastId == null && this.offset == null) {
                     throw PodException.invalidParameter("firstId or lastId or offset must be specified");

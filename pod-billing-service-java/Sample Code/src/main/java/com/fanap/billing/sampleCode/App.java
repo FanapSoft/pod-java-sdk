@@ -1,12 +1,11 @@
 package com.fanap.billing.sampleCode;
 
-
-
 import com.fanap.billingService.controller.BillingService;
 import com.fanap.billingService.data.modelSrv.*;
 import com.fanap.billingService.data.modelVo.*;
 import com.fanap.billingService.enums.EnumFileStatusCode;
 import com.fanap.billingService.enums.EnumToolCode;
+import com.fanap.billingService.enums.Enum_Server_type;
 import com.fanap.billingService.enums.Enum_Server_type_Percent;
 import com.fanap.billingService.exception.PodException;
 import com.fanap.billingService.util.DelegationInfo;
@@ -50,17 +49,6 @@ App {
 //        payInvoiceByInvoice();
 //        payAnyInvoiceByCredit();
 //        payInvoiceByUniqueNumber();
-//        addDealer();
-//        dealerList();
-//        enableDealer();
-//        disableDealer();
-//        addDealerProductPermission();
-//        businessDealingList();
-//        addDealerProductPermission();
-//        dealerProductPermissionList();
-//        dealingProductPermissionList();
-//        disableDealerProductPermission();
-//        enableDealerProductPermission();
 //        issueMultiInvoice();
 //        reduceMultiInvoice();
 //        reduceMultiInvoiceAndCashout();
@@ -81,14 +69,16 @@ App {
 //        listSettlements();
 //        addAutoSettlement();
 //        removeAutoSettlement();
-
+//        verifyInvoice();
+//       getPayInvoiceByWalletLink();
+//        reduceInvoice();
     }
-
 
     private static void sendInvoicePaymentSMS() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -121,6 +111,7 @@ App {
                 .setToken("7ffa31bb599b40418938e56da7a815b6")
                 .setToken_issuer(1)
                 .setOtt("93bd0bf8e31144cb")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -155,6 +146,7 @@ App {
                 .setToken(TOKEN)
                 .setToken_issuer(1)
                 .setOtt("b7ada5e256d1b9d7")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -189,6 +181,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -220,6 +213,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -251,6 +245,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -282,6 +277,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -314,6 +310,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -346,6 +343,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -378,6 +376,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -414,6 +413,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -448,6 +448,7 @@ App {
                 .setToken("e801898dced840248b0325facb863d8b")
                 .setToken_issuer(1)
                 .setOtt("df4e8ee063c209cc")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -461,7 +462,7 @@ App {
         productInfos.add(productInfo);
 
         try {
-            CreatePreInvoiceVo createPreInvoiceVo = new CreatePreInvoiceVo.Builder(baseInfoVo)
+            final CreatePreInvoiceVo createPreInvoiceVo = new CreatePreInvoiceVo.Builder(baseInfoVo)
                     .setRedirectURL(RIDERECT_URI)
                     .setUserId(1468849L)
                     .setProductInfos(productInfos)
@@ -472,9 +473,9 @@ App {
             billingService.createPreInvoice(createPreInvoiceVo, new OnGetResponseListener<String>() {
                 @Override
                 public void onResponse(ResultVo<String> result) {
-                    LinkSrv linkSrv=new LinkSrv();
+                    LinkSrv linkSrv = new LinkSrv();
                     try {
-                        linkSrv= createPreInvoiceVo.getLink(result.getResult());
+                        linkSrv = createPreInvoiceVo.getLink(result.getResult());
                     } catch (PodException e) {
                         System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
                     }
@@ -497,6 +498,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -529,6 +531,7 @@ App {
                 .setToken(TOKEN)
                 .setToken_issuer(1)
                 .setOtt("117e5b967a4dc8ac")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -574,6 +577,7 @@ App {
                 .setToken("9a36df05377e45fb943d22543996498c")
                 .setToken_issuer(1)
                 .setOtt(OTT)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -609,6 +613,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -643,6 +648,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("c43049a626e5462ab85c0a8e4028e9fe")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         try {
@@ -660,186 +666,19 @@ App {
 
     }
 
-
-    private static void addDealer() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            AddDealerVo addDealerVo = new AddDealerVo.Builder(baseInfoVo)
-                    .setDealerBizId(9364L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.addDealer(addDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
-                @Override
-                public void onResponse(ResultVo<BusinessDealerSrv> result) {
-                    System.out.println(result.getResult().getBusiness().getId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-    private static void dealerList() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("2bf53fedbd8a4e07ba73fe21e4e70cda")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            DealerListVo dealerListVo = new DealerListVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.dealerList(dealerListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
-                @Override
-                public void onResponse(ResultVo<List<BusinessDealerSrv>> result) {
-                    System.out.println(result.getResult().get(0).getBusiness().getId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-
-    private static void enableDealer() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            EnableDealerVo enableDealerVo = new EnableDealerVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.enableDealer(enableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
-                @Override
-                public void onResponse(ResultVo<BusinessDealerSrv> result) {
-                    System.out.println(result.getResult().getBusiness().getId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-    private static void disableDealer() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            DisableDealerVo disableDealerVo = new DisableDealerVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.disableDealer(disableDealerVo, new OnGetResponseListener<BusinessDealerSrv>() {
-                @Override
-                public void onResponse(ResultVo<BusinessDealerSrv> result) {
-                    System.out.println(result.getResult().getBusiness().getId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-
-    private static void businessDealingList() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("9a36df05377e45fb943d22543996498c")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            BusinessDealingListVo businessDealingListVo = new BusinessDealingListVo.Builder(baseInfoVo)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.businessDealingList(businessDealingListVo, new OnGetResponseListener<List<BusinessDealerSrv>>() {
-                @Override
-                public void onResponse(ResultVo<List<BusinessDealerSrv>> result) {
-                    System.out.println(result.getResult().size());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-
     private static void issueMultiInvoice() throws PodException {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("e801898dced840248b0325facb863d8b")
                 .setToken_issuer(1)
                 .setOtt("6eb0b95e072e81e5")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
 
         BillingService billingService = new BillingService();
 //        List<String> voucherHashs = new ArrayList<>();
 //        voucherHashs.add("RFSFGDYEDYGS");
-        DelegationInfo[] delegationInfo ={new DelegationInfo(1234L,"bb")};
+        DelegationInfo[] delegationInfo = {new DelegationInfo(1234L, "bb")};
         List<String> voucherHash = new ArrayList<>();
         voucherHash.add("sgdhjddu");
         InvoiceItemVO mainInvoiceItemVo = new InvoiceItemVO.Builder(baseInfoVo)
@@ -919,181 +758,11 @@ App {
 
     }
 
-
-    private static void addDealerProductPermission() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            AddDealerProductPermissionVo addDealerProductPermissionVo = new AddDealerProductPermissionVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-                    .setEntityId(30343L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.addDealerProductPermission(addDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
-                @Override
-                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
-                    System.out.println(result.getResult().getProduct().getEntityId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-    private static void dealerProductPermissionList() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("99cb42376f6d4ec8ba6bbab265c79ff1")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs = new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            DealerProductPermissionListVo dealerProductPermissionListVo = new DealerProductPermissionListVo.Builder(baseInfoVo)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.dealerProductPermissionList(dealerProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
-                @Override
-                public void onResponse(ResultVo<List<DealerProductPermissionSrv>> result) {
-                    System.out.println(result.getResult());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-
-    private static void dealingProductPermissionList() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("9a36df05377e45fb943d22543996498c")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs =new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            DealingProductPermissionListVo dealingProductPermissionListVo = new DealingProductPermissionListVo.Builder(baseInfoVo)
-                    .setSize(5)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.dealingProductPermissionList(dealingProductPermissionListVo, new OnGetResponseListener<List<DealerProductPermissionSrv>>() {
-                @Override
-                public void onResponse(ResultVo<List<DealerProductPermissionSrv>> result) {
-                    System.out.println(result.getResult());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-    private static void disableDealerProductPermission() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("1c0898d03cef4c0a80741653aaa1b8ad")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs =new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            DisableDealerProductPermissionVo disableDealerProductPermissionVo = new DisableDealerProductPermissionVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-                    .setEntityId(30343L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.disableDealerProductPermission(disableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
-                @Override
-                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
-                    System.out.println(result.getResult().getProduct().getEntityId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-    private static void enableDealerProductPermission() {
-        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("d23eeafbb48949e8944e94576ff78d83")
-                .setToken_issuer(1)
-                .build();
-
-        BillingService billingService = new BillingService();
-//        List<String> voucherHashs =new ArrayList<>();
-//        voucherHashs.add("RFSFGDYEDYGS");
-
-
-        try {
-            EnableDealerProductPermissionVo enableDealerProductPermissionVo = new EnableDealerProductPermissionVo.Builder(baseInfoVo)
-                    .setDealerBizId(9373L)
-                    .setEntityId(30343L)
-//                    .setScVoucherHash(voucherHashs)
-                    .build();
-            billingService.enableDealerProductPermission(enableDealerProductPermissionVo, new OnGetResponseListener<DealerProductPermissionSrv>() {
-                @Override
-                public void onResponse(ResultVo<DealerProductPermissionSrv> result) {
-                    System.out.println(result.getResult().getProduct().getEntityId());
-                }
-
-                @Override
-                public void onFailed(PodException e) {
-                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-                }
-            });
-        } catch (PodException e) {
-            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
-        }
-
-    }
-
-
     private static void reduceMultiInvoice() throws PodException {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
-
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1171,6 +840,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1246,6 +916,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("8576577201c441bab5320803e5acadae")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1288,6 +959,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1333,6 +1005,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
         BillingService billingService = new BillingService();
 //        List<String> voucherHashs =new ArrayList<>();
@@ -1383,6 +1056,7 @@ App {
                 .setToken("f34f62d27f92481595399a42ac81cf74")
                 .setToken_issuer(1)
                 .setOtt("745ca2da8203263b")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1422,6 +1096,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("f34f62d27f92481595399a42ac81cf74")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1456,6 +1131,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1489,6 +1165,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("99cb42376f6d4ec8ba6bbab265c79ff1")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1527,6 +1204,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("f34f62d27f92481595399a42ac81cf74")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1567,6 +1245,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1609,6 +1288,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1647,6 +1327,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("f34f62d27f92481595399a42ac81cf74")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1678,6 +1359,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("9dfc30b213f74c82b2e03053c338d58e")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1686,7 +1368,7 @@ App {
 //        List<String> voucherHashs =new ArrayList<>();
 //        voucherHashs.add("YELZF7WUHRLD");
         try {
-            GetExportListVo getExportListVo = new GetExportListVo.Builder(baseInfoVo)
+            final GetExportListVo getExportListVo = new GetExportListVo.Builder(baseInfoVo)
                     .setOffset(0)
                     .setSize(50)
                     .setStatusCode(enumFileStatusCode.getValue())
@@ -1695,8 +1377,8 @@ App {
             billingService.getExportList(getExportListVo, new OnGetResponseListener<List<ExportServiceSrv>>() {
                 @Override
                 public void onResponse(ResultVo<List<ExportServiceSrv>> result) {
-                    LinkSrv linkSrv=new LinkSrv();
-                    linkSrv= getExportListVo.getLink(result.getResult().get(0).getResultFile().getId(),result.getResult().get(0).getResultFile().getHashCode());
+                    LinkSrv linkSrv = new LinkSrv();
+                    linkSrv = getExportListVo.getLink(result.getResult().get(0).getResultFile().getId(), result.getResult().get(0).getResultFile().getHashCode());
                     System.out.println(linkSrv.getRedirectUrl());
                 }
 
@@ -1716,6 +1398,7 @@ App {
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
                 .setOtt("87e476936558924d")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1749,6 +1432,7 @@ App {
                 .setToken("f34f62d27f92481595399a42ac81cf74")
                 .setToken_issuer(1)
                 .setOtt("fec3970c1eb5a102")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1781,6 +1465,7 @@ App {
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
                 .setOtt("fec3970c1eb5a102")
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1816,6 +1501,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1848,6 +1534,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1878,6 +1565,7 @@ App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken("d23eeafbb48949e8944e94576ff78d83")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
                 .build();
 
         BillingService billingService = new BillingService();
@@ -1905,9 +1593,115 @@ App {
     }
 
 
+    private static void verifyInvoice() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
 
+
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken(TOKEN)
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScVoucherHash("")
+//                .setScApiKey("")
+                .build();
+
+        BillingService billingService = new BillingService();
+
+
+        try {
+            VerifyInvoiceVo verifyInvoiceVo = new VerifyInvoiceVo.Builder(baseInfoVo)
+                    .setId(38255L)
+//                    .setBillNumber("hjgfj")
+                    .build();
+            billingService.verifyInvoice(verifyInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
+                @Override
+                public void onResponse(ResultVo<InvoiceSrv> result) {
+                    System.out.println(result.getResult().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (
+                PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+
+    private static void reduceInvoice() {
+        //        List<String> scVoucherHashs = new ArrayList<>();
+//        scVoucherHashs.add("RFSFGDYEDYGS");
+
+
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken(TOKEN)
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+//                .setScVoucherHash("")
+//                .setScApiKey("")
+                .build();
+
+        BillingService billingService = new BillingService();
+        List<InvoiceItemInfoVo> invoiceItemInfoVos = new ArrayList<>();
+        InvoiceItemInfoVo invoiceItemInfoVo = new InvoiceItemInfoVo();
+        invoiceItemInfoVo.setInvoiceItemId(7070162L)
+                .setPrice(new BigDecimal(2))
+                .setItemDescription("ete")
+                .setQuantity(new BigDecimal(2));
+        invoiceItemInfoVos.add(invoiceItemInfoVo);
+
+
+        try {
+            ReduceInvoiceVo reduceInvoiceVo = new ReduceInvoiceVo.Builder(baseInfoVo)
+                    .setId(38255L)
+                    .setInvoiceItemsInfo(invoiceItemInfoVos)
+                    .build();
+            billingService.reduceInvoice(reduceInvoiceVo, new OnGetResponseListener<InvoiceSrv>() {
+                @Override
+                public void onResponse(ResultVo<InvoiceSrv> result) {
+                    System.out.println(result.getResult().getId());
+                }
+
+                @Override
+                public void onFailed(PodException e) {
+                    System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+                }
+            });
+        } catch (
+                PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+    }
+
+    private static String getPayInvoiceByWalletLink() {
+        BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
+                .setToken("9dfc30b213f74c82b2e03053c338d58e")
+                .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
+                .build();
+
+        BillingService billingService = new BillingService();
+
+        try {
+            PayInvoiceByWalletVo payInvoiceByWalletVo = new PayInvoiceByWalletVo.Builder(baseInfoVo)
+                    .setInvoiceId(0L)
+                    .setCallUri("")
+                    .setRedirectUri("")
+                    .build();
+            return payInvoiceByWalletVo.getLink();
+        } catch (PodException e) {
+            System.out.println("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+        }
+
+        return null;
+    }
 
 
 }
+
 
 

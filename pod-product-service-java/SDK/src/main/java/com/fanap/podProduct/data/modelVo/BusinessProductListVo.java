@@ -1,10 +1,14 @@
 package com.fanap.podProduct.data.modelVo;
 
-import com.fanap.podProduct.exception.PodException;
-import com.fanap.podProduct.util.PodServicesEnum;
-import com.fanap.podProduct.util.TypeConversionUtil;
+
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podProduct.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+import com.fanap.podProduct.util.ScProductIdPodServicesProduction;
 
 import java.util.List;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Z.gholinia on 9/11/2019.
@@ -155,7 +159,10 @@ public class BusinessProductListVo {
         this.scope = builder.getScope();
 //        this.scApiKey = builder.getScApiKey();
 //        this.scVoucherHash = builder.getScVoucherHash();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_PRODUCT_LIST);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_PRODUCT_LIST);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_PRODUCT_LIST);
 
     }
 
@@ -402,7 +409,7 @@ public class BusinessProductListVo {
         }
 
         public BusinessProductListVo build() throws PodException {
-            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
+            if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null && this.baseInfoVo.getServerType()!=null &&
                     this.baseInfoVo.getToken_issuer() != null && this.size != null && this.offset != null)
                 return new BusinessProductListVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

@@ -1,11 +1,14 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -56,11 +59,13 @@ public class GetInvoiceListVo {
         this.query = builder.getQuery();
         this.firstId = TypeConversionUtil.longToString(builder.getFirstId());
         this.lastId = TypeConversionUtil.longToString(builder.getLastId());
-        this.offset = TypeConversionUtil.longToString(builder.getOffset());
+        this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.entityIdList = TypeConversionUtil.longToString(builder.getEntityIdList());
-        this.size = TypeConversionUtil.longToString(builder.getSize());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_LIST);
-
+        this.size = TypeConversionUtil.intToString(builder.getSize());
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_INVOICE_LIST);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_INVOICE_LIST);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -171,9 +176,9 @@ public class GetInvoiceListVo {
         private String query;
         private Long firstId;
         private Long lastId;
-        private Long offset;
+        private Integer offset;
         private List<Long> entityIdList;
-        private Long size;
+        private Integer size;
 
         public Builder(BaseInfoVo baseInfoVo) {
             this.baseInfoVo = baseInfoVo;
@@ -342,11 +347,11 @@ public class GetInvoiceListVo {
             return this;
         }
 
-        public Long getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(Long offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
@@ -360,11 +365,11 @@ public class GetInvoiceListVo {
             return this;
         }
 
-        public Long getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(Long size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }

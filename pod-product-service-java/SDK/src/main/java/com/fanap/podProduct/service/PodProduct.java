@@ -18,7 +18,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<ProductSrv>> addProduct(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -62,7 +62,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<ProductSrv>>> addProducts(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -78,7 +78,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<ProductSrv>> updateProduct(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -122,7 +122,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<ProductSrv>>> updateProducts(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -137,7 +137,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<ProductSrv>>> getProductList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -166,7 +166,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<ProductSrv>>> getBusinessProductList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -200,7 +200,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<List<AttributeTemplateSrv>>> getAttributeTemplateList(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -216,7 +216,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<ProductSrv>> addSubProduct(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -254,7 +254,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SearchProductSrv>> searchProduct(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,
@@ -285,7 +285,7 @@ public interface PodProduct {
 
     @FormUrlEncoded
     @Headers("Content-Type:application/x-www-form-urlencoded; charset=UTF-8")
-    @POST("/srv/core/nzh/doServiceCall")
+    @POST("nzh/doServiceCall")
     Call<ResultSrv<SearchProductSrv>> searchSubProduct(
             @Header("_token_") String token,
             @Header("_token_issuer_") String token_issuer,

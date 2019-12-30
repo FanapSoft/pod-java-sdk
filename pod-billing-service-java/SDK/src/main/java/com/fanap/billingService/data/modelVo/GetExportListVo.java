@@ -2,8 +2,11 @@ package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.data.modelSrv.LinkSrv;
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class GetExportListVo {
 
@@ -25,8 +28,11 @@ public class GetExportListVo {
         this.size = TypeConversionUtil.intToString(builder.getSize());
         this.id = TypeConversionUtil.longToString(builder.getId());
         this.statusCode = builder.getStatusCode();
-        this.serviceUrl = builder.getServiceUrl();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_EXPORT_LIST);
+
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_EXPORT_LIST);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_EXPORT_LIST);
 
     }
 
@@ -152,7 +158,7 @@ public class GetExportListVo {
         }
         LinkSrv linkSrv = new LinkSrv();
         linkSrv.setHashCode(hashCode);
-        linkSrv.setRedirectUrl("https://core.pod.land/nzh/file/?fileId=" + fileId + "&hashCode=" + hashCode);
+        linkSrv.setRedirectUrl("https://core.pod.ir/nzh/file/?fileId=" + fileId + "&hashCode=" + hashCode);
         return linkSrv;
     }
 

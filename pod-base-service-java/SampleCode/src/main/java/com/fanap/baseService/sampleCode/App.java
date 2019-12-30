@@ -1,15 +1,14 @@
 package com.fanap.baseService.sampleCode;
 
-
 import com.fanap.podBaseService.controller.PodBaseService;
 import com.fanap.podBaseService.data.modelSrv.GuildSrv;
 import com.fanap.podBaseService.data.modelSrv.TagTreeCategorySrv;
 import com.fanap.podBaseService.data.modelSrv.TagTreeSrv;
 import com.fanap.podBaseService.data.modelVo.*;
+import com.fanap.podBaseService.enums.Enum_Server_type;
 import com.fanap.podBaseService.exception.PodException;
 import com.fanap.podBaseService.util.OnGetResponseListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class App {
 //        updateTagTreeCategory();
 //        addTagTree();
 //        getTagTreeList();
-        updateTagTree();
+//        updateTagTree();
 //        getCurrencyList();
     }
 
@@ -39,6 +38,7 @@ public class App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -48,7 +48,7 @@ public class App {
 
         try {
             AddTagTreeCategoryVo addTagTreeCategoryVo = new AddTagTreeCategoryVo.Builder(baseInfoVo)
-                    .setName("bbbbbb")
+                    .setName("bbjjebbbb")
 //                    .setScVoucherHash(scVoucherHashs)
                     .build();
             podBaseService.addTagTreeCategory(addTagTreeCategoryVo, new OnGetResponseListener<TagTreeCategorySrv>() {
@@ -72,8 +72,9 @@ public class App {
 //        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken(TOKEN)
+                .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -110,6 +111,7 @@ public class App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -146,6 +148,7 @@ public class App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -156,8 +159,8 @@ public class App {
 
         try {
             AddTagTreeVo addTagTreeVo = new AddTagTreeVo.Builder(baseInfoVo)
-                    .setName("tag2")
-                    .setCategoryId(361L)
+                    .setName("ta222g2")
+                    .setCategoryId(012L)
 //                    .setScVoucherHash(scVoucherHashs)
                     .build();
             podBaseService.addTagTree(addTagTreeVo, new OnGetResponseListener<TagTreeSrv>() {
@@ -181,8 +184,9 @@ public class App {
 //        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken(TOKEN)
+                .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -193,8 +197,11 @@ public class App {
 
         try {
             GetTagTreeListVo getTagTreeListVo = new GetTagTreeListVo.Builder(baseInfoVo)
-                    .setCategoryId(361L)
-                    .setLevelCount(1)
+//                    .setCategoryId(441L)
+//                    .setLevelCount(1)
+                    .setLevel(0)
+//                    .setParentId(1124L)
+                    .setId(1121L)
 //                    .setScVoucherHash(scVoucherHashs)
                     .build();
             podBaseService.getTagTreeList(getTagTreeListVo, new OnGetResponseListener<List<TagTreeSrv>>() {
@@ -220,6 +227,7 @@ public class App {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -230,8 +238,8 @@ public class App {
 
         try {
             UpdateTagTreeVo updateTagTreeVo = new UpdateTagTreeVo.Builder(baseInfoVo)
-                    .setId(1208L)
-                    .setName("hi")
+                    .setId(854L)
+                    .setName("hiiii   ")
 //                    .setScVoucherHash(scVoucherHashs)
                     .build();
             podBaseService.updateTagTree(updateTagTreeVo, new OnGetResponseListener<TagTreeSrv>() {
@@ -254,8 +262,9 @@ public class App {
 //        List<String> scVoucherHashs = new ArrayList<>();
 //        scVoucherHashs.add("ghjdshfjshf");
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
-                .setToken("d23eeafbb48949e8944e94576ff78d83")
+                .setToken("2b02de2188a149bfa74b7760d4a64c85")
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();

@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class RequestGuildSettlementVo {
 
@@ -31,8 +34,10 @@ public class RequestGuildSettlementVo {
         this.currencyCode = builder.getCurrencyCode();
         this.uniqueId = builder.getUniqueId();
         this.description = builder.getDescription();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_REQUEST_SETTLEMENT);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+        this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_REQUEST_SETTLEMENT);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_REQUEST_SETTLEMENT);
 
     }
 

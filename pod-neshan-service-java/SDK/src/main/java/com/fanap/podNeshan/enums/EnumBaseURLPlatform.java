@@ -5,8 +5,8 @@ package com.fanap.podNeshan.enums;
  */
 public enum EnumBaseURLPlatform {
 
-//    SANDBOX("http://sandbox.pod.land"),
-    PRODUCTION("https://api.pod.land");
+//    SANDBOX("http://sandbox.pod.ir"),
+    PRODUCTION("https://api.pod.ir");
 
     private final String value;
 

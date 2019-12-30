@@ -1,14 +1,14 @@
 package com.fanap.podSubscription;
 
+import com.fanap.podBaseService.enums.Enum_Server_type;
+import com.fanap.podBaseService.exception.PodException;
 import com.fanap.podSubscription.controller.PodSubscription;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionFullSrv;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionPlanSrv;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionSrv;
 import com.fanap.podSubscription.data.modelVo.*;
 import com.fanap.podSubscription.enums.Enum_Period_Type_Code;
-import com.fanap.podSubscription.enums.Enum_Server_type;
 import com.fanap.podSubscription.enums.Enum_Type;
-import com.fanap.podSubscription.exception.PodException;
 import com.fanap.podSubscription.util.OnGetResponseListener;
 
 import java.math.BigDecimal;
@@ -21,18 +21,18 @@ import java.util.List;
 
 public class Main {
 
-    private static String TOKEN = "c43049a626e5462ab85c0a8e4028e9fe";
+    private static String TOKEN = "1c0898d03cef4c0a80741653aaa1b8ad";
     private static String GUILD_CODE = "INFORMATION_TECHNOLOGY_GUILD";
 
     public static void main(String[] args) {
 
         addSubscriptionPlan();
-        subscriptionPlanList();
-        subscriptionList();
-        updateSubscriptionPlan();
-        consumeSubscription();
-        requestSubscription();
-        confirmSubscription();
+//        subscriptionPlanList();
+//        subscriptionList();
+//        updateSubscriptionPlan();
+//        consumeSubscription();
+//        requestSubscription();
+//        confirmSubscription();
 
     }
 
@@ -42,6 +42,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -80,6 +81,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -116,6 +118,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -152,6 +155,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -199,6 +203,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -254,6 +259,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();
@@ -290,6 +296,7 @@ public class Main {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
                 .setToken_issuer(1)
+                .setServerType(Enum_Server_type.SANDBOX)
 //                .setScApiKey("")
 //                .setScVoucherHash(scVoucherHashs)
                 .build();

@@ -1,11 +1,16 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class AddUserAndBusinessVo {
 
@@ -214,7 +219,7 @@ public class AddUserAndBusinessVo {
         this.city = builder.getCity();
         this.address = builder.getAddress();
         this.description = builder.getDescription();
-        this.newsReader = builder.getNewsReader();
+        this.newsReader = TypeConversionUtil.booleanToString(builder.getNewsReader());
         this.logoImage = builder.getLogoImage();
         this.coverImage = builder.getCoverImage();
         this.tags = builder.getTags();
@@ -227,7 +232,10 @@ public class AddUserAndBusinessVo {
         this.agentLastName = builder.getAgentLastName();
         this.agentCellphoneNumber = builder.getAgentCellphoneNumber();
         this.agentNationalCode = builder.getAgentNationalCode();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_ADD_USER_AND_BUSINESS);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_ADD_USER_AND_BUSINESS);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_ADD_USER_AND_BUSINESS);
 
     }
 
@@ -253,7 +261,7 @@ public class AddUserAndBusinessVo {
         private String city;
         private String address;
         private String description;
-        private String newsReader;
+        private Boolean newsReader;
         private String logoImage;
         private String coverImage;
         private String tags;
@@ -320,8 +328,14 @@ public class AddUserAndBusinessVo {
             return sheba;
         }
 
-        public Builder setSheba(String sheba) {
-            this.sheba = sheba;
+        public Builder setSheba(String sheba) throws PodException {
+            String regex = "^(\\d)(?!\\1{23}$)\\d{23}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(sheba);
+            if (mach.find() && mach.group().equals(sheba))
+                this.sheba = sheba;
+            else
+                throw PodException.invalidParameter(sheba + " is not a valid sheba");
             return this;
         }
 
@@ -329,8 +343,14 @@ public class AddUserAndBusinessVo {
             return nationalCode;
         }
 
-        public Builder setNationalCode(String nationalCode) {
-            this.nationalCode = nationalCode;
+        public Builder setNationalCode(String nationalCode) throws PodException {
+            String regex = "^\\d{10}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(nationalCode);
+            if (mach.find() && mach.group().equals(nationalCode))
+                this.nationalCode = nationalCode;
+            else
+                throw PodException.invalidParameter(nationalCode + " is not a valid nationalCode");
             return this;
         }
 
@@ -374,8 +394,14 @@ public class AddUserAndBusinessVo {
             return cellphone;
         }
 
-        public Builder setCellphone(String cellphone) {
-            this.cellphone = cellphone;
+        public Builder setCellphone(String cellphone) throws PodException {
+            String regex = "^(0|\\+98|0098){1}[9]{1}[\\d]{9}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(cellphone);
+            if (mach.find() && mach.group().equals(cellphone))
+                this.cellphone = cellphone;
+            else
+                throw PodException.invalidParameter(cellphone + " is not a valid cellphoneNumber");
             return this;
         }
 
@@ -383,8 +409,14 @@ public class AddUserAndBusinessVo {
             return phone;
         }
 
-        public Builder setPhone(String phone) {
-            this.phone = phone;
+        public Builder setPhone(String phone) throws PodException {
+            String regex = "^(0[1-8][1-9]-?)?[1-9][0-9]{7}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(phone);
+            if (mach.find() && mach.group().equals(phone))
+                this.phone = phone;
+            else
+                throw PodException.invalidParameter(phone + " is not a valid phoneNumber");
             return this;
         }
 
@@ -392,8 +424,14 @@ public class AddUserAndBusinessVo {
             return fax;
         }
 
-        public Builder setFax(String fax) {
-            this.fax = fax;
+        public Builder setFax(String fax) throws PodException {
+            String regex = "^(0[1-8][1-9]-?)?[1-9][0-9]{7}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(fax);
+            if (mach.find() && mach.group().equals(fax))
+                this.fax = fax;
+            else
+                throw PodException.invalidParameter(fax + " is not a valid fax");
             return this;
         }
 
@@ -401,8 +439,14 @@ public class AddUserAndBusinessVo {
             return postalCode;
         }
 
-        public Builder setPostalCode(String postalCode) {
-            this.postalCode = postalCode;
+        public Builder setPostalCode(String postalCode) throws PodException {
+            String regex = "^(?!(\\d)\\\\1{3})[13-9]{4}[1346-9][013-9]{5}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(postalCode);
+            if (mach.find() && mach.group().equals(postalCode))
+                this.postalCode = postalCode;
+            else
+                throw PodException.invalidParameter(postalCode + " is not a valid postalcode");
             return this;
         }
 
@@ -451,11 +495,11 @@ public class AddUserAndBusinessVo {
             return this;
         }
 
-        public String getNewsReader() {
+        public Boolean getNewsReader() {
             return newsReader;
         }
 
-        public Builder setNewsReader(String newsReader) {
+        public Builder setNewsReader(Boolean newsReader) {
             this.newsReader = newsReader;
             return this;
         }
@@ -554,8 +598,14 @@ public class AddUserAndBusinessVo {
             return agentCellphoneNumber;
         }
 
-        public Builder setAgentCellphoneNumber(String agentCellphoneNumber) {
-            this.agentCellphoneNumber = agentCellphoneNumber;
+        public Builder setAgentCellphoneNumber(String agentCellphoneNumber) throws PodException {
+            String regex = "^(0|\\+98|0098){1}[9]{1}[\\d]{9}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(agentCellphoneNumber);
+            if (mach.find() && mach.group().equals(agentCellphoneNumber))
+                this.agentCellphoneNumber = agentCellphoneNumber;
+            else
+                throw PodException.invalidParameter(agentCellphoneNumber + " is not a valid cellphoneNumber");
             return this;
         }
 
@@ -563,8 +613,14 @@ public class AddUserAndBusinessVo {
             return agentNationalCode;
         }
 
-        public Builder setAgentNationalCode(String agentNationalCode) {
-            this.agentNationalCode = agentNationalCode;
+        public Builder setAgentNationalCode(String agentNationalCode) throws PodException {
+            String regex = "^\\d{10}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(agentNationalCode);
+            if (mach.find() && mach.group().equals(agentNationalCode))
+                this.agentNationalCode = agentNationalCode;
+            else
+                throw PodException.invalidParameter(agentNationalCode + " is not a valid nationalCode");
             return this;
         }
 

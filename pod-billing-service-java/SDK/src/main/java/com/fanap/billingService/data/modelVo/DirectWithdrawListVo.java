@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class DirectWithdrawListVo {
 
@@ -21,8 +24,10 @@ public class DirectWithdrawListVo {
         this.wallet = builder.getWallet();
         this.offset = TypeConversionUtil.intToString(builder.getOffset());
         this.size = TypeConversionUtil.intToString(builder.getSize());
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_DIRECT_WITHDRAW_LIST);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_DIRECT_WITHDRAW_LIST);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_DIRECT_WITHDRAW_LIST);
     }
 
     public BaseInfoVo getBaseInfoVo() {

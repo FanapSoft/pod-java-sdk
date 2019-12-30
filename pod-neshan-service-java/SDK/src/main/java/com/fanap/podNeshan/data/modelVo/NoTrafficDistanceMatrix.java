@@ -5,12 +5,14 @@ import com.fanap.podNeshan.util.NeshanProductId;
 import com.fanap.podNeshan.util.Point;
 import com.fanap.podNeshan.util.TypeConversionUtil;
 
+import java.util.List;
+
 /**
  * Created by Z.gholinia on 9/22/2019.
  */
-public class NoTrafficDistanceMatrix {
+public class NoTrafficDistanceMatrix  {
 
-    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, scApiKey, origins and destinations are required parameters!";
+    private final static String REQUIRED_PARAMETER_ERROR_MESSAGE = "Token, token_issuer, serverType ,productId,apiKey, origins and destinations are required parameters!";
 
     private BaseInfoVo baseInfoVo;
     private String origins;
@@ -26,7 +28,7 @@ public class NoTrafficDistanceMatrix {
         return destinations;
     }
 
-    public static String getScProductId() {
+    public String getScProductId() {
         return scProductId;
     }
 
@@ -47,6 +49,8 @@ public class NoTrafficDistanceMatrix {
         private BaseInfoVo baseInfoVo;
         private String origins;
         private String destinations;
+
+
 
 
         public String getOrigins() {
@@ -90,7 +94,6 @@ public class NoTrafficDistanceMatrix {
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }
-
     public static String creatStringPoint(Point[] doublePoints) {
         String result = "";
         for (int i = 0; i < doublePoints.length; i++) {

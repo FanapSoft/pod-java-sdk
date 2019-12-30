@@ -1,12 +1,14 @@
 package com.fanap.podProduct.service;
 
+import com.fanap.podBaseService.util.RetrofitUtil;
+import com.fanap.podBaseService.util.ServerTypeSelectionUtil;
 import com.fanap.podProduct.data.modelSrv.AttributeTemplateSrv;
 import com.fanap.podProduct.data.modelSrv.ProductSrv;
 import com.fanap.podProduct.data.modelSrv.SearchProductSrv;
 import com.fanap.podProduct.data.modelVo.*;
 import com.fanap.podProduct.util.GetResult;
 import com.fanap.podProduct.util.OnGetResponseListener;
-import com.fanap.podProduct.util.RetrofitUtil;
+
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class Service {
                            OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addProductVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<ProductSrv>(service.addProduct(
@@ -69,7 +71,7 @@ public class Service {
                             OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addProductsVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<List<ProductSrv>>(service.addProducts(
@@ -91,7 +93,7 @@ public class Service {
                               OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateProductVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<ProductSrv>(service.updateProduct(
@@ -141,7 +143,7 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateProductsVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<List<ProductSrv>>(service.updateProducts(
@@ -162,7 +164,7 @@ public class Service {
                                OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(productListVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<List<ProductSrv>>(service.getProductList(
@@ -198,7 +200,7 @@ public class Service {
                                        OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(businessProductListVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<List<ProductSrv>>(service.getBusinessProductList(
@@ -237,7 +239,7 @@ public class Service {
                                          OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(attributeTemplateListVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<List<AttributeTemplateSrv>>(service.getAttributeTemplateList(
@@ -261,7 +263,7 @@ public class Service {
                               OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addSubProductVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<ProductSrv>(service.addSubProduct(
@@ -302,7 +304,7 @@ public class Service {
                               OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(searchProductVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<SearchProductSrv>(service.searchProduct(
@@ -340,7 +342,7 @@ public class Service {
                               OnGetResponseListener onGetResponseListener) {
 
         PodProduct service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(searchSubProductVo.getBaseInfoVo().getServerType()))
                 .create(PodProduct.class);
 
         new GetResult<SearchProductSrv>(service.searchSubProduct(

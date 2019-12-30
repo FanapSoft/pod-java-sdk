@@ -1,8 +1,11 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 public class DefineDirectWithdrawVo {
 
@@ -29,7 +32,10 @@ public class DefineDirectWithdrawVo {
         this.minAmount = TypeConversionUtil.longToString(builder.getMinAmount());
         this.maxAmount = TypeConversionUtil.longToString(builder.getMaxAmount());
         this.wallet = builder.getWallet();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_DEFINE_DIRECT_WITHDRAW);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_DEFINE_DIRECT_WITHDRAW);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_DEFINE_DIRECT_WITHDRAW);
 
 
     }
@@ -162,7 +168,7 @@ public class DefineDirectWithdrawVo {
         public DefineDirectWithdrawVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null && this.username != null && this.privateKey != null
-                    && this.depositNumber != null && this.onDemand != null && this.minAmount != null && this.maxAmount != null)
+                    && this.depositNumber != null && this.onDemand != null && this.minAmount != null && this.maxAmount != null && this.wallet!=null)
                 return new DefineDirectWithdrawVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }

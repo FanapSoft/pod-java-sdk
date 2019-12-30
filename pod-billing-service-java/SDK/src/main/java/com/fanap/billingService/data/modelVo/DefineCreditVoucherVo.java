@@ -1,13 +1,15 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 import com.fanap.billingService.util.Voucher;
-
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by  Z.Gholinia on 9/30/2019.
@@ -43,8 +45,10 @@ public class DefineCreditVoucherVo {
         this.currencyCode = builder.getCurrencyCode();
         this.hashCode = builder.getHashCode();
         this.vouchers = builder.getVouchers();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_DEFINE_CREDIT_VOUCHER);
-
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_DEFINE_CREDIT_VOUCHER);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_DEFINE_CREDIT_VOUCHER);
 
     }
 
@@ -225,51 +229,51 @@ public class DefineCreditVoucherVo {
             return this;
         }
 
-        public Builder setCount(Voucher[] vouchers) {
-            for (int i = 0; i < vouchers.length; i++) {
-                List<Integer> counts = new ArrayList<>();
-                if (vouchers[i] != null) {
-                    counts.add(i, vouchers[i].getCount());
-                }
-                this.count = count;
-
-            }
-            return this;
-        }
-
-        public Builder setAmount(Voucher[] vouchers) {
-            List<Long> amounts = new ArrayList<>();
-            for (int i = 0; i < vouchers.length; i++) {
-                if (vouchers[i] != null) {
-                    amounts.add(i, vouchers[i].getAmount());
-                }
-            }
-            this.count = count;
-            return this;
-        }
-
-
-        public Builder setName(Voucher[] vouchers) {
-            List<String> names = new ArrayList<>();
-            for (int i = 0; i < vouchers.length; i++) {
-                if (vouchers[i] != null) {
-                    names.add(i, vouchers[i].getName());
-                }
-            }
-            this.count = count;
-            return this;
-        }
-
-        public Builder setDescription(Voucher[] vouchers) {
-            List<String> descriptions = new ArrayList<>();
-            for (int i = 0; i < vouchers.length; i++) {
-                if (vouchers[i] != null) {
-                    descriptions.add(i, vouchers[i].getDescription());
-                }
-            }
-            this.count = count;
-            return this;
-        }
+//        public Builder setCount(Voucher[] vouchers) {
+//            for (int i = 0; i < vouchers.length; i++) {
+//                List<Integer> counts = new ArrayList<>();
+//                if (vouchers[i] != null) {
+//                    counts.add(i, vouchers[i].getCount());
+//                }
+//                this.count = count;
+//
+//            }
+//            return this;
+//        }
+//
+//        public Builder setAmount(Voucher[] vouchers) {
+//            List<Long> amounts = new ArrayList<>();
+//            for (int i = 0; i < vouchers.length; i++) {
+//                if (vouchers[i] != null) {
+//                    amounts.add(i, vouchers[i].getAmount());
+//                }
+//            }
+//            this.count = count;
+//            return this;
+//        }
+//
+//
+//        public Builder setName(Voucher[] vouchers) {
+//            List<String> names = new ArrayList<>();
+//            for (int i = 0; i < vouchers.length; i++) {
+//                if (vouchers[i] != null) {
+//                    names.add(i, vouchers[i].getName());
+//                }
+//            }
+//            this.count = count;
+//            return this;
+//        }
+//
+//        public Builder setDescription(Voucher[] vouchers) {
+//            List<String> descriptions = new ArrayList<>();
+//            for (int i = 0; i < vouchers.length; i++) {
+//                if (vouchers[i] != null) {
+//                    descriptions.add(i, vouchers[i].getDescription());
+//                }
+//            }
+//            this.count = count;
+//            return this;
+//        }
 
         public DefineCreditVoucherVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&

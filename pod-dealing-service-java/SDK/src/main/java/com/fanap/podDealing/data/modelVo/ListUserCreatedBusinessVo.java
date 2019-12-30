@@ -1,10 +1,16 @@
 package com.fanap.podDealing.data.modelVo;
 
-import com.fanap.podDealing.exception.PodException;
-import com.fanap.podDealing.util.PodServicesEnum;
-import com.fanap.podDealing.util.TypeConversionUtil;
+
+import com.fanap.podBaseService.exception.PodException;
+import com.fanap.podDealing.util.ScProductIdPodServicesProduction;
+import com.fanap.podDealing.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.fanap.podBaseService.enums.Enum_Server_type.PRODUCTION;
 
 public class ListUserCreatedBusinessVo {
 
@@ -122,12 +128,12 @@ public class ListUserCreatedBusinessVo {
         this.baseInfoVo = builder.getBaseInfoVo();
         this.bizId = TypeConversionUtil.longToString(builder.getBizId());
         this.guildCode = builder.getGuildCode();
-        this.offset = TypeConversionUtil.longToString(builder.getOffset());
-        this.size = TypeConversionUtil.longToString(builder.getSize());
+        this.offset = TypeConversionUtil.intToString(builder.getOffset());
+        this.size = TypeConversionUtil.intToString(builder.getSize());
         this.query = builder.getQuery();
         this.tags = builder.getTags();
         this.tagTrees = builder.getTagTrees();
-        this.active = builder.getActive();
+        this.active = TypeConversionUtil.booleanToString(builder.getActive());
         this.country = builder.getCountry();
         this.state = builder.getState();
         this.city = builder.getCity();
@@ -139,7 +145,10 @@ public class ListUserCreatedBusinessVo {
         this.economicCode = builder.getEconomicCode();
         this.email = builder.getEmail();
         this.cellphone = builder.getCellphone();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_LIST_USER_CREATED_BUSINESS);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_LIST_USER_CREATED_BUSINESS);
+        else
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_LIST_USER_CREATED_BUSINESS);
     }
 
     public BaseInfoVo getBaseInfoVo() {
@@ -150,12 +159,12 @@ public class ListUserCreatedBusinessVo {
         private BaseInfoVo baseInfoVo;
         private List<Long> bizId;
         private List<String> guildCode;
-        private Long offset;
-        private Long size;
+        private Integer offset;
+        private Integer size;
         private String query;
         private List<String> tags;
         private List<String> tagTrees;
-        private String active;
+        private Boolean active;
         private String country;
         private String state;
         private String city;
@@ -187,20 +196,20 @@ public class ListUserCreatedBusinessVo {
             return this;
         }
 
-        public Long getOffset() {
+        public Integer getOffset() {
             return offset;
         }
 
-        public Builder setOffset(Long offset) {
+        public Builder setOffset(Integer offset) {
             this.offset = offset;
             return this;
         }
 
-        public Long getSize() {
+        public Integer getSize() {
             return size;
         }
 
-        public Builder setSize(Long size) {
+        public Builder setSize(Integer size) {
             this.size = size;
             return this;
         }
@@ -232,11 +241,11 @@ public class ListUserCreatedBusinessVo {
             return this;
         }
 
-        public String getActive() {
+        public Boolean getActive() {
             return active;
         }
 
-        public Builder setActive(String active) {
+        public Builder setActive(Boolean active) {
             this.active = active;
             return this;
         }
@@ -308,8 +317,14 @@ public class ListUserCreatedBusinessVo {
             return nationalCode;
         }
 
-        public Builder setNationalCode(String nationalCode) {
-            this.nationalCode = nationalCode;
+        public Builder setNationalCode(String nationalCode) throws PodException {
+            String regex = "^\\d{10}$";
+            Pattern p = Pattern.compile(regex);
+            Matcher mach = p.matcher(nationalCode);
+            if (mach.find() && mach.group().equals(nationalCode))
+                this.nationalCode = nationalCode;
+            else
+                throw PodException.invalidParameter(nationalCode + " is not a valid nationalCode");
             return this;
         }
 
@@ -355,7 +370,6 @@ public class ListUserCreatedBusinessVo {
 
         public ListUserCreatedBusinessVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
-                    this.baseInfoVo.getToken_issuer() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
                 return new ListUserCreatedBusinessVo(this);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);

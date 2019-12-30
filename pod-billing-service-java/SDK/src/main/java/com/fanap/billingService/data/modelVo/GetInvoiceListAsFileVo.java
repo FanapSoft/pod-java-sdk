@@ -1,11 +1,14 @@
 package com.fanap.billingService.data.modelVo;
 
 import com.fanap.billingService.exception.PodException;
-import com.fanap.billingService.util.PodServicesEnum;
-import com.fanap.billingService.util.TypeConversionUtil;
+import com.fanap.billingService.util.ScProductIdPodServicesProduction;
+import com.fanap.billingService.util.ScProductIdPodServicesSandBox;
+import com.fanap.podBaseService.util.TypeConversionUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.fanap.billingService.enums.Enum_Server_type.PRODUCTION;
 
 /**
  * Created by Shahab Askarian on 5/28/2019.
@@ -54,7 +57,10 @@ public class GetInvoiceListAsFileVo {
         this.entityIdList = TypeConversionUtil.longToString(builder.getEntityIdList());
         this.lastNRows = TypeConversionUtil.longToString(builder.getLastNRows());
         this.callbackUrl = builder.getCallbackUrl();
-        this.scProductId = TypeConversionUtil.intToString(PodServicesEnum.NZH_BIZ_GET_INVOICE_LIST_AS_FILE);
+        if (getBaseInfoVo().getServerType().equals(PRODUCTION))
+            this.scProductId = TypeConversionUtil.intToString(ScProductIdPodServicesProduction.NZH_BIZ_GET_INVOICE_LIST_AS_FILE);
+        else
+            this.scProductId = com.fanap.podBaseService.util.TypeConversionUtil.intToString(ScProductIdPodServicesSandBox.NZH_BIZ_GET_INVOICE_LIST_AS_FILE);
     }
 
     public String getCallbackUrl() {
@@ -324,7 +330,9 @@ public class GetInvoiceListAsFileVo {
         public GetInvoiceListAsFileVo build() throws PodException {
             if (this.baseInfoVo != null && this.baseInfoVo.getToken() != null &&
                     this.baseInfoVo.getToken_issuer() != null)
-                return new GetInvoiceListAsFileVo(this);
+                if (this.lastNRows != null || this.fromDate != null || this.toDate != null)
+                    return new GetInvoiceListAsFileVo(this);
+                else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
             else throw PodException.invalidParameter(REQUIRED_PARAMETER_ERROR_MESSAGE);
         }
     }

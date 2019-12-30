@@ -1,12 +1,13 @@
 package com.fanap.podSubscription.service;
 
+import com.fanap.podBaseService.util.RetrofitUtil;
+import com.fanap.podBaseService.util.ServerTypeSelectionUtil;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionFullSrv;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionPlanSrv;
 import com.fanap.podSubscription.data.modelSrv.SubscriptionSrv;
 import com.fanap.podSubscription.data.modelVo.*;
 import com.fanap.podSubscription.util.GetResult;
 import com.fanap.podSubscription.util.OnGetResponseListener;
-import com.fanap.podSubscription.util.RetrofitUtil;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Service {
     public void subscriptionList(SubscriptionListVo subscriptionListVo, OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(subscriptionListVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<List<SubscriptionFullSrv>>(service.subscriptionList(
@@ -36,7 +37,7 @@ public class Service {
     public void consumeSubscription(ConsumeSubscriptionVo consumeSubscriptionVo, OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(consumeSubscriptionVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<SubscriptionSrv>(service.consumeSubscription(
@@ -53,7 +54,7 @@ public class Service {
     public void updateSubscriptionPlan(UpdateSubscriptionPlanVo updateSubscriptionPlanVo, OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(updateSubscriptionPlanVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<SubscriptionPlanSrv>(service.updateSubscriptionPlan(
@@ -76,7 +77,7 @@ public class Service {
                                      OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(subscriptionPlanListVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<List<SubscriptionPlanSrv>>(service.subscriptionPlanList(
@@ -106,7 +107,7 @@ public class Service {
                                         OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(addSubscriptionPlanVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<SubscriptionPlanSrv>(service.addSubscriptionPlan(
@@ -136,7 +137,7 @@ public class Service {
                                     OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(requestSubscriptionVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<SubscriptionSrv>(service.requestSubscription(
@@ -155,7 +156,7 @@ public class Service {
                                     OnGetResponseListener onGetResponseListener) {
 
         PodSubscription service = RetrofitUtil
-                .getInstance()
+                .getInstance(ServerTypeSelectionUtil.getBaseURL(confirmSubscriptionVo.getBaseInfoVo().getServerType()))
                 .create(PodSubscription.class);
 
         new GetResult<SubscriptionSrv>(service.confirmSubscription(
