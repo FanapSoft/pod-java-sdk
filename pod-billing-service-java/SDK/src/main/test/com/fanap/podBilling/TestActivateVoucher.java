@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestActivateVoucher {
     private final String TOKEN = "";
-@Test
+
+    @Test
     public void activateVoucher_AllParameters() {
         BaseInfoVo baseInfoVo = new BaseInfoVo.Builder()
                 .setToken(TOKEN)
@@ -62,7 +63,7 @@ public class TestActivateVoucher {
             });
             optional(countDownLatch());
         } catch (PodException e) {
-           fail("code : " + e.getCode() + "\nmessage : " + e.getMessage());
+            fail("code : " + e.getCode() + "\nmessage : " + e.getMessage());
         }
 
 

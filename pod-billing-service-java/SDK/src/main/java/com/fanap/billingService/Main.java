@@ -32,7 +32,7 @@ Main {
     private static String SAMPLE_GUILD_CODE = "INFORMATION_TECHNOLOGY_GUILD";
 
     public static void main(String[] args) throws PodException, IOException {
-        ott();
+//        ott();
 //        issueInvoice();
 //        createPreInvoice();
 //        getInvoiceList();
@@ -51,16 +51,16 @@ Main {
 //        payInvoiceByUniqueNumber();
 //        issueMultiInvoice();
 //        reduceMultiInvoice();
-        reduceMultiInvoiceAndCashout();
+//        reduceMultiInvoiceAndCashout();
 //        defineCreditVoucher();
 //        defineDiscountAmountVoucher();
 //        defineDiscountPercentageVoucher();
 //        deactivateVoucher();
 //        activateVoucher();
 //        getVoucherList();
-        defineDirectWithdraw();
+//        defineDirectWithdraw();
 //        updateDirectWithdraw();
-        directWithdrawList();
+//        directWithdrawList();
 //        revokeDirectWithdraw();
 //        getExportList();
 //        requestGuildSettlement();
